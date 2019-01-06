@@ -1,0 +1,40 @@
+<h1>Welcome to the game zone</h1>
+	<p>
+		
+		<button id="btn">Click me brother</button>
+
+	</p>
+
+
+
+
+<script>
+
+	var audio = new AudioContext();
+
+	var oscillator = audio.createOscillator();
+	
+
+	oscillator.type = 'square';
+	oscillator.frequency.setValueAtTime(440, audio.currentTime);
+
+
+
+	oscillator.connect(audio.destination);
+
+
+
+	let btn = document.getElementById('btn');
+
+	btn.addEventListener('click', function buttonClicked(){
+		console.log("clicked!");
+		oscillator.start();
+	});
+
+
+	
+
+
+
+
+</script>
