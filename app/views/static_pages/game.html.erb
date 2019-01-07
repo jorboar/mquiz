@@ -9,30 +9,38 @@
 
 
 <script>
-
-	var audio = new AudioContext();
-
-	var oscillator = audio.createOscillator();
 	
-
-	oscillator.type = 'square';
-	oscillator.frequency.setValueAtTime(440, audio.currentTime);
-
-
-
-	oscillator.connect(audio.destination);
-
+	var audioctx = new AudioContext();
 
 
 	let btn = document.getElementById('btn');
 
+	
 	btn.addEventListener('click', function buttonClicked(){
-		console.log("clicked!");
-		oscillator.start();
+		playTone(200);
 	});
 
 
-	
+	function playTone(hertz){
+		console.log("playing tone");
+
+		var oscillator = audioctx.createOscillator();
+
+		oscillator.type = 'square';
+		oscillator.frequency.setValueAtTime(hertz, audioctx.currentTime);
+
+		oscillator.connect(audioctx.destination);
+
+		oscillator.start(audioctx.currentTime);
+		oscillator.stop(audioctx.currentTime + 1);
+	}
+
+
+
+	//oscillator.onended = function(){
+	//	oscillator.disconnect(audioctx.destination);
+	//	console.log("HEY");
+	//}
 
 
 
