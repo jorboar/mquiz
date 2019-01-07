@@ -10,19 +10,23 @@
 
 <script>
 	
+	var notenames = ["A","A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+
+	var noteID = "A";
+
 	var audioctx = new AudioContext();
 
 
 	let btn = document.getElementById('btn');
-
 	
 	btn.addEventListener('click', function buttonClicked(){
-		playTone(200);
+		playTone(halfStep(-2, 440));
 	});
 
 
+	//plays tone at given hertz
 	function playTone(hertz){
-		console.log("playing tone");
+		console.log("playing " + noteID + " at " + hertz + " hertz");
 
 		var oscillator = audioctx.createOscillator();
 
@@ -34,6 +38,33 @@
 		oscillator.start(audioctx.currentTime);
 		oscillator.stop(audioctx.currentTime + 1);
 	}
+
+	//returns hertz morphed by given halfsteps
+	//calculates noteID 
+	function halfStep(steps, hertz){
+		
+		mod = steps;
+
+		while (11 < mod) {
+			console.log(mod);
+			mod = mod - 12;
+		}
+
+		while (0 > mod) {
+			console.log(mod);
+			mod = mod + 12;
+		}
+
+		console.log(mod);
+		noteID = notenames[mod];
+
+
+		const a = Math.pow(2, 1/12)
+		
+		return hertz * Math.pow(a, steps)
+
+	}
+
 
 
 
