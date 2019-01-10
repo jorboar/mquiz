@@ -10,17 +10,40 @@
 
 <script>
 	
-	var notenames = ["A","A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
 	var noteID = "A";
 
+	var intervals = [
+		[2, "Second"],
+		[3, "Minor Third"],
+		[4, "Major Third"],
+		[5, "Fourth"],
+		[6, "Flatted Fifth"],
+		[7, "Fifth"],
+		[10, "Minor Seventh"],
+		[11, "Major Seventh"],
+		[12, "Octave"],
+		[14, "Ninth"]
+	];
+
 	var audioctx = new AudioContext();
+
 
 
 	let btn = document.getElementById('btn');
 	
 	btn.addEventListener('click', function buttonClicked(){
-		playTone(halfStep(-2, 440));
+		step = genInterval();
+		initialoffset = randNum(0,9);
+		//value to offset first tone (from A4 assuming hertz is at 440)
+
+		playTone(halfStep(initialoffset, 440));
+		playTone(halfStep(initialoffset + step, 440));
+
+		setTimeout(function(){playTone(halfStep(initialoffset, 440));}, 2000);
+		setTimeout(function(){playTone(halfStep(initialoffset + step, 440));}, 3500);
+		
 	});
 
 
@@ -29,13 +52,20 @@
 		console.log("playing " + noteID + " at " + hertz + " hertz");
 
 		var oscillator = audioctx.createOscillator();
+		var gainNode = audioctx.createGain();
+
 
 		oscillator.type = 'square';
 		oscillator.frequency.setValueAtTime(hertz, audioctx.currentTime);
 
-		oscillator.connect(audioctx.destination);
+
+		//oscillator.connect(audioctx.destination);
+		gainNode.connect(audioctx.destination);
+		oscillator.connect(gainNode);
+
 
 		oscillator.start(audioctx.currentTime);
+		gainNode.gain.setValueAtTime(0.01, audioctx.currentTime);
 		oscillator.stop(audioctx.currentTime + 1);
 	}
 
@@ -46,16 +76,16 @@
 		mod = steps;
 
 		while (11 < mod) {
-			console.log(mod);
+			//console.log(mod);
 			mod = mod - 12;
 		}
 
 		while (0 > mod) {
-			console.log(mod);
+			//console.log(mod);
 			mod = mod + 12;
 		}
 
-		console.log(mod);
+		//console.log(mod);
 		noteID = notenames[mod];
 
 
@@ -65,7 +95,19 @@
 
 	}
 
+	//generates a random interval
+	function genInterval(){
 
+		number = randNum(0,9);
+
+		console.log("Got a " + intervals[number][1] + ", which is " + intervals[number][0] + " steps from the root" );
+		return intervals[number][0];
+	}
+
+
+	function randNum(min, max) {
+  		return Math.floor(Math.random() * (max - min + 1) ) + min;
+	}
 
 
 	//oscillator.onended = function(){
