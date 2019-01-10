@@ -35,7 +35,7 @@
 	
 	btn.addEventListener('click', function buttonClicked(){
 		step = genInterval();
-		initialoffset = randNum(0,9);
+		initialoffset = randNum(-12,12);
 		//value to offset first tone (from A4 assuming hertz is at 440)
 
 		playTone(halfStep(initialoffset, 440));
