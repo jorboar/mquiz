@@ -10,9 +10,24 @@
 
 <script>
 	
+	class note {
+		constructor(name, label, hertz, steps) {
+			this.name = name;
+			this.label = label;
+			this.hertz = hertz;
+			this.steps = steps;
+		}
+	};
+
+	let note1 = new note("?", "root", 440, 0);
+	let note2 = new note("", "", 440, 0);
+
+
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
-	var noteID = "A";
+	
+
+	
 
 	var intervals = [
 		[2, "Second"],
@@ -34,29 +49,38 @@
 	let btn = document.getElementById('btn');
 	
 	btn.addEventListener('click', function buttonClicked(){
-		step = genInterval();
-		initialoffset = randNum(-12,12);
-		//value to offset first tone (from A4 assuming hertz is at 440)
+		
 
-		playTone(halfStep(initialoffset, 440));
-		playTone(halfStep(initialoffset + step, 440));
+		
+		genData(note1, true);
+		genData(note2, false);
 
-		setTimeout(function(){playTone(halfStep(initialoffset, 440));}, 2000);
-		setTimeout(function(){playTone(halfStep(initialoffset + step, 440));}, 3500);
+
+		playTone(note1);
+		playTone(note2);
+
+		setTimeout(function(){playTone(note1);}, 2000);
+		setTimeout(function(){playTone(note2);}, 3500);
 		
 	});
 
 
 	//plays tone at given hertz
-	function playTone(hertz){
-		console.log("playing " + noteID + " at " + hertz + " hertz");
+	function playTone(note){
+		
+		if (note.label == "root") {
+			console.log("-----playing the " + note.label + ", " + note.name + ", " + "at " + note.hertz + " hertz");
+		} else {
+			console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
+		}
+		
 
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 
 
 		oscillator.type = 'square';
-		oscillator.frequency.setValueAtTime(hertz, audioctx.currentTime);
+		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
 
 
 		//oscillator.connect(audioctx.destination);
@@ -69,39 +93,50 @@
 		oscillator.stop(audioctx.currentTime + 1);
 	}
 
-	//returns hertz morphed by given halfsteps
-	//calculates noteID 
-	function halfStep(steps, hertz){
-		
-		mod = steps;
+
+	//generates note object data
+	//initial should be set to true if root note
+	function genData(note, initial){
+
+		if (initial) {
+			note.hertz = 440;
+			note.label = "root";
+			note.steps = randNum(-12,12);
+			
+			mod = note.steps;
+		} else {
+			number = randNum(0,9);
+			
+			note.hertz = note1.hertz
+			note.label = intervals[number][1];
+			note.steps = intervals[number][0];
+			
+			mod = note.steps + note1.steps;
+		}
+
 
 		while (11 < mod) {
-			//console.log(mod);
 			mod = mod - 12;
 		}
 
 		while (0 > mod) {
-			//console.log(mod);
 			mod = mod + 12;
 		}
 
-		//console.log(mod);
-		noteID = notenames[mod];
-
+		
+		note.name = notenames[mod];
 
 		const a = Math.pow(2, 1/12)
+	
+		note.hertz = note.hertz * Math.pow(a, note.steps);
 		
-		return hertz * Math.pow(a, steps)
 
-	}
+		if (initial) {
+			console.log("Got a(n) " + note.name + ", which is the " + note.label);
+		} else {
+			console.log("Got a(n) " + note.label + ", which is " + note.steps + " halfsteps from the root" );
+		}
 
-	//generates a random interval
-	function genInterval(){
-
-		number = randNum(0,9);
-
-		console.log("Got a " + intervals[number][1] + ", which is " + intervals[number][0] + " steps from the root" );
-		return intervals[number][0];
 	}
 
 
@@ -115,7 +150,7 @@
 	//	console.log("HEY");
 	//}
 
-
+	
 
 
 </script>
