@@ -1,11 +1,16 @@
 <h1>Welcome to the game zone</h1>
-	<p>
-		
-		<button id="btn">Click me brother</button>
 
+	<p>
+		<div class = "data"></div>
+		<button id="btn">Create note set</button>
+		<button id="btn2">Populate</button>
+		<div class = "response"></div>
 	</p>
 
-
+	<form id="myform">
+		answer:<input type="text" id="useranswer"/>
+		<input type="submit" />
+	</form>
 
 
 <script>
@@ -22,12 +27,7 @@
 	let note1 = new note("?", "root", 440, 0);
 	let note2 = new note("", "", 440, 0);
 
-
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
-
-	
-
-	
 
 	var intervals = [
 		[2, "Second"],
@@ -44,17 +44,20 @@
 
 	var audioctx = new AudioContext();
 
+	let btn = document.getElementById('btn');	
+
+	btn2.addEventListener('click', function test(){
+		var dataElement = $('.data');
+		dataElement.html("Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
+		console.log("gotcha");
+
+	});
 
 
-	let btn = document.getElementById('btn');
-	
 	btn.addEventListener('click', function buttonClicked(){
-		
-
 		
 		genData(note1, true);
 		genData(note2, false);
-
 
 		playTone(note1);
 		playTone(note2);
@@ -62,6 +65,17 @@
 		setTimeout(function(){playTone(note1);}, 2000);
 		setTimeout(function(){playTone(note2);}, 3500);
 		
+	});
+
+
+	//action on form submit
+	$(document).ready(function (){
+		$('#myform').on('submit', function(e){
+			e.preventDefault();
+			console.log("Grabbed form stuff");
+			var gimme = document.getElementById("useranswer").value;
+			answer(gimme);
+		});
 	});
 
 
@@ -73,20 +87,16 @@
 		} else {
 			console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
 		}
-		
 
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 
-
 		oscillator.type = 'square';
 		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
-
 
 		//oscillator.connect(audioctx.destination);
 		gainNode.connect(audioctx.destination);
 		oscillator.connect(gainNode);
-
 
 		oscillator.start(audioctx.currentTime);
 		gainNode.gain.setValueAtTime(0.01, audioctx.currentTime);
@@ -114,7 +124,6 @@
 			mod = note.steps + note1.steps;
 		}
 
-
 		while (11 < mod) {
 			mod = mod - 12;
 		}
@@ -122,7 +131,6 @@
 		while (0 > mod) {
 			mod = mod + 12;
 		}
-
 		
 		note.name = notenames[mod];
 
@@ -135,6 +143,19 @@
 			console.log("Got a(n) " + note.name + ", which is the " + note.label);
 		} else {
 			console.log("Got a(n) " + note.label + ", which is " + note.steps + " halfsteps from the root" );
+		}
+
+	}
+
+
+	//checks if given string matches note2 label
+	function answer(answer) {
+		var response = $('.response');
+
+		if (answer==note2.label) {
+			response.html("CORRECT");
+		} else{
+			response.html("NOPE");
 		}
 
 	}
