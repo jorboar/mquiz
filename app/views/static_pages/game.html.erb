@@ -4,8 +4,15 @@
 		<div class = "data"></div>
 		<button id="btn">Create note set</button>
 		<button id="btn2">Populate</button>
+		<button id="btn3">Start New Quiz</button>
+		<button id="foo">Some text</button>
+
 		<div class = "response"></div>
 	</p>
+	<p id="display">
+		Howdy hey
+	</p>
+
 
 	<form id="myform">
 		answer:<input type="text" id="useranswer"/>
@@ -15,7 +22,7 @@
 
 <script>
 	
-	class note {
+	class Note {
 		constructor(name, label, hertz, steps) {
 			this.name = name;
 			this.label = label;
@@ -24,8 +31,44 @@
 		}
 	};
 
-	let note1 = new note("?", "root", 440, 0);
-	let note2 = new note("", "", 440, 0);
+	class Quiz {
+		constructor(question_total, strikes){
+			this.question_total = question_total;
+			this.strikes = strikes;
+			this.array = new Array(question_total);
+			
+		}
+
+		access_question(id){
+			return this.array[id]
+		}
+
+		set_question(id,question){
+			this.array[id] = question;
+		}
+
+
+
+	};
+
+
+
+	class Question {
+
+		constructor(note1, note2){
+			this.note1 = note1;
+			this.note2 = note2;
+			this.answer = note2.label;
+			
+		}
+		
+	};
+
+	
+
+
+	let note1 = new Note("?", "root", 440, 0);
+	let note2 = new Note("", "", 440, 0);
 
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
@@ -44,17 +87,34 @@
 
 	var audioctx = new AudioContext();
 
-	let btn = document.getElementById('btn');	
+	//let btn = document.getElementById('btn');	
 
-	btn2.addEventListener('click', function test(){
-		var dataElement = $('.data');
-		dataElement.html("Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
-		console.log("gotcha");
+	btn3.addEventListener('click', function(){
+		let thequiz = new Quiz(5,0);
+
+		let question = new Question(note1,note2);
+
+		thequiz.set_question(0,question);
+		
+
+		console.log(thequiz.access_question(0));
+
+		playTone(thequiz.access_question(0).note1);
 
 	});
 
 
-	btn.addEventListener('click', function buttonClicked(){
+
+
+	btn2.addEventListener('click', function(){
+		var dataElement = $('.data');
+		dataElement.html("Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
+		//console.log("gotcha");
+
+	});
+
+
+	btn.addEventListener('click', function(){
 		
 		genData(note1, true);
 		genData(note2, false);
@@ -91,7 +151,7 @@
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 
-		oscillator.type = 'square';
+		oscillator.type = 'sawtooth';
 		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
 
 		//oscillator.connect(audioctx.destination);
@@ -147,19 +207,17 @@
 
 	}
 
-
 	//checks if given string matches note2 label
 	function answer(answer) {
 		var response = $('.response');
 
 		if (answer==note2.label) {
 			response.html("CORRECT");
-		} else{
+		} else {
 			response.html("NOPE");
 		}
 
 	}
-
 
 	function randNum(min, max) {
   		return Math.floor(Math.random() * (max - min + 1) ) + min;
