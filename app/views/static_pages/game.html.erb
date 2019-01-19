@@ -59,13 +59,21 @@
 			this.note1 = note1;
 			this.note2 = note2;
 			this.answer = note2.label;
-			
+			this.submittedanswer = "";
 		}
 
 		get_answer(){
 			return this.answer
 		}
+
+		get_submittedanswer(){
+			return this.submittedanswer
+		}
 		
+		set_submittedanswer(x){
+			this.submittedanswer = x;
+		}
+
 	};
 
 	
@@ -75,6 +83,8 @@
 	let note2 = new Note("", "", 440, 0);
 
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+
+	var gimme = ""
 
 	var intervals = [
 		[2, "Second"],
@@ -96,9 +106,21 @@
 	btn3.addEventListener('click', function(){
 		thequiz = new Quiz(5);
 
+		
+
+
 		genQuestion(0);
 
-		genQuestion(1);
+
+		if (gimme != "") {
+			thequiz.get_question(0).set_submittedanswer(gimme);
+			console.log("It's time to rumble");
+			gimme = "";
+		}
+
+		console.log(thequiz.get_question(0).get_submittedanswer());
+
+		//genQuestion(1);
 
 		
 
@@ -134,8 +156,8 @@
 		$('#myform').on('submit', function(e){
 			e.preventDefault();
 			console.log("Grabbed form stuff");
-			var gimme = document.getElementById("useranswer").value;
-			answer(gimme);
+			gimme = document.getElementById("useranswer").value;
+			//answer(gimme);
 		});
 	});
 
