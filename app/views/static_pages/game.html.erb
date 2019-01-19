@@ -32,14 +32,14 @@
 	};
 
 	class Quiz {
-		constructor(question_total, strikes){
+		constructor(question_total){
 			this.question_total = question_total;
-			this.strikes = strikes;
+			this.strikes = 0;
 			this.array = new Array(question_total);
 			
 		}
 
-		access_question(id){
+		get_question(id){
 			return this.array[id]
 		}
 
@@ -61,13 +61,17 @@
 			this.answer = note2.label;
 			
 		}
+
+		get_answer(){
+			return this.answer
+		}
 		
 	};
 
 	
 
 
-	let note1 = new Note("?", "root", 440, 0);
+	let note1 = new Note("A", "root", 440, 0);
 	let note2 = new Note("", "", 440, 0);
 
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
@@ -90,16 +94,13 @@
 	//let btn = document.getElementById('btn');	
 
 	btn3.addEventListener('click', function(){
-		let thequiz = new Quiz(5,0);
+		thequiz = new Quiz(5);
 
-		let question = new Question(note1,note2);
+		genQuestion(0);
 
-		thequiz.set_question(0,question);
+		genQuestion(1);
+
 		
-
-		console.log(thequiz.access_question(0));
-
-		playTone(thequiz.access_question(0).note1);
 
 	});
 
@@ -139,6 +140,22 @@
 	});
 
 
+	function genQuestion(index){
+
+		genData(true);
+		genData(false);
+		let question = new Question(note1,note2);
+		thequiz.set_question(index,question);
+		
+		playTone(thequiz.get_question(index).note1);
+		playTone(thequiz.get_question(index).note2);
+
+		setTimeout(function(){playTone(note1);}, 2000);
+		setTimeout(function(){playTone(note2);}, 3500);
+
+	}
+
+
 	//plays tone at given hertz
 	function playTone(note){
 		
@@ -166,22 +183,22 @@
 
 	//generates note object data
 	//initial should be set to true if root note
-	function genData(note, initial){
+	function genData(initial){
 
 		if (initial) {
-			note.hertz = 440;
-			note.label = "root";
-			note.steps = randNum(-12,12);
+			hertz = 440;
+			label = "root";
+			steps = randNum(-12,12);
 			
-			mod = note.steps;
+			mod = steps;
 		} else {
 			number = randNum(0,9);
 			
-			note.hertz = note1.hertz
-			note.label = intervals[number][1];
-			note.steps = intervals[number][0];
+			hertz = note1.hertz
+			label = intervals[number][1];
+			steps = intervals[number][0];
 			
-			mod = note.steps + note1.steps;
+			mod = steps + note1.steps;
 		}
 
 		while (11 < mod) {
@@ -192,18 +209,26 @@
 			mod = mod + 12;
 		}
 		
-		note.name = notenames[mod];
+		name = notenames[mod];
 
 		const a = Math.pow(2, 1/12)
 	
-		note.hertz = note.hertz * Math.pow(a, note.steps);
+		hertz = hertz * Math.pow(a, steps);
 		
 
 		if (initial) {
-			console.log("Got a(n) " + note.name + ", which is the " + note.label);
+			note1 = new Note(name, label, hertz, steps);
+			console.log("Got a(n) " + note1.name + ", which is the " + note1.label);
+			
 		} else {
-			console.log("Got a(n) " + note.label + ", which is " + note.steps + " halfsteps from the root" );
+			note2 = new Note(name, label, hertz, steps);
+			console.log("Got a(n) " + note2.label + ", which is " + note2.steps + " halfsteps from the root" );
+			
 		}
+
+		
+		
+
 
 	}
 
