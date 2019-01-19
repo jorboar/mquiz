@@ -3,10 +3,7 @@
 	<p>
 		<div class = "data"></div>
 		<button id="btn">Create note set</button>
-		<button id="btn2">Populate</button>
-		<button id="btn3">Start New Quiz</button>
-		<button id="foo">Some text</button>
-
+		<button id="btn3">Next Question</button>
 		<div class = "response"></div>
 	</p>
 	<p id="display">
@@ -47,8 +44,6 @@
 			this.array[id] = question;
 		}
 
-
-
 	};
 
 
@@ -74,17 +69,39 @@
 			this.submittedanswer = x;
 		}
 
+		check_answer(){
+			if (this.answer === this.submittedanswer){
+				this.correct = true;
+				
+				response.html("CORRECT");
+
+				console.log("CORRECT");
+			} else {
+				this.correct = false;
+				
+				response.html("INCORRECT");
+
+				console.log("INCORRECT")
+			}
+		}
+
 	};
 
 	
-
-
 	let note1 = new Note("A", "root", 440, 0);
 	let note2 = new Note("", "", 440, 0);
 
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
 	var gimme = ""
+	
+	var response = $('.response');
+	var dataElement = $('.data');
+
+	//used to communicate question index number to various functions
+	var current_question = 0; 
+
+
 
 	var intervals = [
 		[2, "Second"],
@@ -103,38 +120,16 @@
 
 	//let btn = document.getElementById('btn');	
 
+	thequiz = new Quiz(5);
+	
 	btn3.addEventListener('click', function(){
-		thequiz = new Quiz(5);
-
 		
-
-
-		genQuestion(0);
-
-
-		if (gimme != "") {
-			thequiz.get_question(0).set_submittedanswer(gimme);
-			console.log("It's time to rumble");
-			gimme = "";
-		}
-
-		console.log(thequiz.get_question(0).get_submittedanswer());
-
-		//genQuestion(1);
+		present_question(current_question,thequiz)
 
 		
 
 	});
 
-
-
-
-	btn2.addEventListener('click', function(){
-		var dataElement = $('.data');
-		dataElement.html("Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
-		//console.log("gotcha");
-
-	});
 
 
 	btn.addEventListener('click', function(){
@@ -157,17 +152,17 @@
 			e.preventDefault();
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
-			//answer(gimme);
+			answer(current_question,thequiz,gimme);
 		});
 	});
 
 
-	function genQuestion(index){
+	function genQuestion(index,quiz){
 
 		genData(true);
 		genData(false);
 		let question = new Question(note1,note2);
-		thequiz.set_question(index,question);
+		quiz.set_question(index,question);
 		
 		playTone(thequiz.get_question(index).note1);
 		playTone(thequiz.get_question(index).note2);
@@ -248,24 +243,30 @@
 			
 		}
 
-		
-		
+	}
 
+	//generates question using genQuestion function and presents it to page
+	function present_question(index,quiz){
+
+		genQuestion(index,quiz);
+
+		dataElement.html("Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
 
 	}
 
-	//checks if given string matches note2 label
-	function answer(answer) {
-		var response = $('.response');
 
-		if (answer==note2.label) {
-			response.html("CORRECT");
-		} else {
-			response.html("NOPE");
-		}
+	//checks answer ("input") of given question index per quiz object
+	//increase current_question variable by 1
+	function answer(index, quiz, input) {
+		
+		quiz.get_question(index).set_submittedanswer(input);
+		quiz.get_question(index).check_answer();
+		current_question = current_question + 1;
 
 	}
 
+
+	//generates a random number on or between minimum to maximum
 	function randNum(min, max) {
   		return Math.floor(Math.random() * (max - min + 1) ) + min;
 	}
