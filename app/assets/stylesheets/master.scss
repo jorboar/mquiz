@@ -1,0 +1,25 @@
+@import "bootstrap";
+
+h1 {
+	text-align: center;
+	
+}
+
+body {
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; font-size: 18px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px;
+}
+
+.navbar {
+  
+  box-shadow: 0px 1px 3px #2a2a2a;
+  
+
+}
+
+.navbar-light .navbar-text {
+	color: red;
+}
+
+.navbar-light .navbar-brand {
+	color: white;
+}
