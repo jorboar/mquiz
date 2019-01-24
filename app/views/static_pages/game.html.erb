@@ -3,9 +3,11 @@
 	<p>
 		<div class = "data2"></div>
 		<div class = "data"></div>
-		<button id="btn">Create note set</button>
 		<button id="start_quiz">Start Quiz</button>
 		<div class = "response"></div>
+
+		<div id="playbackSpot"></div>
+
 	</p>
 
 
@@ -110,6 +112,8 @@
 	var dataElement = $('.data');
 	var dataElement2 = $('.data2');
 	var startQuiz = document.getElementById("start_quiz");
+	var note1button = document.getElementById("note1button");
+
 
 	//used to communicate question index number to various functions
 	var current_question = 0; 
@@ -139,25 +143,52 @@
 
 		present_question(current_question,thequiz)
 
-		//console.log(startQuiz);
+		var note1button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note One");
+		note1button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note1button);
+
+		note1button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note1);
+
+
+		});
+
+
+
+
+		var note2button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note Two");
+		note2button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note2button);
+
+		note2button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note2);
+
+
+		});
+
+		var note1and2button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Both Notes");
+		note1and2button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note1and2button);
+
+		note1and2button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note1);
+			playTone(thequiz.get_question(current_question).note2);
+
+		});
+
+
+
+
+
 
 		startQuiz.remove();		
 
-	});
-
-
-
-	btn.addEventListener('click', function(){
-		
-		genData(note1, true);
-		genData(note2, false);
-
-		playTone(note1);
-		playTone(note2);
-
-		setTimeout(function(){playTone(note1);}, 2000);
-		setTimeout(function(){playTone(note2);}, 3500);
-		
 	});
 
 
