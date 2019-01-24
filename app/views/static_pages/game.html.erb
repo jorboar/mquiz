@@ -4,7 +4,7 @@
 		<div class = "data2"></div>
 		<div class = "data"></div>
 		<button id="btn">Create note set</button>
-		<button id="btn3">Next Question</button>
+		<button id="start_quiz">Start Quiz</button>
 		<div class = "response"></div>
 	</p>
 
@@ -109,9 +109,10 @@
 	var response = $('.response');
 	var dataElement = $('.data');
 	var dataElement2 = $('.data2');
+	var startQuiz = document.getElementById("start_quiz");
 
 	//used to communicate question index number to various functions
-	var current_question = -1; 
+	var current_question = 0; 
 
 
 	var intervals = [
@@ -134,13 +135,13 @@
 	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
-	btn3.addEventListener('click', function(){
-		
-		current_question = current_question + 1;
+	start_quiz.addEventListener('click', function(){
 
 		present_question(current_question,thequiz)
 
-		
+		//console.log(startQuiz);
+
+		startQuiz.remove();		
 
 	});
 
@@ -286,6 +287,10 @@
 		}
 		
 		//current_question = current_question + 1;
+
+		current_question = current_question + 1;
+
+		present_question(current_question,thequiz)
 
 	}
 
