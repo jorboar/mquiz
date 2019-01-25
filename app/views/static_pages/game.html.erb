@@ -10,12 +10,10 @@
 
 	</p>
 
-
 	<form id="myform">
 		ANSWER:<input type="text" id="useranswer"/>
 		<input type="submit" />
 	</form>
-
 
 <script>
 	
@@ -33,7 +31,6 @@
 			this.question_total = question_total;
 			this.strikes = 0;
 			this.array = new Array(question_total);
-			
 		}
 
 		get_question(id){
@@ -57,8 +54,6 @@
 		}
 
 	};
-
-
 
 	class Question {
 
@@ -118,7 +113,6 @@
 	//used to communicate question index number to various functions
 	var current_question = 0; 
 
-
 	var intervals = [
 		[2, "Second"],
 		[3, "Minor Third"],
@@ -156,8 +150,6 @@
 		});
 
 
-
-
 		var note2button = document.createElement("BUTTON");
 		var t = document.createTextNode("Play Note Two");
 		note2button.appendChild(t);
@@ -181,11 +173,6 @@
 			playTone(thequiz.get_question(current_question).note2);
 
 		});
-
-
-
-
-
 
 		startQuiz.remove();		
 
@@ -289,9 +276,7 @@
 		} else {
 			note2 = new Note(name, label, hertz, steps);
 			console.log("Got a(n) " + note2.label + ", which is " + note2.steps + " halfsteps from the root" );
-			
 		}
-
 	}
 
 	//generates question using genQuestion function and presents it to page
@@ -302,7 +287,6 @@
 		dataElement2.html("Question #" + index + " of " + quiz.question_total + ". User has " + quiz.strikes + " strikes.");
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
-
 	}
 
 
@@ -322,7 +306,6 @@
 		current_question = current_question + 1;
 
 		present_question(current_question,thequiz)
-
 	}
 
 
