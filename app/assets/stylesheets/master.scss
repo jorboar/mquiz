@@ -35,10 +35,17 @@ li .nav-item .active{
 	color: white;
 }
 
+.data2  {
+  text-align: left;
+}
+
+.data3 {
+  text-align: left;
+}
 
 
 button {
-  background-color: #000000; /* Green */
+  background-color: #000000; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -47,6 +54,12 @@ button {
   display: inline-block;
   font-size: 16px;
   margin: 10px;
+  
+}
+
+#playbackSpot button{
+  background-color: #4c0000;
+  
   
 }
 
