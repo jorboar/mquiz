@@ -5,6 +5,7 @@
 		<div class = "data3"></div>
 		<div class = "data"></div>
 		<button id="start_quiz">Start Quiz</button>
+		<div id="restart_spot"></div>
 		<div class = "response"></div>
 
 		<div id="playbackSpot"></div>
@@ -61,10 +62,6 @@
 	Quiz.prototype.add_strike = function(){
 		this.strikes = this.strikes + 1;
 	}
-
-	Quiz.prototype.get_question_total = function(){
-			return this.question_total;
-		}
 
 
 
@@ -183,13 +180,16 @@
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
 	var gimme = ""
-	
+	var first = true;
+
 	var response = $('.response');
 	var dataElement = $('.data');
 	var dataElement2 = $('.data2');
 	var dataElement3 = $('.data3');
 	var startQuiz = $("#start_quiz");
-	var note1button = document.getElementById("note1button");
+	var PLAYBACKSPOT = $("#playbackSpot");
+	var ANSWERSPOT = $("#answerSpot");
+	var RESTARTSPOT = $("#restart_spot");
 
 
 	//used to communicate question index number to various functions
@@ -501,13 +501,17 @@
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
 
+
+		
 		genQuestion(index,quiz);
 
-		dataElement2.html("Question #" + index + " of " + quiz.question_total);
+		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
 
 		dataElement3.html(quiz.strikes + " strikes");
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
+		
+
 	}
 
 
@@ -526,7 +530,61 @@
 
 		current_question = current_question + 1;
 
-		present_question(current_question,thequiz)
+		if(quiz.question_total===current_question) {
+			
+			end(quiz);
+			
+		} else {
+			present_question(current_question,quiz)
+		}
+
+	}
+
+	//runs on quiz completion
+	function end(quiz) {
+
+		dataElement2.html("");
+		dataElement3.html("");
+
+		console.log("all done");
+		PLAYBACKSPOT.hide();
+		ANSWERSPOT.hide();
+		
+		dataElement.html("QUIZ COMPLETE");
+		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
+
+
+
+		if (first) {
+			var restartButton = document.createElement("BUTTON");
+			var t = document.createTextNode("Restart Quiz");
+			restartButton.appendChild(t);
+			document.getElementById("restart_spot").appendChild(restartButton);
+
+			restartButton.addEventListener('click', function(){
+
+				current_question = 0;
+				thequiz = new Quiz(10);
+
+				response.html("");
+
+				
+
+				PLAYBACKSPOT.show();
+				ANSWERSPOT.show();
+
+				present_question(current_question,thequiz)
+
+				RESTARTSPOT.hide();
+
+				first = false;
+
+			})
+	} else {
+		RESTARTSPOT.show();
+	};
+
+
 	}
 
 
