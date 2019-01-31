@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
 	root 'static_pages#index'
-	get 'game', to: 'static_pages#game'
+	get 'interval', to: 'static_pages#interval'
+	get 'chord', to: 'static_pages#chord'
 end

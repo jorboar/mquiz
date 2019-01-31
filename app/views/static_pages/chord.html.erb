@@ -1,0 +1,449 @@
+<h1>CHORD QUIZ</h1>
+
+	<div class = "bulk">
+		<div class = "data2"></div>
+		<div class = "data3"></div>
+		<div class = "data"></div>
+		<button id="start_quiz">Start Quiz</button>
+		<div id="restart_spot"></div>
+		<div class = "response"><br></div>
+
+		<div id="playbackSpot"></div>
+
+		<div id="answerSpot"></div>
+	</div>
+
+
+
+<script>
+
+	
+	var Note = function(name, label, hertz, steps){
+		this.name = name;
+		this.label = label;
+		this.hertz = hertz;
+		this.steps = steps;
+
+	}
+
+	var Quiz = function(question_total){
+			this.question_total = question_total;
+			this.strikes = 0;
+			this.array = new Array(question_total);
+	}
+
+	Quiz.prototype.get_question = function(id){
+			return this.array[id]
+		}
+
+	Quiz.prototype.set_question = function(id,question){
+			this.array[id] = question;
+		}
+
+	Quiz.prototype.get_strikes = function(){
+			return this.strikes;
+		}
+
+
+	Quiz.prototype.add_strike = function(){
+		this.strikes = this.strikes + 1;
+	}
+
+
+
+	var Question = function(note1, note2, note3){
+			this.note1 = note1;
+			this.note2 = note2;
+			this.note3 = note3;
+			this.answer = note2.label;
+			this.submittedanswer = "";
+		}
+
+
+	Question.prototype.get_answer = function(){
+			return this.answer
+		}
+
+	Question.prototype.get_submittedanswer = function(){
+			return this.submittedanswer
+		}
+
+	Question.prototype.set_submittedanswer = function(x){
+			this.submittedanswer = x;
+		}
+
+	Question.prototype.check_answer = function(){
+			if (this.answer === this.submittedanswer){
+				this.correct = true;
+				
+				response.html("CORRECT");
+
+				console.log("CORRECT");
+			} else {
+				this.correct = false;
+				
+				response.html("INCORRECT");
+
+				console.log("INCORRECT")
+			}
+			return this.correct
+		}
+
+
+
+	
+	var note1 = new Note("A", "root", 440, 0);
+	var note2 = new Note("", "Third", 440, 0);
+	var note3 = new Note("", "Seventh", 440, 0);
+
+	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+
+	var gimme = ""
+	var first = true;
+
+	var response = $('.response');
+	var dataElement = $('.data');
+	var dataElement2 = $('.data2');
+	var dataElement3 = $('.data3');
+	var startQuiz = $("#start_quiz");
+	var PLAYBACKSPOT = $("#playbackSpot");
+	var ANSWERSPOT = $("#answerSpot");
+	var RESTARTSPOT = $("#restart_spot");
+
+
+	//used to communicate question index number to various functions
+	var current_question = 0; 
+
+	var chords = [
+		[3, 10, "Minor Seventh"],
+		[4, 10, "Dominant Seventh"],
+		[4, 11, "Major Seventh"],
+	];
+
+	var audioctx = new AudioContext();
+
+	thequiz = new Quiz(5);
+	
+	//presents question and increases current_question
+	startQuiz.on('click', function(){
+
+		console.log("hell yeah");
+
+		present_question(current_question,thequiz)
+
+		//creates button + event listener to play note 1
+		var note1button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note One");
+		note1button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note1button);
+
+		note1button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note1);
+
+
+		});
+
+		//creates button + event listener to play note 2
+		var note2button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note Two");
+		note2button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note2button);
+
+		note2button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note2);
+
+
+		});
+
+		//creates button + event listener to play note 3
+		var note3button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note Three");
+		note3button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note3button);
+
+		note3button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note3);
+
+
+		});
+
+
+
+		//creates button + event listener to play chord
+		var chordbutton = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Chord");
+		chordbutton.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(chordbutton);
+
+		chordbutton.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note1);
+			playTone(thequiz.get_question(current_question).note2);
+			playTone(thequiz.get_question(current_question).note3);
+
+		});
+
+
+
+		//----------ANSWER BUTTONS-----------------------------------------------
+		//-----------------------------------------------------------------------
+		var answerButton1 = document.createElement("BUTTON");
+		var t = document.createTextNode("Minor Seventh");
+		answerButton1.appendChild(t);
+		document.getElementById("answerSpot").appendChild(answerButton1);
+
+		answerButton1.addEventListener('click', function(){
+
+			answer(current_question,thequiz,"Minor Seventh");
+
+
+		});
+
+		var answerButton2 = document.createElement("BUTTON");
+		var t = document.createTextNode("Major Seventh");
+		answerButton2.appendChild(t);
+		document.getElementById("answerSpot").appendChild(answerButton2);
+
+		answerButton2.addEventListener('click', function(){
+
+			answer(current_question,thequiz,"Major Seventh");
+
+
+		});
+
+		var answerButton3 = document.createElement("BUTTON");
+		var t = document.createTextNode("Dominant Seventh");
+		answerButton3.appendChild(t);
+		document.getElementById("answerSpot").appendChild(answerButton3);
+
+		answerButton3.addEventListener('click', function(){
+
+			answer(current_question,thequiz,"Dominant Seventh");
+
+
+		});
+
+
+		//-----------------------------------------------------------------------
+		//------------END OF ANSWER BUTTONS--------------------------------------
+
+		//hides start quiz button
+		startQuiz.hide();		
+
+	});
+
+
+	//generates two notes for question and assigns them to quiz on given index
+	//also plays the two notes
+	function genQuestion(index,quiz){
+
+		genData(true);
+		genData(false);
+		
+
+		let question = new Question(note1,note2,note3);
+		quiz.set_question(index,question);
+		
+		playTone(thequiz.get_question(index).note1);
+		playTone(thequiz.get_question(index).note2);
+		playTone(thequiz.get_question(index).note3);
+
+		setTimeout(function(){playTone(note1);}, 2000);
+		setTimeout(function(){playTone(note2);}, 3500);
+		setTimeout(function(){playTone(note3);}, 5000);
+
+	}
+
+
+	//plays tone at given hertz
+	function playTone(note){
+		
+		if (note.label == "root") {
+			console.log("-----playing the " + note.label + ", " + note.name + ", " + "at " + note.hertz + " hertz");
+		} else {
+			console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
+		}
+
+		var oscillator = audioctx.createOscillator();
+		var gainNode = audioctx.createGain();
+
+		oscillator.type = 'sawtooth';
+		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
+
+		//oscillator.connect(audioctx.destination);
+		gainNode.connect(audioctx.destination);
+		oscillator.connect(gainNode);
+
+		oscillator.start(audioctx.currentTime);
+		gainNode.gain.setValueAtTime(0.01, audioctx.currentTime);
+		oscillator.stop(audioctx.currentTime + 1);
+	}
+
+
+	//generates note object data
+	//initial should be set to true if root note
+	//setting initial to false will generate notes 2 and 3
+	function genData(initial){
+
+		chordtype = randNum(0,2);
+
+		mod2 = 0;
+		steps2 = 0;
+
+		if (initial) {
+			hertz = 440;
+			label = "root";
+			steps = randNum(-12,12);
+			
+			mod = steps;
+		} else {
+			//number = randNum(0,9);
+			
+			hertz = note1.hertz
+			label = chords[chordtype][2];
+			steps = chords[chordtype][0];
+			steps2 = chords[chordtype][1];
+
+			mod = steps + note1.steps;
+			mod2 = steps2 + note1.steps;
+		}
+
+		while (11 < mod) {
+			mod = mod - 12;
+		}
+
+		while (0 > mod) {
+			mod = mod + 12;
+		}
+		
+		while (11 < mod2) {
+			mod2 = mod2 - 12;
+		}
+
+		while (0 > mod2) {
+			mod2 = mod2 + 12;
+		}
+
+
+		name = notenames[mod];
+		name2 = notenames[mod2];
+
+		const a = Math.pow(2, 1/12)
+	
+		hertz2 = hertz * Math.pow(a, steps2);
+
+		hertz = hertz * Math.pow(a, steps);
+		
+		
+
+		if (initial) {
+			note1 = new Note(name, label, hertz, steps);
+			console.log("Got a(n) " + note1.name + ", which is the " + note1.label);
+			
+		} else {
+			note2 = new Note(name, label, hertz, steps);
+			note3 = new Note(name2, label, hertz2, steps2);
+			console.log("Got a(n) " + note2.name + ", which is " + note2.steps + " halfsteps from the root" );
+			console.log("Got a(n) " + note3.name + ", which is " + note3.steps + " halfsteps from the root" );
+			console.log("These notes create a " + note2.label + " chord");
+		}
+	}
+
+	//generates question using genQuestion function and presents it to page
+	function present_question(index,quiz){
+
+
+		
+		genQuestion(index,quiz);
+
+		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
+
+		dataElement3.html(quiz.strikes + " strikes");
+
+		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
+		
+
+	}
+
+
+	//checks answer ("input") of given question index per quiz object
+	//increase current_question variable by 1
+	function answer(index, quiz, input) {
+		
+		quiz.get_question(index).set_submittedanswer(input);
+		
+		//adds strike to quiz if answer is incorrect
+		if(!quiz.get_question(index).check_answer()){
+			quiz.add_strike();
+		}
+		
+		//current_question = current_question + 1;
+
+		current_question = current_question + 1;
+
+		if(quiz.question_total===current_question) {
+			
+			end(quiz);
+			
+		} else {
+			present_question(current_question,quiz)
+		}
+
+	}
+
+	//runs on quiz completion
+	function end(quiz) {
+
+		dataElement2.html("");
+		dataElement3.html("");
+
+		console.log("all done");
+		PLAYBACKSPOT.hide();
+		ANSWERSPOT.hide();
+		
+		dataElement.html("QUIZ COMPLETE");
+		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
+
+
+
+		if (first) {
+			var restartButton = document.createElement("BUTTON");
+			var t = document.createTextNode("Restart Quiz");
+			restartButton.appendChild(t);
+			document.getElementById("restart_spot").appendChild(restartButton);
+
+			restartButton.addEventListener('click', function(){
+
+				current_question = 0;
+				thequiz = new Quiz(10);
+
+				response.html("");
+
+				
+
+				PLAYBACKSPOT.show();
+				ANSWERSPOT.show();
+
+				present_question(current_question,thequiz)
+
+				RESTARTSPOT.hide();
+
+				first = false;
+
+			})
+	} else {
+		RESTARTSPOT.show();
+	};
+
+
+	}
+
+	//generates a random number on or between minimum to maximum
+	function randNum(min, max) {
+  		return Math.floor(Math.random() * (max - min + 1) ) + min;
+	}
+
+</script>
