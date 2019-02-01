@@ -354,8 +354,6 @@
 
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
-
-
 		
 		genQuestion(index,quiz);
 
@@ -363,9 +361,8 @@
 
 		dataElement3.html(quiz.strikes + " strikes");
 
-		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
+		dataElement.html(" Got " + note1.name + ", " + note2.name + ", " + note3.name + ". " + note2.label + "" );
 		
-
 	}
 
 
@@ -422,8 +419,6 @@
 
 				response.html("");
 
-				
-
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();
 
@@ -433,8 +428,7 @@
 
 				first = false;
 
-			})
-	} else {
+			}) } else {
 		RESTARTSPOT.show();
 	};
 
