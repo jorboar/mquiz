@@ -352,8 +352,12 @@
 	//also plays the two notes
 	function genQuestion(index,quiz){
 
-		genData(true);
-		genData(false);
+		//genData(true);
+		//genData(false);
+
+		genNoteSet();
+
+
 		let question = new Question(note1,note2);
 		quiz.set_question(index,question);
 		
@@ -436,6 +440,59 @@
 		}
 	}
 
+
+	function create_note(steps){
+		
+		
+		hertz = 440;
+		
+
+		const a = Math.pow(2, 1/12)
+			
+		label = intervals[number][1];
+	
+
+		mod = steps;
+
+		while (11 < mod) {
+			mod = mod - 12;
+		}
+
+		while (0 > mod) {
+			mod = mod + 12;
+		}
+
+		name = notenames[mod];
+	
+
+		hertz = hertz * Math.pow(a, steps);
+		
+		
+		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
+		
+		return new Note(name, label, hertz, steps);
+		
+
+
+
+
+	}
+
+	//generates a noteset for chord with all 3 chord tones
+	function genNoteSet(){
+
+		number = randNum(0,9);
+		initialoffset = randNum(-12,12)
+
+
+		note1 = create_note(initialoffset);
+		note2 = create_note(initialoffset + intervals[number][0]);
+		
+
+	}
+
+
+
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
 
@@ -447,7 +504,7 @@
 
 		dataElement3.html(quiz.strikes + " strikes");
 
-		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + note2.steps + " halfsteps from the root" );
+		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
 
 	}

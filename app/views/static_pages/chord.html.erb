@@ -353,6 +353,8 @@
 		}
 	}
 
+
+	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
 		
 		
@@ -390,10 +392,8 @@
 
 	}
 
-
+	//generates a noteset for chord with all 3 chord tones
 	function genNoteSet(){
-
-		
 
 		chordtype = randNum(0,2);
 		initialoffset = randNum(-12,12)
@@ -402,7 +402,6 @@
 		note1 = create_note(initialoffset);
 		note2 = create_note(initialoffset + chords[chordtype][0]);
 		note3 = create_note(initialoffset + chords[chordtype][1]);
-
 
 	}
 
