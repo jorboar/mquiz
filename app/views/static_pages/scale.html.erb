@@ -1,4 +1,4 @@
-<h1>INTERVAL QUIZ</h1>
+<h1>SCALE QUIZ</h1>
 
 	<div class = "bulk">
 		<div class = "data2"></div>
@@ -13,13 +13,10 @@
 		<div id="answerSpot"></div>
 	</div>
 
-	 
-	<form hidden id="myform">
-		Name:<input type="text" id="useranswer"/>
-		<input type="submit" />
-	</form> 
-	
+
+
 <script>
+
 	
 	var Note = function(name, label, hertz, steps){
 		this.name = name;
@@ -28,6 +25,7 @@
 		this.steps = steps;
 
 	}
+
 
 	var Quiz = function(question_total){
 			this.question_total = question_total;
@@ -53,9 +51,17 @@
 	}
 
 
-	var Question = function(note1, note2){
+
+	var Question = function(note1, note2, note3, note4, note5, note6, note7, note8){
 			this.note1 = note1;
 			this.note2 = note2;
+			this.note3 = note3;
+			this.note4 = note4;
+			this.note5 = note5;
+			this.note6 = note6;
+			this.note7 = note7;
+			this.note8 = note8;
+
 			this.answer = note2.label;
 			this.submittedanswer = "";
 		}
@@ -90,14 +96,22 @@
 			return this.correct
 		}
 
+
+
 	
 	var note1 = new Note("A", "root", 440, 0);
-	var note2 = new Note("", "", 440, 0);
+	var note2 = new Note("", "Second", 440, 0);
+	var note3 = new Note("", "Third", 440, 0);
+	var note4 = new Note("", "Fourth", 440, 0);
+	var note5 = new Note("", "Fifth", 440, 0);
+	var note6 = new Note("", "Sixth", 440, 0);
+	var note7 = new Note("", "Seventh", 440, 0);
+	var note8 = new Note("", "Octave", 440, 0);
 
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
-	var gimme = ""
 	var first = true;
+	var gimme = ""
 
 	var response = $('.response');
 	var dataElement = $('.data');
@@ -107,33 +121,30 @@
 	var PLAYBACKSPOT = $("#playbackSpot");
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
-	
 
 
 	//used to communicate question index number to various functions
 	var current_question = 0; 
 
-	var intervals = [
-		[2, "Second"],
-		[3, "Minor Third"],
-		[4, "Major Third"],
-		[5, "Fourth"],
-		[6, "Flatted Fifth"],
-		[7, "Fifth"],
-		[10, "Minor Seventh"],
-		[11, "Major Seventh"],
-		[12, "Octave"],
-		[14, "Ninth"]
+	var scales = [
+		["Major", 2, 4, 5, 7, 9, 11, 12],
+		["Dorian", 2, 3, 5, 7, 9, 10, 12],
+		["Phrygian", 1, 3, 5, 7, 8, 10, 12],
+		["Lydian", 2, 4, 6, 7, 9, 11, 12],
+		["Mixolydian", 2, 4, 5, 7, 9, 10, 12],
+		["Minor", 2, 3, 5, 7, 8, 10, 12],
+		["Locrian", 1, 3, 5, 6, 8, 10, 12],
+		["Harmonic Minor", 2, 3, 5, 7, 8, 11, 12],
 	];
 
 	var audioctx = new AudioContext();
-
-	//let btn = document.getElementById('btn');	
 
 	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
+
+		console.log("hell yeah");
 
 		present_question(current_question,thequiz)
 
@@ -146,7 +157,6 @@
 		note1button.addEventListener('click', function(){
 
 			playTone(thequiz.get_question(current_question).note1);
-
 
 		});
 
@@ -163,139 +173,182 @@
 
 		});
 
-		//creates button + event listener to play both notes
-		var note1and2button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Both Notes");
-		note1and2button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note1and2button);
+		//creates button + event listener to play note 3
+		var note3button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note Three");
+		note3button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note3button);
 
-		note1and2button.addEventListener('click', function(){
+		note3button.addEventListener('click', function(){
 
-			playTone(thequiz.get_question(current_question).note1);
-			playTone(thequiz.get_question(current_question).note2);
+			playTone(thequiz.get_question(current_question).note3);
+
 
 		});
+
+
+		//creates button + event listener to play note 3
+		var note4button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note 4");
+		note4button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note4button);
+
+		note4button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note4);
+
+
+		});
+
+		//creates button + event listener to play note 3
+		var note5button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note 5");
+		note5button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note5button);
+
+		note5button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note5);
+
+
+		});
+
+		//creates button + event listener to play note 3
+		var note6button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note 6");
+		note6button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note6button);
+
+		note6button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note6);
+
+
+		});
+
+		//creates button + event listener to play note 3
+		var note7button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note 7");
+		note7button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note7button);
+
+		note7button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note7);
+
+
+		});
+
+		//creates button + event listener to play note 3
+		var note8button = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Note 8");
+		note8button.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(note8button);
+
+		note8button.addEventListener('click', function(){
+
+			playTone(thequiz.get_question(current_question).note8);
+
+
+		});
+		
 
 
 
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
 		var answerButton1 = document.createElement("BUTTON");
-		var t = document.createTextNode("Second");
+		var t = document.createTextNode("Major");
 		answerButton1.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton1);
 
 		answerButton1.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Second");
+			answer(current_question,thequiz,"Major");
 
 
 		});
 
 		var answerButton2 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor Third");
+		var t = document.createTextNode("Dorian");
 		answerButton2.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton2);
 
 		answerButton2.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Minor Third");
+			answer(current_question,thequiz,"Dorian");
 
 
 		});
 
 		var answerButton3 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major Third");
+		var t = document.createTextNode("Phrygian");
 		answerButton3.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton3);
 
 		answerButton3.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Major Third");
+			answer(current_question,thequiz,"Phrygian");
 
 
 		});
 
 		var answerButton4 = document.createElement("BUTTON");
-		var t = document.createTextNode("Fourth");
+		var t = document.createTextNode("Lydian");
 		answerButton4.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton4);
 
 		answerButton4.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Fourth");
+			answer(current_question,thequiz,"Lydian");
 
 
 		});
 
 		var answerButton5 = document.createElement("BUTTON");
-		var t = document.createTextNode("Flatted Fifth");
+		var t = document.createTextNode("Mixolydian");
 		answerButton5.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton5);
 
 		answerButton5.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Flatted Fifth");
+			answer(current_question,thequiz,"Mixolydian");
 
 
 		});
 
 		var answerButton6 = document.createElement("BUTTON");
-		var t = document.createTextNode("Fifth");
+		var t = document.createTextNode("Minor");
 		answerButton6.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton6);
 
 		answerButton6.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Fifth");
+			answer(current_question,thequiz,"Minor");
 
 
 		});
 
 		var answerButton7 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor Seventh");
+		var t = document.createTextNode("Locrian");
 		answerButton7.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton7);
 
 		answerButton7.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Minor Seventh");
+			answer(current_question,thequiz,"Locrian");
 
 
 		});
 
 		var answerButton8 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major Seventh");
+		var t = document.createTextNode("Harmonic Minor");
 		answerButton8.appendChild(t);
 		document.getElementById("answerSpot").appendChild(answerButton8);
 
 		answerButton8.addEventListener('click', function(){
 
-			answer(current_question,thequiz,"Major Seventh");
-
-
-		});
-
-		var answerButton9 = document.createElement("BUTTON");
-		var t = document.createTextNode("Octave");
-		answerButton9.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton9);
-
-		answerButton9.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Octave");
-
-
-		});
-
-		var answerButton10 = document.createElement("BUTTON");
-		var t = document.createTextNode("Ninth");
-		answerButton10.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton10);
-
-		answerButton10.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Ninth");
+			answer(current_question,thequiz,"Harmonic Minor");
 
 
 		});
@@ -303,48 +356,9 @@
 		//-----------------------------------------------------------------------
 		//------------END OF ANSWER BUTTONS--------------------------------------
 
-
-
-
-
-
-
 		//hides start quiz button
 		startQuiz.hide();		
 
-	});
-
-
-	//action on form submit
-	//saves quiz to database
-	$(document).ready(function (){
-		$('#myform').on('submit', function(e){
-			e.preventDefault();
-			console.log("Grabbed form stuff");
-			gimme = document.getElementById("useranswer").value;
-			
-
-
-
-			//$(function() {
-			//	$.post("/users", { name: gimme})
-			//			});
-
-			$.ajax({
-    			type: "POST",
-    			url: "/users",
-    			data: {user: {
-    				name: "TESTNAME"
-    				}
-    			}
-    		});
-
-
-
-
-
-
-		});
 	});
 
 
@@ -354,18 +368,21 @@
 
 		//genData(true);
 		//genData(false);
-
+		
 		genNoteSet();
 
-
-		let question = new Question(note1,note2);
+		let question = new Question(note1, note2, note3, note4, note5, note6, note7, note8);
 		quiz.set_question(index,question);
-		
-		playTone(thequiz.get_question(index).note1);
-		playTone(thequiz.get_question(index).note2);
 
-		setTimeout(function(){playTone(note1);}, 2000);
-		setTimeout(function(){playTone(note2);}, 3500);
+		playTone(note1);
+		setTimeout(function(){playTone(note2);}, 500);
+		setTimeout(function(){playTone(note3);}, 1000);
+		setTimeout(function(){playTone(note4);}, 1500);
+		setTimeout(function(){playTone(note5);}, 2000);
+		setTimeout(function(){playTone(note6);}, 2500);
+		setTimeout(function(){playTone(note7);}, 3000);
+		setTimeout(function(){playTone(note8);}, 3500);
+
 
 	}
 
@@ -391,56 +408,11 @@
 
 		oscillator.start(audioctx.currentTime);
 		gainNode.gain.setValueAtTime(0.01, audioctx.currentTime);
-		oscillator.stop(audioctx.currentTime + 1);
+		oscillator.stop(audioctx.currentTime + 0.6);
 	}
 
 
-	//generates note object data
-	//initial should be set to true if root note
-	function genData(initial){
-
-		if (initial) {
-			hertz = 440;
-			label = "root";
-			steps = randNum(-12,12);
-			
-			mod = steps;
-		} else {
-			number = randNum(0,9);
-			
-			hertz = note1.hertz
-			label = intervals[number][1];
-			steps = intervals[number][0];
-			
-			mod = steps + note1.steps;
-		}
-
-		while (11 < mod) {
-			mod = mod - 12;
-		}
-
-		while (0 > mod) {
-			mod = mod + 12;
-		}
-		
-		name = notenames[mod];
-
-		const a = Math.pow(2, 1/12)
-	
-		hertz = hertz * Math.pow(a, steps);
-		
-
-		if (initial) {
-			note1 = new Note(name, label, hertz, steps);
-			console.log("Got a(n) " + note1.name + ", which is the " + note1.label);
-			
-		} else {
-			note2 = new Note(name, label, hertz, steps);
-			console.log("Got a(n) " + note2.label + ", which is " + note2.steps + " halfsteps from the root" );
-		}
-	}
-
-
+	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
 		
 		
@@ -449,7 +421,7 @@
 
 		const a = Math.pow(2, 1/12)
 			
-		label = intervals[number][1];
+		label = scales[scaletype][0];
 	
 
 		mod = steps;
@@ -473,21 +445,23 @@
 		return new Note(name, label, hertz, steps);
 		
 
-
-
-
 	}
 
 	//generates a noteset for chord with all 3 chord tones
 	function genNoteSet(){
 
-		number = randNum(0,9);
+		scaletype = randNum(0,7);
 		initialoffset = randNum(-12,12)
 
 
 		note1 = create_note(initialoffset);
-		note2 = create_note(initialoffset + intervals[number][0]);
-		
+		note2 = create_note(initialoffset + scales[scaletype][1]);
+		note3 = create_note(initialoffset + scales[scaletype][2]);
+		note4 = create_note(initialoffset + scales[scaletype][3]);
+		note5 = create_note(initialoffset + scales[scaletype][4]);
+		note6 = create_note(initialoffset + scales[scaletype][5]);
+		note7 = create_note(initialoffset + scales[scaletype][6]);
+		note8 = create_note(initialoffset + scales[scaletype][7]);
 
 	}
 
@@ -495,16 +469,15 @@
 
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
-
+		
 		genQuestion(index,quiz);
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
 
 		dataElement3.html(quiz.strikes + " strikes");
 
-		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
+		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
 		
-
 	}
 
 
@@ -543,8 +516,6 @@
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
 		
-		document.getElementById("myform").hidden = false;
-		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
 
@@ -563,8 +534,6 @@
 
 				response.html("");
 
-				document.getElementById("myform").hidden = true;
-
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();
 
@@ -574,32 +543,16 @@
 
 				first = false;
 
-			})
-
-			
-
-
-
-	} else {
+			}) } else {
 		RESTARTSPOT.show();
 	};
 
 
 	}
 
-
 	//generates a random number on or between minimum to maximum
 	function randNum(min, max) {
   		return Math.floor(Math.random() * (max - min + 1) ) + min;
 	}
-
-
-	//oscillator.onended = function(){
-	//	oscillator.disconnect(audioctx.destination);
-	//	console.log("HEY");
-	//}
-
-	
-
 
 </script>
