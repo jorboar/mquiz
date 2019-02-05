@@ -3,3 +3,19 @@
 <a href="/interval"> Interval Quiz </a>
 <br>
 <a href="/chord"> Chord Quiz </a> 
+<h1><%= @question.question_text %></h1>
+
+<script>
+	
+	$(function() {
+		$.get("/questions").success( function( data ){
+			console.log(data);
+		});
+	});
+
+
+
+
+
+
+</script>

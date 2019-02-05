@@ -26,6 +26,7 @@
 
 	}
 
+
 	var Quiz = function(question_total){
 			this.question_total = question_total;
 			this.strikes = 0;
@@ -141,7 +142,6 @@
 
 			playTone(thequiz.get_question(current_question).note1);
 
-
 		});
 
 		//creates button + event listener to play note 2
@@ -240,9 +240,10 @@
 	//also plays the two notes
 	function genQuestion(index,quiz){
 
-		genData(true);
-		genData(false);
+		//genData(true);
+		//genData(false);
 		
+		genNoteSet();
 
 		let question = new Question(note1,note2,note3);
 		quiz.set_question(index,question);
@@ -351,6 +352,61 @@
 			console.log("These notes create a " + note2.label + " chord");
 		}
 	}
+
+	function create_note(steps){
+		
+		
+		hertz = 440;
+		
+
+		const a = Math.pow(2, 1/12)
+			
+		label = chords[chordtype][2];
+	
+
+		mod = steps;
+
+		while (11 < mod) {
+			mod = mod - 12;
+		}
+
+		while (0 > mod) {
+			mod = mod + 12;
+		}
+
+		name = notenames[mod];
+	
+
+		hertz = hertz * Math.pow(a, steps);
+		
+		
+		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
+		
+		return new Note(name, label, hertz, steps);
+		
+
+
+
+
+	}
+
+
+	function genNoteSet(){
+
+		
+
+		chordtype = randNum(0,2);
+		initialoffset = randNum(-12,12)
+
+
+		note1 = create_note(initialoffset);
+		note2 = create_note(initialoffset + chords[chordtype][0]);
+		note3 = create_note(initialoffset + chords[chordtype][1]);
+
+
+	}
+
+
 
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){

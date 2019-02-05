@@ -13,24 +13,13 @@
 		<div id="answerSpot"></div>
 	</div>
 
-	<!-- 
-	<form id="myform">
-		ANSWER:<input type="text" id="useranswer"/>
+	 
+	<form hidden id="myform">
+		Name:<input type="text" id="useranswer"/>
 		<input type="submit" />
 	</form> 
-	-->
-
+	
 <script>
-	
-	
-	// class Note {
-	// 	constructor(name, label, hertz, steps) {
-	// 		this.name = name;
-	// 		this.label = label;
-	// 		this.hertz = hertz;
-	// 		this.steps = steps;
-	// 	}
-	// };
 	
 	var Note = function(name, label, hertz, steps){
 		this.name = name;
@@ -63,36 +52,6 @@
 		this.strikes = this.strikes + 1;
 	}
 
-
-
-	// class Quiz {
-	// 	constructor(question_total){
-	// 		this.question_total = question_total;
-	// 		this.strikes = 0;
-	// 		this.array = new Array(question_total);
-	// 	}
-
-	// 	get_question(id){
-	// 		return this.array[id]
-	// 	}
-
-	// 	set_question(id,question){
-	// 		this.array[id] = question;
-	// 	}
-
-	// 	get_strikes(){
-	// 		return this.strikes;
-	// 	}
-
-	// 	add_strike(){
-	// 		this.strikes = this.strikes + 1;
-	// 	}
-
-	// 	get_question_total(){
-	// 		return this.question_total;
-	// 	}
-
-	// };
 
 	var Question = function(note1, note2){
 			this.note1 = note1;
@@ -131,55 +90,13 @@
 			return this.correct
 		}
 
-
-
-	// class Question {
-
-	// 	constructor(note1, note2){
-	// 		this.note1 = note1;
-	// 		this.note2 = note2;
-	// 		this.answer = note2.label;
-	// 		this.submittedanswer = "";
-	// 	}
-
-	// 	get_answer(){
-	// 		return this.answer
-	// 	}
-
-	// 	get_submittedanswer(){
-	// 		return this.submittedanswer
-	// 	}
-		
-	// 	set_submittedanswer(x){
-	// 		this.submittedanswer = x;
-	// 	}
-
-	// 	check_answer(){
-	// 		if (this.answer === this.submittedanswer){
-	// 			this.correct = true;
-				
-	// 			response.html("CORRECT");
-
-	// 			console.log("CORRECT");
-	// 		} else {
-	// 			this.correct = false;
-				
-	// 			response.html("INCORRECT");
-
-	// 			console.log("INCORRECT")
-	// 		}
-	// 		return this.correct
-	// 	}
-
-	// };
-
 	
 	var note1 = new Note("A", "root", 440, 0);
 	var note2 = new Note("", "", 440, 0);
 
 	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
-	//var gimme = ""
+	var gimme = ""
 	var first = true;
 
 	var response = $('.response');
@@ -190,6 +107,7 @@
 	var PLAYBACKSPOT = $("#playbackSpot");
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
+	
 
 
 	//used to communicate question index number to various functions
@@ -398,16 +316,36 @@
 
 
 	//action on form submit
-	//runs answer function
-	
-	// $(document).ready(function (){
-	// 	$('#myform').on('submit', function(e){
-	// 		e.preventDefault();
-	// 		console.log("Grabbed form stuff");
-	// 		gimme = document.getElementById("useranswer").value;
-	// 		answer(current_question,thequiz,gimme);
-	// 	});
-	// });
+	//saves quiz to database
+	$(document).ready(function (){
+		$('#myform').on('submit', function(e){
+			e.preventDefault();
+			console.log("Grabbed form stuff");
+			gimme = document.getElementById("useranswer").value;
+			
+
+
+
+			//$(function() {
+			//	$.post("/users", { name: gimme})
+			//			});
+
+			$.ajax({
+    			type: "POST",
+    			url: "/users",
+    			data: {user: {
+    				name: "TESTNAME"
+    				}
+    			}
+    		});
+
+
+
+
+
+
+		});
+	});
 
 
 	//generates two notes for question and assigns them to quiz on given index
@@ -550,6 +488,8 @@
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
 		
+		document.getElementById("myform").hidden = false;
+		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
 
@@ -568,7 +508,7 @@
 
 				response.html("");
 
-				
+				document.getElementById("myform").hidden = true;
 
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();
@@ -580,6 +520,11 @@
 				first = false;
 
 			})
+
+			
+
+
+
 	} else {
 		RESTARTSPOT.show();
 	};
