@@ -249,6 +249,25 @@
 
 
 		});
+
+		var repeatbutton = document.createElement("BUTTON");
+		var t = document.createTextNode("Repeat Scale");
+		repeatbutton.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(repeatbutton);
+
+		repeatbutton.addEventListener('click', function(){
+
+			playTone(note1);
+			setTimeout(function(){playTone(note2);}, 500);
+			setTimeout(function(){playTone(note3);}, 1000);
+			setTimeout(function(){playTone(note4);}, 1500);
+			setTimeout(function(){playTone(note5);}, 2000);
+			setTimeout(function(){playTone(note6);}, 2500);
+			setTimeout(function(){playTone(note7);}, 3000);
+			setTimeout(function(){playTone(note8);}, 3500);
+
+
+		});
 		
 
 
