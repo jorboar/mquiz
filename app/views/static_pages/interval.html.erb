@@ -324,8 +324,6 @@
 			gimme = document.getElementById("useranswer").value;
 			
 
-
-
 			//$(function() {
 			//	$.post("/users", { name: gimme})
 			//			});
@@ -334,7 +332,7 @@
     			type: "POST",
     			url: "/users",
     			data: {user: {
-    				name: "TESTNAME"
+    				name: gimme
     				}
     			}
     		});

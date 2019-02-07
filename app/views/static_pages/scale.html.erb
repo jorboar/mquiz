@@ -96,8 +96,6 @@
 			return this.correct
 		}
 
-
-
 	
 	var note1 = new Note("A", "root", 440, 0);
 	var note2 = new Note("", "Second", 440, 0);
@@ -415,9 +413,7 @@
 	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
 		
-		
 		hertz = 440;
-		
 
 		const a = Math.pow(2, 1/12)
 			
@@ -544,8 +540,8 @@
 				first = false;
 
 			}) } else {
-		RESTARTSPOT.show();
-	};
+			RESTARTSPOT.show();
+		};
 
 
 	}

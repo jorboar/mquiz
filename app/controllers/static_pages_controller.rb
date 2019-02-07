@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
 	def index
-		@question = Question.find(get_id) 
+		#@question = Question.find(get_id) 
 		
 	end
 
