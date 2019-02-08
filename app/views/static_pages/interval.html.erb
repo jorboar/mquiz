@@ -350,9 +350,11 @@
 
 			$.ajax({
     			type: "POST",
-    			url: "/users",
-    			data: {user: {
-    				name: gimme
+    			url: "/quizzes",
+    			data: {quiz: {
+    				quiz_type: "Interval Quiz",
+    				quiz_taker: gimme,
+    				score: 100
     				}
     			}
     		});
