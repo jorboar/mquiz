@@ -8,6 +8,8 @@
 		<div id="restart_spot"></div>
 		<div class = "response"><br></div>
 
+		<div id="timer_spot"></div>
+
 		<div id="playbackSpot"></div>
 
 		<div id="answerSpot"></div>
@@ -101,6 +103,8 @@
 
 	var gimme = ""
 	var first = true;
+	var seconds = 0;
+	
 
 	var response = $('.response');
 	var dataElement = $('.data');
@@ -110,6 +114,16 @@
 	var PLAYBACKSPOT = $("#playbackSpot");
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
+	var timerSpot = $("#timer_spot");
+
+
+	//prevents timer from stacking intervals
+	if (typeof interval !=='undefined') {
+		console.log('cleared interval!');
+		clearInterval(interval);
+	}
+
+
 
 
 	//used to communicate question index number to various functions
@@ -128,7 +142,11 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-		console.log("hell yeah");
+
+
+		interval = setInterval(function() {
+	    	document.getElementById('timer_spot').innerHTML = ++seconds;
+		}, 1000);
 
 		present_question(current_question,thequiz)
 
@@ -409,7 +427,7 @@
 
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
-		
+
 		genQuestion(index,quiz);
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
@@ -417,6 +435,14 @@
 		dataElement3.html(quiz.strikes + " strikes");
 
 		dataElement.html(" Got " + note1.name + ", " + note2.name + ", " + note3.name + ". " + note2.label + "" );
+
+
+
+		seconds = 0;
+
+		document.getElementById('timer_spot').innerHTML = seconds;
+
+
 		
 	}
 
@@ -455,6 +481,7 @@
 		console.log("all done");
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
+		timerSpot.hide();
 		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
@@ -480,6 +507,7 @@
 				present_question(current_question,thequiz)
 
 				RESTARTSPOT.hide();
+				timerSpot.show();
 
 				first = false;
 

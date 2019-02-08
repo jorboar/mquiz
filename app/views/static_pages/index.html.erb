@@ -11,6 +11,11 @@
 
 <script>
 
+	//prevents timer from stacking intervals
+	if (typeof interval !=='undefined') {
+		console.log('cleared interval!');
+		clearInterval(interval);
+	}
 
 
 

@@ -8,6 +8,8 @@
 		<div id="restart_spot"></div>
 		<div class = "response"><br></div>
 
+		<div id="timer_spot"></div>
+
 		<div id="playbackSpot"></div>
 
 		<div id="answerSpot"></div>
@@ -107,6 +109,16 @@
 	var PLAYBACKSPOT = $("#playbackSpot");
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
+	var timerSpot = $("#timer_spot");
+
+	
+	//prevents timer from stacking intervals
+	if (typeof interval !=='undefined') {
+		console.log('cleared interval!');
+		clearInterval(interval);
+	}
+
+
 	
 
 
@@ -134,6 +146,14 @@
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
+
+		
+		
+		interval = setInterval(function() {
+	   		document.getElementById('timer_spot').innerHTML = ++seconds;
+		}, 1000);
+		
+
 
 		present_question(current_question,thequiz)
 
@@ -502,6 +522,10 @@
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
+		seconds = 0;
+
+		document.getElementById('timer_spot').innerHTML = seconds;
+
 
 	}
 
@@ -540,6 +564,7 @@
 		console.log("all done");
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
+		timerSpot.hide();
 		
 		document.getElementById("myform").hidden = false;
 		
@@ -565,6 +590,7 @@
 
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();
+				timerSpot.show();
 
 				present_question(current_question,thequiz)
 

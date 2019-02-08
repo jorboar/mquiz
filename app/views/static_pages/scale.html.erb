@@ -8,6 +8,8 @@
 		<div id="restart_spot"></div>
 		<div class = "response"><br></div>
 
+		<div id="timer_spot"></div>
+
 		<div id="playbackSpot"></div>
 
 		<div id="answerSpot"></div>
@@ -119,6 +121,14 @@
 	var PLAYBACKSPOT = $("#playbackSpot");
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
+	var timerSpot = $("#timer_spot"); 
+
+
+	//prevents timer from stacking intervals
+	if (typeof interval !=='undefined') {
+		console.log('cleared interval!');
+		clearInterval(interval);
+	}
 
 
 	//used to communicate question index number to various functions
@@ -142,7 +152,11 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-		console.log("hell yeah");
+
+
+		interval = setInterval(function() {
+	    	document.getElementById('timer_spot').innerHTML = ++seconds;
+		}, 1000);
 
 		present_question(current_question,thequiz)
 
@@ -493,6 +507,11 @@
 
 		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
 		
+
+		seconds = 0;
+
+		document.getElementById('timer_spot').innerHTML = seconds;
+
 	}
 
 
@@ -530,6 +549,7 @@
 		console.log("all done");
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
+		timerSpot.hide();
 		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
@@ -551,6 +571,7 @@
 
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();
+				timerSpot.show();
 
 				present_question(current_question,thequiz)
 
