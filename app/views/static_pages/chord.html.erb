@@ -145,7 +145,12 @@
 
 
 		interval = setInterval(function() {
-	    	document.getElementById('timer_spot').innerHTML = ++seconds;
+	    	document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    	if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+
 		}, 1000);
 
 		present_question(current_question,thequiz)
@@ -255,7 +260,7 @@
 
 
 	//generates two notes for question and assigns them to quiz on given index
-	//also plays the two notes
+	//also plays notes
 	function genQuestion(index,quiz){
 
 		//genData(true);
@@ -270,9 +275,9 @@
 		playTone(thequiz.get_question(index).note2);
 		playTone(thequiz.get_question(index).note3);
 
-		setTimeout(function(){playTone(note1);}, 2000);
-		setTimeout(function(){playTone(note2);}, 3500);
-		setTimeout(function(){playTone(note3);}, 5000);
+		setTimeout(function(){playTone(note1);}, 1600);
+		setTimeout(function(){playTone(note2);}, 2700);
+		setTimeout(function(){playTone(note3);}, 3800);
 
 	}
 
@@ -438,7 +443,7 @@
 
 
 
-		seconds = 0;
+		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 

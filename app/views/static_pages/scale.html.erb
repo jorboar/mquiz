@@ -155,7 +155,12 @@
 
 
 		interval = setInterval(function() {
-	    	document.getElementById('timer_spot').innerHTML = ++seconds;
+	    	document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    	if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+	    	
 		}, 1000);
 
 		present_question(current_question,thequiz)
@@ -508,7 +513,7 @@
 		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
 		
 
-		seconds = 0;
+		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 

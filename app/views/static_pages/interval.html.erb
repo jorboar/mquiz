@@ -150,7 +150,13 @@
 		
 		
 		interval = setInterval(function() {
-	   		document.getElementById('timer_spot').innerHTML = ++seconds;
+	   		document.getElementById('timer_spot').innerHTML = --seconds;
+		
+	   		if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+
+
 		}, 1000);
 		
 
@@ -384,8 +390,8 @@
 		playTone(thequiz.get_question(index).note1);
 		playTone(thequiz.get_question(index).note2);
 
-		setTimeout(function(){playTone(note1);}, 2000);
-		setTimeout(function(){playTone(note2);}, 3500);
+		setTimeout(function(){playTone(note1);}, 1500);
+		setTimeout(function(){playTone(note2);}, 2600);
 
 	}
 
@@ -524,7 +530,7 @@
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
-		seconds = 0;
+		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 
