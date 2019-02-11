@@ -33,6 +33,7 @@
 			this.question_total = question_total;
 			this.strikes = 0;
 			this.array = new Array(question_total);
+			this.total_points = 0;
 	}
 
 	Quiz.prototype.get_question = function(id){
@@ -52,6 +53,14 @@
 		this.strikes = this.strikes + 1;
 	}
 
+	Quiz.prototype.get_total_points = function() {
+		return this.total_points;
+	}
+
+	Quiz.prototype.add_points = function(number) {
+		this.total_points = this.total_points + number;
+
+	}
 
 
 	var Question = function(note1, note2, note3){
@@ -60,6 +69,8 @@
 			this.note3 = note3;
 			this.answer = note2.label;
 			this.submittedanswer = "";
+			this.time = 0;
+			this.points = 0;
 		}
 
 
@@ -79,16 +90,23 @@
 			if (this.answer === this.submittedanswer){
 				this.correct = true;
 				
+				this.points = seconds * 100;
+
 				response.html("CORRECT");
 
 				console.log("CORRECT");
 			} else {
 				this.correct = false;
-				
+				this.points = 0;
+
 				response.html("INCORRECT");
 
 				console.log("INCORRECT")
 			}
+			
+			this.time = seconds;
+
+
 			return this.correct
 		}
 
@@ -263,9 +281,6 @@
 	//also plays notes
 	function genQuestion(index,quiz){
 
-		//genData(true);
-		//genData(false);
-		
 		genNoteSet();
 
 		let question = new Question(note1,note2,note3);
@@ -307,88 +322,15 @@
 	}
 
 
-	//generates note object data
-	//initial should be set to true if root note
-	//setting initial to false will generate notes 2 and 3
-	function genData(initial){
-
-		chordtype = randNum(0,2);
-
-		mod2 = 0;
-		steps2 = 0;
-
-		if (initial) {
-			hertz = 440;
-			label = "root";
-			steps = randNum(-12,12);
-			
-			mod = steps;
-		} else {
-			//number = randNum(0,9);
-			
-			hertz = note1.hertz
-			label = chords[chordtype][2];
-			steps = chords[chordtype][0];
-			steps2 = chords[chordtype][1];
-
-			mod = steps + note1.steps;
-			mod2 = steps2 + note1.steps;
-		}
-
-		while (11 < mod) {
-			mod = mod - 12;
-		}
-
-		while (0 > mod) {
-			mod = mod + 12;
-		}
-		
-		while (11 < mod2) {
-			mod2 = mod2 - 12;
-		}
-
-		while (0 > mod2) {
-			mod2 = mod2 + 12;
-		}
-
-
-		name = notenames[mod];
-		name2 = notenames[mod2];
-
-		const a = Math.pow(2, 1/12)
-	
-		hertz2 = hertz * Math.pow(a, steps2);
-
-		hertz = hertz * Math.pow(a, steps);
-		
-		
-
-		if (initial) {
-			note1 = new Note(name, label, hertz, steps);
-			console.log("Got a(n) " + note1.name + ", which is the " + note1.label);
-			
-		} else {
-			note2 = new Note(name, label, hertz, steps);
-			note3 = new Note(name2, label, hertz2, steps2);
-			console.log("Got a(n) " + note2.name + ", which is " + note2.steps + " halfsteps from the root" );
-			console.log("Got a(n) " + note3.name + ", which is " + note3.steps + " halfsteps from the root" );
-			console.log("These notes create a " + note2.label + " chord");
-		}
-	}
-
-
 	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
 		
-		
 		hertz = 440;
-		
 
 		const a = Math.pow(2, 1/12)
 			
 		label = chords[chordtype][2];
 	
-
 		mod = steps;
 
 		while (11 < mod) {
@@ -408,10 +350,6 @@
 		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
 		
 		return new Note(name, label, hertz, steps);
-		
-
-
-
 
 	}
 
@@ -437,7 +375,7 @@
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
 
-		dataElement3.html(quiz.strikes + " strikes");
+		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
 
 		dataElement.html(" Got " + note1.name + ", " + note2.name + ", " + note3.name + ". " + note2.label + "" );
 
@@ -453,17 +391,21 @@
 
 
 	//checks answer ("input") of given question index per quiz object
-	//increase current_question variable by 1
+	//increases current_question variable by 1
 	function answer(index, quiz, input) {
 		
 		quiz.get_question(index).set_submittedanswer(input);
 		
 		//adds strike to quiz if answer is incorrect
+		//also runs check_answer in this line which provides important data for question
 		if(!quiz.get_question(index).check_answer()){
 			quiz.add_strike();
 		}
 		
-		//current_question = current_question + 1;
+	
+		//adds question points to total points
+		quiz.add_points(quiz.get_question(index).points);
+
 
 		current_question = current_question + 1;
 
@@ -479,6 +421,8 @@
 
 	//runs on quiz completion
 	function end(quiz) {
+
+		clearInterval(interval);
 
 		dataElement2.html("");
 		dataElement3.html("");
@@ -513,6 +457,16 @@
 
 				RESTARTSPOT.hide();
 				timerSpot.show();
+
+				interval = setInterval(function() {
+	    			document.getElementById('timer_spot').innerHTML = --seconds;
+
+			    	if (seconds == 0) {
+			    		answer(current_question,thequiz,"TIMEOUT");
+			    	}
+
+				}, 1000);
+
 
 				first = false;
 
