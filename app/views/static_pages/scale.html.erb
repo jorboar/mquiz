@@ -33,6 +33,7 @@
 			this.question_total = question_total;
 			this.strikes = 0;
 			this.array = new Array(question_total);
+			this.total_points = 0;
 	}
 
 	Quiz.prototype.get_question = function(id){
@@ -48,8 +49,18 @@
 		}
 
 
+	Quiz.prototype.get_total_points = function() {
+		return this.total_points;
+	}
+
+
 	Quiz.prototype.add_strike = function(){
 		this.strikes = this.strikes + 1;
+	}
+
+	Quiz.prototype.add_points = function(number) {
+		this.total_points = this.total_points + number;
+
 	}
 
 
@@ -66,6 +77,9 @@
 
 			this.answer = note2.label;
 			this.submittedanswer = "";
+			this.time = 0;
+			this.points = 0;
+
 		}
 
 
@@ -85,16 +99,23 @@
 			if (this.answer === this.submittedanswer){
 				this.correct = true;
 				
+				this.points = seconds * 100;
+
 				response.html("CORRECT");
 
 				console.log("CORRECT");
 			} else {
 				this.correct = false;
-				
+				this.points = 0;
+
 				response.html("INCORRECT");
 
 				console.log("INCORRECT")
 			}
+			
+			this.time = seconds;
+
+
 			return this.correct
 		}
 
@@ -506,7 +527,7 @@
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
 
-		dataElement3.html(quiz.strikes + " strikes");
+		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
 
 		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
 		
@@ -525,11 +546,14 @@
 		quiz.get_question(index).set_submittedanswer(input);
 		
 		//adds strike to quiz if answer is incorrect
+		//also runs check_answer in this line which provides important data for question
 		if(!quiz.get_question(index).check_answer()){
 			quiz.add_strike();
 		}
 		
-		//current_question = current_question + 1;
+	
+		//adds question points to total points
+		quiz.add_points(quiz.get_question(index).points);
 
 		current_question = current_question + 1;
 
@@ -545,6 +569,8 @@
 
 	//runs on quiz completion
 	function end(quiz) {
+
+		clearInterval(interval);
 
 		dataElement2.html("");
 		dataElement3.html("");
@@ -577,6 +603,15 @@
 				timerSpot.show();
 
 				present_question(current_question,thequiz)
+
+				interval = setInterval(function() {
+	    			document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    			if (seconds == 0) {
+	    				answer(current_question,thequiz,"TIMEOUT");
+	    			}
+
+				}, 1000);
 
 				RESTARTSPOT.hide();
 
