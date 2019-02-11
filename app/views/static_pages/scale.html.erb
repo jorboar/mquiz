@@ -152,15 +152,13 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-
-
 		interval = setInterval(function() {
 	    	document.getElementById('timer_spot').innerHTML = --seconds;
 
 	    	if (seconds == 0) {
 	    		answer(current_question,thequiz,"TIMEOUT");
 	    	}
-	    	
+
 		}, 1000);
 
 		present_question(current_question,thequiz)
