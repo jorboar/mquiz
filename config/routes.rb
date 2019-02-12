@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 	get 'scale', to: 'static_pages#scale'
 	get 'about', to: 'static_pages#about'
 
-	resources :questions
-	resources :quizzes
+	
+	resources :quizzes do 
+		resources :questions	
+	end
 end

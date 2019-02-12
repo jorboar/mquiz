@@ -375,7 +375,18 @@
     			data: {quiz: {
     				quiz_type: "Interval Quiz",
     				quiz_taker: gimme,
-    				score: 100
+    				score: 2300
+    				}
+    			}
+    		});
+
+    		$.ajax({
+    			type: "POST",
+    			url: "/quizzes/1/questions",
+    			data: {question: {
+    				question_text: "TEST QUESTION TEXT",
+    				result: false,
+    				score: 300
     				}
     			}
     		});
@@ -408,7 +419,7 @@
 	}
 
 
-	//plays tone at given hertz
+	//plays hertz per note object passed in
 	function playTone(note){
 		
 		if (note.label == "root") {

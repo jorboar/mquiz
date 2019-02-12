@@ -1,4 +1,7 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Hanalei+Fill|Open+Sans|Roboto');
+
+
 
 h1 {
 	text-align: center;
@@ -11,11 +14,34 @@ body {
   background-attachment: fixed;
 }
 
+.indexButton {
+  background-color: #700000; 
+  margin: 25px;
+  text-align: center;
+  padding: 100px 100px;
+
+}
+
+.indexButton a{
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Hanalei Fill', cursive;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
+
+
+.indexButton a:hover{
+  color: #b7acac;
+  text-decoration:none;
+}
+
+
 .navbar {
   
   box-shadow: 0px 1px 3px #2a2a2a;
   
-
 }
 
 .navbar-light .navbar-text {

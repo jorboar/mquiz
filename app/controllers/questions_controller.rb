@@ -4,14 +4,20 @@ class QuestionsController < ApplicationController
 		render json: Question.all
 	end
 
+
+	def new
+		@question = Question.new
+		render json: quiz
+	end
+
+
 	def show
 		@question = Question.find(params[:id])
 		render json: question
 	end
 
 	def create
-		@question = question.new(question_params)
-		#render json: user
+		@question = Question.create(question_params)
 
 		respond_to do |format|
 			format.json { render json: @question }
@@ -23,7 +29,7 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:question_text, :result)
+		params.require(:question).permit(:quiz_id, :question_text, :result, :score)
 	end
 	
 
