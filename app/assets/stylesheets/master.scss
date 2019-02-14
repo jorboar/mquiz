@@ -22,7 +22,7 @@ body {
 
 }
 
-.indexButton a{
+a .indexButton{
   font-family: 'Open Sans', sans-serif;
   font-family: 'Roboto', sans-serif;
   font-family: 'Hanalei Fill', cursive;
@@ -32,7 +32,7 @@ body {
 }
 
 
-.indexButton a:hover{
+a .indexButton:hover{
   color: #b7acac;
   text-decoration:none;
 }
@@ -96,6 +96,7 @@ button {
 
 .bulk {
 	text-align: center;
+  min-width: 800px;
 }
 
 

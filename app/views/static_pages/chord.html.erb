@@ -151,6 +151,8 @@
 		[3, 10, "Minor Seventh"],
 		[4, 10, "Dominant Seventh"],
 		[4, 11, "Major Seventh"],
+		[3, 12, "Minor"],
+		[4, 12, "Major"],
 	];
 
 	var audioctx = new AudioContext();
@@ -267,6 +269,30 @@
 
 		});
 
+		var answerButton4 = document.createElement("BUTTON");
+		var t = document.createTextNode("Minor");
+		answerButton4.appendChild(t);
+		document.getElementById("answerSpot").appendChild(answerButton4);
+
+		answerButton4.addEventListener('click', function(){
+
+			answer(current_question,thequiz,"Minor");
+
+
+		});
+
+		var answerButton5 = document.createElement("BUTTON");
+		var t = document.createTextNode("Major");
+		answerButton5.appendChild(t);
+		document.getElementById("answerSpot").appendChild(answerButton5);
+
+		answerButton5.addEventListener('click', function(){
+
+			answer(current_question,thequiz,"Major");
+
+
+		});
+
 
 		//-----------------------------------------------------------------------
 		//------------END OF ANSWER BUTTONS--------------------------------------
@@ -356,7 +382,7 @@
 	//generates a noteset for chord with all 3 chord tones
 	function genNoteSet(){
 
-		chordtype = randNum(0,2);
+		chordtype = randNum(0,4);
 		initialoffset = randNum(-12,12)
 
 
