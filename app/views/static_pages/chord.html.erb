@@ -66,8 +66,6 @@
 			return this.correct
 		}
 
-
-
 	
 	var note1 = new Note("A", "root", 440, 0);
 	var note2 = new Note("", "Third", 440, 0);
@@ -129,43 +127,10 @@
 
 		present_question(current_question,thequiz)
 
-		//creates button + event listener to play note 1
-		var note1button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play root");
-		note1button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note1button);
-
-		note1button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note1);
-
-		});
-
-		//creates button + event listener to play note 2
-		var note2button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play third");
-		note2button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note2button);
-
-		note2button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note2);
-
-
-		});
-
-		//creates button + event listener to play note 3
-		var note3button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play seventh/octave");
-		note3button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note3button);
-
-		note3button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note3);
-
-
-		});
+		//creates playback buttons
+		createNoteButton("note1button", "Play Note 1", "1", "playbackSpot" );
+		createNoteButton("note2button", "Play Note 2", "2", "playbackSpot" );
+		createNoteButton("note3button", "Play Note 3", "3", "playbackSpot" );
 
 
 

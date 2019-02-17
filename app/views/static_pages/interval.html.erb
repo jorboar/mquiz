@@ -140,31 +140,10 @@
 
 		present_question(current_question,thequiz)
 
-		//creates button + event listener to play note 1
-		var note1button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note One");
-		note1button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note1button);
+		//creates playback buttons
+		createNoteButton("note1button", "Play Note 1", "1", "playbackSpot" );
+		createNoteButton("note2button", "Play Note 2", "2", "playbackSpot" );
 
-		note1button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note1);
-
-
-		});
-
-		//creates button + event listener to play note 2
-		var note2button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note Two");
-		note2button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note2button);
-
-		note2button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note2);
-
-
-		});
 
 		//creates button + event listener to play both notes
 		var note1and2button = document.createElement("BUTTON");

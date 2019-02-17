@@ -136,109 +136,20 @@
 
 		present_question(current_question,thequiz)
 
-		//creates button + event listener to play note 1
-		var note1button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note One");
-		note1button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note1button);
-
-		note1button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note1);
-
-		});
-
-		//creates button + event listener to play note 2
-		var note2button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note Two");
-		note2button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note2button);
-
-		note2button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note2);
+		
+		//creates buttons to playback current scale tones
+		createNoteButton("note1button", "Play Note 1", "1", "playbackSpot" );
+		createNoteButton("note2button", "Play Note 2", "2", "playbackSpot" );
+		createNoteButton("note3button", "Play Note 3", "3", "playbackSpot" );
+		createNoteButton("note4button", "Play Note 4", "4", "playbackSpot" );
+		createNoteButton("note5button", "Play Note 5", "5", "playbackSpot" );
+		createNoteButton("note6button", "Play Note 6", "6", "playbackSpot" );
+		createNoteButton("note7button", "Play Note 7", "7", "playbackSpot" );
+		createNoteButton("note8button", "Play Note 8", "8", "playbackSpot" );
 
 
-		});
-
-		//creates button + event listener to play note 3
-		var note3button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note Three");
-		note3button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note3button);
-
-		note3button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note3);
 
 
-		});
-
-
-		//creates button + event listener to play note 3
-		var note4button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note 4");
-		note4button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note4button);
-
-		note4button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note4);
-
-
-		});
-
-		//creates button + event listener to play note 3
-		var note5button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note 5");
-		note5button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note5button);
-
-		note5button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note5);
-
-
-		});
-
-		//creates button + event listener to play note 3
-		var note6button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note 6");
-		note6button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note6button);
-
-		note6button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note6);
-
-
-		});
-
-		//creates button + event listener to play note 3
-		var note7button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note 7");
-		note7button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note7button);
-
-		note7button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note7);
-
-
-		});
-
-		//creates button + event listener to play note 3
-		var note8button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note 8");
-		note8button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note8button);
-
-		note8button.addEventListener('click', function(){
-
-			playTone(thequiz.get_question(current_question).note8);
-
-
-		});
 
 		var repeatbutton = document.createElement("BUTTON");
 		var t = document.createTextNode("Repeat Scale");
@@ -262,8 +173,7 @@
 
 
 
-		//----------ANSWER BUTTONS-----------------------------------------------
-		//-----------------------------------------------------------------------
+		//----ANSWER BUTTONS-----------------------------------------------
 		createAnswerButton("answerButton1", "Major", "answerSpot");
 		createAnswerButton("answerButton2", "Dorian", "answerSpot");
 		createAnswerButton("answerButton3", "Phrygian", "answerSpot");
@@ -274,9 +184,6 @@
 		createAnswerButton("answerButton8", "Harmonic Minor", "answerSpot");
 
 
-
-		//-----------------------------------------------------------------------
-		//------------END OF ANSWER BUTTONS--------------------------------------
 
 		//hides start quiz button
 		startQuiz.hide();		

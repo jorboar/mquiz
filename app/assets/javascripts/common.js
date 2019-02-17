@@ -118,6 +118,24 @@
 
 	}
 
+//creates playback button with given variable name, text, note number, and element to append to
+	function createNoteButton(buttonName, text, noteNumber, element){
+
+			var toneText = "thequiz.get_question(current_question).note" + noteNumber;
+
+			var buttonName = document.createElement("BUTTON");
+			var t = document.createTextNode(text);
+			buttonName.appendChild(t);
+			document.getElementById(element).appendChild(buttonName);
+
+			buttonName.addEventListener('click', function(){
+
+				playTone(eval(toneText));
+
+			});
+
+		}
+
 
 
 //generates a random number on or between minimum to maximum
