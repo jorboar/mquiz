@@ -36,7 +36,6 @@
 
 		}
 
-
 	Question.prototype.get_answer = function(){
 			return this.answer
 		}
@@ -68,7 +67,6 @@
 			}
 			
 			this.time = seconds;
-
 
 			return this.correct
 		}
@@ -266,101 +264,16 @@
 
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
-		var answerButton1 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major");
-		answerButton1.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton1);
-
-		answerButton1.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Major");
-
-
-		});
-
-		var answerButton2 = document.createElement("BUTTON");
-		var t = document.createTextNode("Dorian");
-		answerButton2.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton2);
-
-		answerButton2.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Dorian");
+		createAnswerButton("answerButton1", "Major", "answerSpot");
+		createAnswerButton("answerButton2", "Dorian", "answerSpot");
+		createAnswerButton("answerButton3", "Phrygian", "answerSpot");
+		createAnswerButton("answerButton4", "Lydian", "answerSpot");
+		createAnswerButton("answerButton5", "Mixolydian", "answerSpot");
+		createAnswerButton("answerButton6", "Minor", "answerSpot");
+		createAnswerButton("answerButton7", "Locrian", "answerSpot");
+		createAnswerButton("answerButton8", "Harmonic Minor", "answerSpot");
 
 
-		});
-
-		var answerButton3 = document.createElement("BUTTON");
-		var t = document.createTextNode("Phrygian");
-		answerButton3.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton3);
-
-		answerButton3.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Phrygian");
-
-
-		});
-
-		var answerButton4 = document.createElement("BUTTON");
-		var t = document.createTextNode("Lydian");
-		answerButton4.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton4);
-
-		answerButton4.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Lydian");
-
-
-		});
-
-		var answerButton5 = document.createElement("BUTTON");
-		var t = document.createTextNode("Mixolydian");
-		answerButton5.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton5);
-
-		answerButton5.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Mixolydian");
-
-
-		});
-
-		var answerButton6 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor");
-		answerButton6.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton6);
-
-		answerButton6.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Minor");
-
-
-		});
-
-		var answerButton7 = document.createElement("BUTTON");
-		var t = document.createTextNode("Locrian");
-		answerButton7.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton7);
-
-		answerButton7.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Locrian");
-
-
-		});
-
-		var answerButton8 = document.createElement("BUTTON");
-		var t = document.createTextNode("Harmonic Minor");
-		answerButton8.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton8);
-
-		answerButton8.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Harmonic Minor");
-
-
-		});
 
 		//-----------------------------------------------------------------------
 		//------------END OF ANSWER BUTTONS--------------------------------------
@@ -369,6 +282,7 @@
 		startQuiz.hide();		
 
 	});
+
 
 
 	//generates two notes for question and assigns them to quiz on given index
@@ -388,7 +302,6 @@
 		setTimeout(function(){playTone(note6);}, 2500);
 		setTimeout(function(){playTone(note7);}, 3000);
 		setTimeout(function(){playTone(note8);}, 3500);
-
 
 	}
 

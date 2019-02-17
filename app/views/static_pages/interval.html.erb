@@ -183,129 +183,16 @@
 
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
-		var answerButton1 = document.createElement("BUTTON");
-		var t = document.createTextNode("Second");
-		answerButton1.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton1);
-
-		answerButton1.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Second");
-
-
-		});
-
-		var answerButton2 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor Third");
-		answerButton2.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton2);
-
-		answerButton2.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Minor Third");
-
-
-		});
-
-		var answerButton3 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major Third");
-		answerButton3.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton3);
-
-		answerButton3.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Major Third");
-
-
-		});
-
-		var answerButton4 = document.createElement("BUTTON");
-		var t = document.createTextNode("Fourth");
-		answerButton4.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton4);
-
-		answerButton4.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Fourth");
-
-
-		});
-
-		var answerButton5 = document.createElement("BUTTON");
-		var t = document.createTextNode("Flatted Fifth");
-		answerButton5.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton5);
-
-		answerButton5.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Flatted Fifth");
-
-
-		});
-
-		var answerButton6 = document.createElement("BUTTON");
-		var t = document.createTextNode("Fifth");
-		answerButton6.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton6);
-
-		answerButton6.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Fifth");
-
-
-		});
-
-		var answerButton7 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor Seventh");
-		answerButton7.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton7);
-
-		answerButton7.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Minor Seventh");
-
-
-		});
-
-		var answerButton8 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major Seventh");
-		answerButton8.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton8);
-
-		answerButton8.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Major Seventh");
-
-
-		});
-
-		var answerButton9 = document.createElement("BUTTON");
-		var t = document.createTextNode("Octave");
-		answerButton9.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton9);
-
-		answerButton9.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Octave");
-
-
-		});
-
-		var answerButton10 = document.createElement("BUTTON");
-		var t = document.createTextNode("Ninth");
-		answerButton10.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton10);
-
-		answerButton10.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Ninth");
-
-
-		});
-
-		//-----------------------------------------------------------------------
-		//------------END OF ANSWER BUTTONS--------------------------------------
-
+		createAnswerButton("answerButton1", "Second", "answerSpot");
+		createAnswerButton("answerButton2", "Minor Third", "answerSpot");
+		createAnswerButton("answerButton3", "Major Third", "answerSpot");
+		createAnswerButton("answerButton4", "Fourth", "answerSpot");
+		createAnswerButton("answerButton5", "Flatted Fifth", "answerSpot");
+		createAnswerButton("answerButton6", "Fifth", "answerSpot");
+		createAnswerButton("answerButton7", "Minor Seventh", "answerSpot");
+		createAnswerButton("answerButton8", "Major Seventh", "answerSpot");
+		createAnswerButton("answerButton9", "Octave", "answerSpot");
+		createAnswerButton("answerButton10", "Ninth", "answerSpot");
 
 
 		//hides start quiz button

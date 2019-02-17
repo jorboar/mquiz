@@ -118,8 +118,6 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-
-
 		interval = setInterval(function() {
 	    	document.getElementById('timer_spot').innerHTML = --seconds;
 
@@ -189,69 +187,12 @@
 
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
-		var answerButton1 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor Seventh");
-		answerButton1.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton1);
+		createAnswerButton("answerButton1", "Minor Seventh", "answerSpot");
+		createAnswerButton("answerButton2", "Major Seventh", "answerSpot");
+		createAnswerButton("answerButton3", "Dominant Seventh", "answerSpot");
+		createAnswerButton("answerButton4", "Minor", "answerSpot");
+		createAnswerButton("answerButton5", "Major", "answerSpot");
 
-		answerButton1.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Minor Seventh");
-
-
-		});
-
-		var answerButton2 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major Seventh");
-		answerButton2.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton2);
-
-		answerButton2.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Major Seventh");
-
-
-		});
-
-		var answerButton3 = document.createElement("BUTTON");
-		var t = document.createTextNode("Dominant Seventh");
-		answerButton3.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton3);
-
-		answerButton3.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Dominant Seventh");
-
-
-		});
-
-		var answerButton4 = document.createElement("BUTTON");
-		var t = document.createTextNode("Minor");
-		answerButton4.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton4);
-
-		answerButton4.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Minor");
-
-
-		});
-
-		var answerButton5 = document.createElement("BUTTON");
-		var t = document.createTextNode("Major");
-		answerButton5.appendChild(t);
-		document.getElementById("answerSpot").appendChild(answerButton5);
-
-		answerButton5.addEventListener('click', function(){
-
-			answer(current_question,thequiz,"Major");
-
-
-		});
-
-
-		//-----------------------------------------------------------------------
-		//------------END OF ANSWER BUTTONS--------------------------------------
 
 		//hides start quiz button
 		startQuiz.hide();		

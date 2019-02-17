@@ -102,6 +102,23 @@
 	}
 
 
+//creates answer button with given variable name, text, and element to append to
+	function createAnswerButton(buttonName, buttonText, element) {
+	
+		var buttonName = document.createElement("BUTTON");
+		var t = document.createTextNode(buttonText);
+		buttonName.appendChild(t);
+		document.getElementById(element).appendChild(buttonName);
+
+		buttonName.addEventListener('click', function(){
+
+			answer(current_question,thequiz,buttonText);
+
+		});
+
+	}
+
+
 
 //generates a random number on or between minimum to maximum
 	function randNum(min, max) {
