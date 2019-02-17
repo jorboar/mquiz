@@ -19,50 +19,6 @@
 
 <script>
 
-	
-	var Note = function(name, label, hertz, steps){
-		this.name = name;
-		this.label = label;
-		this.hertz = hertz;
-		this.steps = steps;
-
-	}
-
-
-	var Quiz = function(question_total){
-			this.question_total = question_total;
-			this.strikes = 0;
-			this.array = new Array(question_total);
-			this.total_points = 0;
-	}
-
-	Quiz.prototype.get_question = function(id){
-			return this.array[id]
-		}
-
-	Quiz.prototype.set_question = function(id,question){
-			this.array[id] = question;
-		}
-
-	Quiz.prototype.get_strikes = function(){
-			return this.strikes;
-		}
-
-
-	Quiz.prototype.add_strike = function(){
-		this.strikes = this.strikes + 1;
-	}
-
-	Quiz.prototype.get_total_points = function() {
-		return this.total_points;
-	}
-
-	Quiz.prototype.add_points = function(number) {
-		this.total_points = this.total_points + number;
-
-	}
-
-
 	var Question = function(note1, note2, note3){
 			this.note1 = note1;
 			this.note2 = note2;
@@ -177,7 +133,7 @@
 
 		//creates button + event listener to play note 1
 		var note1button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note One");
+		var t = document.createTextNode("Play root");
 		note1button.appendChild(t);
 		document.getElementById("playbackSpot").appendChild(note1button);
 
@@ -189,7 +145,7 @@
 
 		//creates button + event listener to play note 2
 		var note2button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note Two");
+		var t = document.createTextNode("Play third");
 		note2button.appendChild(t);
 		document.getElementById("playbackSpot").appendChild(note2button);
 
@@ -202,7 +158,7 @@
 
 		//creates button + event listener to play note 3
 		var note3button = document.createElement("BUTTON");
-		var t = document.createTextNode("Play Note Three");
+		var t = document.createTextNode("Play seventh/octave");
 		note3button.appendChild(t);
 		document.getElementById("playbackSpot").appendChild(note3button);
 
@@ -324,28 +280,7 @@
 
 
 	//plays tone at given hertz
-	function playTone(note){
-		
-		if (note.label == "root") {
-			console.log("-----playing the " + note.label + ", " + note.name + ", " + "at " + note.hertz + " hertz");
-		} else {
-			console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
-		}
-
-		var oscillator = audioctx.createOscillator();
-		var gainNode = audioctx.createGain();
-
-		oscillator.type = 'sawtooth';
-		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
-
-		//oscillator.connect(audioctx.destination);
-		gainNode.connect(audioctx.destination);
-		oscillator.connect(gainNode);
-
-		oscillator.start(audioctx.currentTime);
-		gainNode.gain.setValueAtTime(0.01, audioctx.currentTime);
-		oscillator.stop(audioctx.currentTime + 1);
-	}
+	
 
 
 	//creates note with given steps offset from A4 (440 hertz)

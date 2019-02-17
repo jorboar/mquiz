@@ -1,5 +1,5 @@
 @import "bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Hanalei+Fill|Open+Sans|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Felipa|Righteous');
 
 
 
@@ -10,8 +10,9 @@ h1 {
 
 body {
 	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; font-size: 18px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px;
-  background: image_url('tile.png');
+  background: image_url('tile2.png');
   background-attachment: fixed;
+  color: white;
 }
 
 .indexButton {
@@ -19,13 +20,12 @@ body {
   margin: 25px;
   text-align: center;
   padding: 100px 100px;
+  border-radius: 16px;
 
 }
 
 a .indexButton{
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Roboto', sans-serif;
-  font-family: 'Hanalei Fill', cursive;
+  font-family: 'Righteous', cursive;
   color: white;
   font-size: 30px;
   text-align: center;
@@ -35,6 +35,7 @@ a .indexButton{
 a .indexButton:hover{
   color: #b7acac;
   text-decoration:none;
+  border-color: rgba(255,255,255,1);
 }
 
 
@@ -81,10 +82,16 @@ button {
   font-size: 16px;
   margin: 10px;
   
+
+}
+
+#playbackSpot button:hover{
+  border-color: rgba(255,255,255,1);
 }
 
 #playbackSpot button{
   background-color: #4c0000;
+  border-radius: 25px;
   
   
 }
