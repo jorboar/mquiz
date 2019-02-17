@@ -466,33 +466,7 @@
 	}
 
 
-	//checks answer ("input") of given question index per quiz object
-	//increase current_question variable by 1
-	function answer(index, quiz, input) {
-		
-		quiz.get_question(index).set_submittedanswer(input);
-		
-		//adds strike to quiz if answer is incorrect
-		//also runs check_answer in this line which provides important data for question
-		if(!quiz.get_question(index).check_answer()){
-			quiz.add_strike();
-		}
-		
-	
-		//adds question points to total points
-		quiz.add_points(quiz.get_question(index).points);
 
-		current_question = current_question + 1;
-
-		if(quiz.question_total===current_question) {
-			
-			end(quiz);
-			
-		} else {
-			present_question(current_question,quiz)
-		}
-
-	}
 
 	//runs on quiz completion
 	function end(quiz) {
@@ -551,9 +525,6 @@
 
 	}
 
-	//generates a random number on or between minimum to maximum
-	function randNum(min, max) {
-  		return Math.floor(Math.random() * (max - min + 1) ) + min;
-	}
+	
 
 </script>

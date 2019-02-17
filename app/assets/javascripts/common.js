@@ -43,48 +43,13 @@
 
 
 
-	Question.prototype.get_answer = function(){
-			return this.answer
-		}
-
-	Question.prototype.get_submittedanswer = function(){
-			return this.submittedanswer
-		}
-
-	Question.prototype.set_submittedanswer = function(x){
-			this.submittedanswer = x;
-		}
-
-	Question.prototype.check_answer = function(){
-			if (this.answer === this.submittedanswer){
-				this.correct = true;
-				
-				this.points = seconds * 100;
-
-				response.html("CORRECT");
-
-				console.log("CORRECT");
-			} else {
-				this.correct = false;
-				this.points = 0;
-
-				response.html("INCORRECT");
-
-				console.log("INCORRECT")
-			}
-			
-			this.time = seconds;
-
-
-			return this.correct
-		}
 
 
 
 
 
-
-function playTone(note){
+//plays tone at given hertz
+	function playTone(note){
 		
 		if (note.label == "root") {
 			console.log("-----playing the " + note.label + ", " + note.name + ", " + "at " + note.hertz + " hertz");
@@ -107,3 +72,38 @@ function playTone(note){
 		oscillator.stop(audioctx.currentTime + 0.6);
 	}
 
+//checks answer ("input") of given question index per quiz object
+//increases current_question variable by 1
+	function answer(index, quiz, input) {
+		
+		quiz.get_question(index).set_submittedanswer(input);
+		
+		//adds strike to quiz if answer is incorrect
+		//also runs check_answer in this line which provides important data for question
+		if(!quiz.get_question(index).check_answer()){
+			quiz.add_strike();
+		}
+		
+	
+		//adds question points to total points
+		quiz.add_points(quiz.get_question(index).points);
+
+
+		current_question = current_question + 1;
+
+		if(quiz.question_total===current_question) {
+			
+			end(quiz);
+			
+		} else {
+			present_question(current_question,quiz)
+		}
+
+	}
+
+
+
+//generates a random number on or between minimum to maximum
+	function randNum(min, max) {
+  		return Math.floor(Math.random() * (max - min + 1) ) + min;
+	}
