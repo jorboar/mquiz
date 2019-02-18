@@ -88,15 +88,23 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
 
+	var answerButton1;
+	var answerButton2;
+	var answerButton3;
+	var answerButton4;
+	var answerButton5;
+	var answerButton6;
+	var answerButton7;
+	var answerButton8;
+	var answerButton9;
+	var answerButton10;
+
 	
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
 		console.log('cleared interval!');
 		clearInterval(interval);
 	}
-
-
-	
 
 
 	//used to communicate question index number to various functions
@@ -162,16 +170,16 @@
 
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
-		createAnswerButton("answerButton1", "Second", "answerSpot");
-		createAnswerButton("answerButton2", "Minor Third", "answerSpot");
-		createAnswerButton("answerButton3", "Major Third", "answerSpot");
-		createAnswerButton("answerButton4", "Fourth", "answerSpot");
-		createAnswerButton("answerButton5", "Flatted Fifth", "answerSpot");
-		createAnswerButton("answerButton6", "Fifth", "answerSpot");
-		createAnswerButton("answerButton7", "Minor Seventh", "answerSpot");
-		createAnswerButton("answerButton8", "Major Seventh", "answerSpot");
-		createAnswerButton("answerButton9", "Octave", "answerSpot");
-		createAnswerButton("answerButton10", "Ninth", "answerSpot");
+		answerButton1 = createAnswerButton("Second", "answerSpot");
+		answerButton2 = createAnswerButton( "Minor Third", "answerSpot");
+		answerButton3 = createAnswerButton("Major Third", "answerSpot");
+		answerButton4 = createAnswerButton("Fourth", "answerSpot");
+		answerButton5 = createAnswerButton( "Flatted Fifth", "answerSpot");
+		answerButton6 = createAnswerButton( "Fifth", "answerSpot");
+		answerButton7 = createAnswerButton( "Minor Seventh", "answerSpot");
+		answerButton8 = createAnswerButton( "Major Seventh", "answerSpot");
+		answerButton9 = createAnswerButton( "Octave", "answerSpot");
+		answerButton10 = createAnswerButton( "Ninth", "answerSpot");
 
 
 		//hides start quiz button

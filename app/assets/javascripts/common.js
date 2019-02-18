@@ -103,25 +103,30 @@
 
 
 //creates answer button with given variable name, text, and element to append to
-	function createAnswerButton(buttonName, buttonText, element) {
+	function createAnswerButton(buttonText, element) {
 	
 		var buttonName = document.createElement("BUTTON");
 		var t = document.createTextNode(buttonText);
 		buttonName.appendChild(t);
 		document.getElementById(element).appendChild(buttonName);
 
-		buttonName.addEventListener('click', function(){
+
+		var handler = function(){
 
 			answer(current_question,thequiz,buttonText);
 
-		});
+		};
+
+
+		buttonName.addEventListener('click', handler);
+
+		return buttonName
 
 	}
 
 //creates playback button with given variable name, text, note number, and element to append to
+	
 	function createNoteButton(buttonName, text, noteNumber, element){
-
-			var toneText = "thequiz.get_question(current_question).note" + noteNumber;
 
 			var buttonName = document.createElement("BUTTON");
 			var t = document.createTextNode(text);
@@ -130,11 +135,12 @@
 
 			buttonName.addEventListener('click', function(){
 
-				playTone(eval(toneText));
+				playTone(thequiz.get_question(current_question)["note" + noteNumber]);
 
 			});
 
 		}
+
 
 
 

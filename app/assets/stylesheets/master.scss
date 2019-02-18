@@ -96,6 +96,23 @@ button {
   
 }
 
+#answerSpot {
+ 
+  margin-right: 200px;
+  margin-left: 200px;
+
+  border: solid;
+  border-color: white;
+  background-color: rgba(255,255,255,0.7);
+
+}
+
+#answerSpot button {
+  opacity: 1.0;
+}
+
+
+
 #start_quiz {
 	margin: auto;
  	width: 30%;
@@ -104,6 +121,7 @@ button {
 .bulk {
 	text-align: center;
   min-width: 800px;
+
 }
 
 
