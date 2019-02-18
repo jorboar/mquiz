@@ -96,6 +96,25 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot"); 
 
+	var answerButton1;
+	var answerButton2;
+	var answerButton3;
+	var answerButton4;
+	var answerButton5;
+	var answerButton6;
+	var answerButton7;
+	var answerButton8;
+
+	var note1button;
+	var note2button;
+	var note3button;
+	var note4button;
+	var note5button;
+	var note6button;
+	var note7button;
+	var note8button;
+	
+
 
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
@@ -138,14 +157,14 @@
 
 		
 		//creates buttons to playback current scale tones
-		createNoteButton("note1button", "Play Note 1", "1", "playbackSpot" );
-		createNoteButton("note2button", "Play Note 2", "2", "playbackSpot" );
-		createNoteButton("note3button", "Play Note 3", "3", "playbackSpot" );
-		createNoteButton("note4button", "Play Note 4", "4", "playbackSpot" );
-		createNoteButton("note5button", "Play Note 5", "5", "playbackSpot" );
-		createNoteButton("note6button", "Play Note 6", "6", "playbackSpot" );
-		createNoteButton("note7button", "Play Note 7", "7", "playbackSpot" );
-		createNoteButton("note8button", "Play Note 8", "8", "playbackSpot" );
+		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
+		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
+		note3button = createNoteButton("Play Note 3", "3", "playbackSpot" );
+		note4button = createNoteButton("Play Note 4", "4", "playbackSpot" );
+		note5button = createNoteButton("Play Note 5", "5", "playbackSpot" );
+		note6button = createNoteButton("Play Note 6", "6", "playbackSpot" );
+		note7button = createNoteButton("Play Note 7", "7", "playbackSpot" );
+		note8button = createNoteButton("Play Note 8", "8", "playbackSpot" );
 
 
 
@@ -174,14 +193,14 @@
 
 
 		//----ANSWER BUTTONS-----------------------------------------------
-		createAnswerButton("answerButton1", "Major", "answerSpot");
-		createAnswerButton("answerButton2", "Dorian", "answerSpot");
-		createAnswerButton("answerButton3", "Phrygian", "answerSpot");
-		createAnswerButton("answerButton4", "Lydian", "answerSpot");
-		createAnswerButton("answerButton5", "Mixolydian", "answerSpot");
-		createAnswerButton("answerButton6", "Minor", "answerSpot");
-		createAnswerButton("answerButton7", "Locrian", "answerSpot");
-		createAnswerButton("answerButton8", "Harmonic Minor", "answerSpot");
+		answerButton1 = createAnswerButton("Major", "answerSpot");
+		answerButton2 = createAnswerButton("Dorian", "answerSpot");
+		answerButton3 = createAnswerButton("Phrygian", "answerSpot");
+		answerButton4 = createAnswerButton("Lydian", "answerSpot");
+		answerButton5 = createAnswerButton("Mixolydian", "answerSpot");
+		answerButton6 = createAnswerButton("Minor", "answerSpot");
+		answerButton7 = createAnswerButton("Locrian", "answerSpot");
+		answerButton8 = createAnswerButton("Harmonic Minor", "answerSpot");
 
 
 

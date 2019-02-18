@@ -102,7 +102,7 @@
 	}
 
 
-//creates answer button with given variable name, text, and element to append to
+//creates answer button with given text and element to append to
 	function createAnswerButton(buttonText, element) {
 	
 		var buttonName = document.createElement("BUTTON");
@@ -124,20 +124,26 @@
 
 	}
 
-//creates playback button with given variable name, text, note number, and element to append to
+//creates playback button with given text, note number, and element to append to
 	
-	function createNoteButton(buttonName, text, noteNumber, element){
+	function createNoteButton(text, noteNumber, element){
 
 			var buttonName = document.createElement("BUTTON");
 			var t = document.createTextNode(text);
 			buttonName.appendChild(t);
 			document.getElementById(element).appendChild(buttonName);
 
-			buttonName.addEventListener('click', function(){
+			
+
+			var handler = function(){
 
 				playTone(thequiz.get_question(current_question)["note" + noteNumber]);
 
-			});
+			};
+
+		buttonName.addEventListener('click', handler);
+
+		return buttonName
 
 		}
 

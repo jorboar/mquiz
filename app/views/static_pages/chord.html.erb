@@ -88,6 +88,20 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
 
+	var answerButton1;
+	var answerButton2;
+	var answerButton3;
+	var answerButton4;
+	var answerButton5;
+
+	var note1button;
+	var note2button;
+	var note3button;
+	
+
+
+
+
 
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
@@ -128,9 +142,9 @@
 		present_question(current_question,thequiz)
 
 		//creates playback buttons
-		createNoteButton("note1button", "Play Note 1", "1", "playbackSpot" );
-		createNoteButton("note2button", "Play Note 2", "2", "playbackSpot" );
-		createNoteButton("note3button", "Play Note 3", "3", "playbackSpot" );
+		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
+		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
+		note3button = createNoteButton("Play Note 3", "3", "playbackSpot" );
 
 
 
@@ -152,11 +166,11 @@
 
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
-		createAnswerButton("answerButton1", "Minor Seventh", "answerSpot");
-		createAnswerButton("answerButton2", "Major Seventh", "answerSpot");
-		createAnswerButton("answerButton3", "Dominant Seventh", "answerSpot");
-		createAnswerButton("answerButton4", "Minor", "answerSpot");
-		createAnswerButton("answerButton5", "Major", "answerSpot");
+		answerButton1 = createAnswerButton("Minor Seventh", "answerSpot");
+		answerButton2 = createAnswerButton("Major Seventh", "answerSpot");
+		answerButton3 = createAnswerButton("Dominant Seventh", "answerSpot");
+		answerButton4 = createAnswerButton("Minor", "answerSpot");
+		answerButton5 = createAnswerButton("Major", "answerSpot");
 
 
 		//hides start quiz button

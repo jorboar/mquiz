@@ -99,6 +99,9 @@
 	var answerButton9;
 	var answerButton10;
 
+	var note1button;
+	var note2button;
+
 	
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
@@ -149,8 +152,8 @@
 		present_question(current_question,thequiz)
 
 		//creates playback buttons
-		createNoteButton("note1button", "Play Note 1", "1", "playbackSpot" );
-		createNoteButton("note2button", "Play Note 2", "2", "playbackSpot" );
+		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
+		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
 
 
 		//creates button + event listener to play both notes
