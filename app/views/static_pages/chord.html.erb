@@ -336,11 +336,14 @@
 
 
 	//toggles event button listeners. True for on, false for off
+	//also stops and starts timer
 	function toggleEventListeners(type) {
 
 		if (type) {
 
 			interval = setInterval(timer,1000);
+
+			document.getElementById('timer_spot').style.color="white";
 
 			repeatbutton.addEventListener('click', repeatListener);
 
@@ -358,6 +361,8 @@
 		} else {
 				
 			clearInterval(interval);
+
+			document.getElementById('timer_spot').style.color="grey";
 
 			repeatbutton.removeEventListener('click', repeatListener);
 
