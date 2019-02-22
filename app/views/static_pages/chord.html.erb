@@ -142,7 +142,7 @@
 
 		}, 1000);
 
-		present_question(current_question,thequiz)
+		
 
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
@@ -178,6 +178,8 @@
 		answerButton5 = createAnswerButton("Major", "answerSpot");
 
 
+		present_question(current_question,thequiz)
+
 		//hides start quiz button
 		startQuiz.hide();		
 
@@ -190,6 +192,8 @@
 
 		genNoteSet();
 
+		toggleEventListeners(false);
+
 		let question = new Question(note1,note2,note3);
 		quiz.set_question(index,question);
 		
@@ -200,6 +204,8 @@
 		setTimeout(function(){playTone(note1);}, 1600);
 		setTimeout(function(){playTone(note2);}, 2600);
 		setTimeout(function(){playTone(note3);}, 3600);
+
+		setTimeout(function(){toggleEventListeners(true);}, 4100);
 
 	}
 	

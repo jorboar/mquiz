@@ -157,7 +157,7 @@
 
 		}, 1000);
 
-		present_question(current_question,thequiz)
+		
 
 		
 		//creates buttons to playback current scale tones
@@ -210,6 +210,7 @@
 		answerButton8 = createAnswerButton("Harmonic Minor", "answerSpot");
 
 
+		present_question(current_question,thequiz)
 
 		//hides start quiz button
 		startQuiz.hide();		
@@ -224,6 +225,8 @@
 		
 		genNoteSet();
 
+		toggleEventListeners(false);
+
 		let question = new Question(note1, note2, note3, note4, note5, note6, note7, note8);
 		quiz.set_question(index,question);
 
@@ -235,6 +238,8 @@
 		setTimeout(function(){playTone(note6);}, 2500);
 		setTimeout(function(){playTone(note7);}, 3000);
 		setTimeout(function(){playTone(note8);}, 3500);
+
+		setTimeout(function(){toggleEventListeners(true);}, 4100);
 
 	}
 

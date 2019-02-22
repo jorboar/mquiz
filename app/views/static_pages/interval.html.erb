@@ -138,8 +138,6 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-		
-		
 		interval = setInterval(function() {
 	   		document.getElementById('timer_spot').innerHTML = --seconds;
 		
@@ -152,7 +150,7 @@
 		
 
 
-		present_question(current_question,thequiz)
+		
 
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
@@ -179,16 +177,18 @@
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
 		answerButton1 = createAnswerButton("Second", "answerSpot");
-		answerButton2 = createAnswerButton( "Minor Third", "answerSpot");
+		answerButton2 = createAnswerButton("Minor Third", "answerSpot");
 		answerButton3 = createAnswerButton("Major Third", "answerSpot");
 		answerButton4 = createAnswerButton("Fourth", "answerSpot");
-		answerButton5 = createAnswerButton( "Flatted Fifth", "answerSpot");
-		answerButton6 = createAnswerButton( "Fifth", "answerSpot");
-		answerButton7 = createAnswerButton( "Minor Seventh", "answerSpot");
-		answerButton8 = createAnswerButton( "Major Seventh", "answerSpot");
-		answerButton9 = createAnswerButton( "Octave", "answerSpot");
-		answerButton10 = createAnswerButton( "Ninth", "answerSpot");
+		answerButton5 = createAnswerButton("Flatted Fifth", "answerSpot");
+		answerButton6 = createAnswerButton("Fifth", "answerSpot");
+		answerButton7 = createAnswerButton("Minor Seventh", "answerSpot");
+		answerButton8 = createAnswerButton("Major Seventh", "answerSpot");
+		answerButton9 = createAnswerButton("Octave", "answerSpot");
+		answerButton10 = createAnswerButton("Ninth", "answerSpot");
 
+
+		present_question(current_question,thequiz)
 
 		//hides start quiz button
 		startQuiz.hide();		
@@ -246,6 +246,7 @@
 
 		genNoteSet();
 
+		toggleEventListeners(false);
 
 		let question = new Question(note1,note2);
 		quiz.set_question(index,question);
@@ -255,6 +256,10 @@
 
 		setTimeout(function(){playTone(note1);}, 1500);
 		setTimeout(function(){playTone(note2);}, 2600);
+
+		setTimeout(function(){toggleEventListeners(true);}, 3200);
+
+
 
 	}
 
