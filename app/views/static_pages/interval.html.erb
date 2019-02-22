@@ -88,6 +88,9 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
 
+	var repeatbutton;
+	var repeatListener;
+
 	var answerButton1;
 	var answerButton2;
 	var answerButton3;
@@ -157,17 +160,19 @@
 
 
 		//creates button + event listener to play both notes
-		var note1and2button = document.createElement("BUTTON");
+		repeatbutton = document.createElement("BUTTON");
 		var t = document.createTextNode("Play Both Notes");
-		note1and2button.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(note1and2button);
+		repeatbutton.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(repeatbutton);
 
-		note1and2button.addEventListener('click', function(){
+		repeatListener = function(){
 
 			playTone(thequiz.get_question(current_question).note1);
 			playTone(thequiz.get_question(current_question).note2);
 
-		});
+		}
+
+		repeatbutton.addEventListener('click', repeatListener);
 
 
 
@@ -397,6 +402,48 @@
 	}
 
 
+	//toggles event button listeners. True for on, false for off
+	function toggleEventListeners(type) {
+
+		if (type) {
+
+			repeatbutton.addEventListener('click', repeatListener);
+
+			note1button.button.addEventListener('click', note1button.listener);
+			note2button.button.addEventListener('click', note2button.listener);
+
+			answerButton1.button.addEventListener('click', answerButton1.listener);
+			answerButton2.button.addEventListener('click', answerButton2.listener);
+			answerButton3.button.addEventListener('click', answerButton3.listener);
+			answerButton4.button.addEventListener('click', answerButton4.listener);
+			answerButton5.button.addEventListener('click', answerButton5.listener);
+			answerButton6.button.addEventListener('click', answerButton6.listener);
+			answerButton7.button.addEventListener('click', answerButton7.listener);
+			answerButton8.button.addEventListener('click', answerButton8.listener);
+			answerButton9.button.addEventListener('click', answerButton9.listener);
+			answerButton10.button.addEventListener('click', answerButton10.listener);
+
+		} else {
+			
+			repeatbutton.removeEventListener('click', repeatListener);
+
+			note1button.button.removeEventListener('click', note1button.listener);
+			note2button.button.removeEventListener('click', note2button.listener);
+
+			answerButton1.button.removeEventListener('click', answerButton1.listener);
+			answerButton2.button.removeEventListener('click', answerButton2.listener);
+			answerButton3.button.removeEventListener('click', answerButton3.listener);
+			answerButton4.button.removeEventListener('click', answerButton4.listener);
+			answerButton5.button.removeEventListener('click', answerButton5.listener);
+			answerButton6.button.removeEventListener('click', answerButton6.listener);
+			answerButton7.button.removeEventListener('click', answerButton7.listener);
+			answerButton8.button.removeEventListener('click', answerButton8.listener);
+			answerButton9.button.removeEventListener('click', answerButton9.listener);
+			answerButton10.button.removeEventListener('click', answerButton10.listener);
+
+		};
+
+	}
 	
 
 

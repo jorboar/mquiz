@@ -1,15 +1,15 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Felipa|Righteous');
-
+@import url('https://fonts.googleapis.com/css?family=Istok+Web');
 
 
 h1 {
 	text-align: center;
-	
+  
 }
 
 body {
-	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; font-size: 18px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px;
+  font-family: 'Istok Web', sans-serif;
   background: image_url('tile2.png');
   background-attachment: fixed;
   color: white;
@@ -64,10 +64,17 @@ li .nav-item .active{
 
 .data2  {
   text-align: left;
+  
+  margin-left: 200px;
 }
 
 .data3 {
   text-align: left;
+  margin-left: 200px;
+}
+
+#timer_spot {
+  font-size: 25px;
 }
 
 
@@ -101,9 +108,8 @@ button {
   margin-right: 200px;
   margin-left: 200px;
 
-  border: solid;
-  border-color: white;
-  background-color: rgba(255,255,255,0.7);
+  
+  background-color: rgba(255,255,255,0.5);
 
 }
 

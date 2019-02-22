@@ -105,20 +105,23 @@
 //creates answer button with given text and element to append to
 	function createAnswerButton(buttonText, element) {
 	
-		var buttonName = document.createElement("BUTTON");
-		var t = document.createTextNode(buttonText);
-		buttonName.appendChild(t);
-		document.getElementById(element).appendChild(buttonName);
-
-
-		var handler = function(){
+		var button = function() {
+			this.button = document.createElement("BUTTON");
+			this.listener = function(){
 
 			answer(current_question,thequiz,buttonText);
 
-		};
+			};
+		
+		}
 
+		buttonName = new button();
 
-		buttonName.addEventListener('click', handler);
+		var t = document.createTextNode(buttonText);
+		buttonName.button.appendChild(t);
+		document.getElementById(element).appendChild(buttonName.button);
+
+		buttonName.button.addEventListener('click', buttonName.listener);
 
 		return buttonName
 
@@ -128,20 +131,24 @@
 	
 	function createNoteButton(text, noteNumber, element){
 
-			var buttonName = document.createElement("BUTTON");
-			var t = document.createTextNode(text);
-			buttonName.appendChild(t);
-			document.getElementById(element).appendChild(buttonName);
-
-			
-
-			var handler = function(){
+			var button = function() {
+				this.button = document.createElement("BUTTON");
+				this.listener = function(){
 
 				playTone(thequiz.get_question(current_question)["note" + noteNumber]);
 
-			};
+				};
+		
+			}
 
-		buttonName.addEventListener('click', handler);
+			buttonName = new button();
+
+			var t = document.createTextNode(text);
+			buttonName.button.appendChild(t);
+			document.getElementById(element).appendChild(buttonName.button);
+
+
+		buttonName.button.addEventListener('click', buttonName.listener);
 
 		return buttonName
 

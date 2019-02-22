@@ -88,6 +88,9 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
 
+	var repeatbutton;
+	var repeatListener;
+
 	var answerButton1;
 	var answerButton2;
 	var answerButton3;
@@ -149,18 +152,20 @@
 
 
 		//creates button + event listener to play chord
-		var chordbutton = document.createElement("BUTTON");
+		repeatbutton = document.createElement("BUTTON");
 		var t = document.createTextNode("Play Chord");
-		chordbutton.appendChild(t);
-		document.getElementById("playbackSpot").appendChild(chordbutton);
+		repeatbutton.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(repeatbutton);
 
-		chordbutton.addEventListener('click', function(){
+		repeatListener = function(){
 
 			playTone(thequiz.get_question(current_question).note1);
 			playTone(thequiz.get_question(current_question).note2);
 			playTone(thequiz.get_question(current_question).note3);
 
-		});
+		}
+
+		repeatbutton.addEventListener('click', repeatListener);
 
 
 
@@ -323,6 +328,44 @@
 		RESTARTSPOT.show();
 	};
 
+
+	}
+
+
+	//toggles event button listeners. True for on, false for off
+	function toggleEventListeners(type) {
+
+		if (type) {
+
+			repeatbutton.addEventListener('click', repeatListener);
+
+			note1button.button.addEventListener('click', note1button.listener);
+			note2button.button.addEventListener('click', note2button.listener);
+			note3button.button.addEventListener('click', note3button.listener);
+
+			answerButton1.button.addEventListener('click', answerButton1.listener);
+			answerButton2.button.addEventListener('click', answerButton2.listener);
+			answerButton3.button.addEventListener('click', answerButton3.listener);
+			answerButton4.button.addEventListener('click', answerButton4.listener);
+			answerButton5.button.addEventListener('click', answerButton5.listener);
+			
+
+		} else {
+			
+			repeatbutton.removeEventListener('click', repeatListener);
+
+			note1button.button.removeEventListener('click', note1button.listener);
+			note2button.button.removeEventListener('click', note2button.listener);
+			note3button.button.removeEventListener('click', note3button.listener);
+
+			answerButton1.button.removeEventListener('click', answerButton1.listener);
+			answerButton2.button.removeEventListener('click', answerButton2.listener);
+			answerButton3.button.removeEventListener('click', answerButton3.listener);
+			answerButton4.button.removeEventListener('click', answerButton4.listener);
+			answerButton5.button.removeEventListener('click', answerButton5.listener);
+			
+
+		};
 
 	}
 

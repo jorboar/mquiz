@@ -96,6 +96,10 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot"); 
 
+
+	var repeatbutton;
+	var repeatListener;
+
 	var answerButton1;
 	var answerButton2;
 	var answerButton3;
@@ -170,12 +174,12 @@
 
 
 
-		var repeatbutton = document.createElement("BUTTON");
+		repeatbutton = document.createElement("BUTTON");
 		var t = document.createTextNode("Repeat Scale");
 		repeatbutton.appendChild(t);
 		document.getElementById("playbackSpot").appendChild(repeatbutton);
 
-		repeatbutton.addEventListener('click', function(){
+		repeatListener = function(){
 
 			playTone(note1);
 			setTimeout(function(){playTone(note2);}, 500);
@@ -187,7 +191,10 @@
 			setTimeout(function(){playTone(note8);}, 3500);
 
 
-		});
+		}
+
+
+		repeatbutton.addEventListener('click', repeatListener);
 		
 
 
@@ -361,6 +368,58 @@
 			RESTARTSPOT.show();
 		};
 
+
+	}
+
+
+	//toggles event button listeners. True for on, false for off
+	function toggleEventListeners(type) {
+
+		if (type) {
+
+			repeatbutton.addEventListener('click', repeatListener);
+
+			note1button.button.addEventListener('click', note1button.listener);
+			note2button.button.addEventListener('click', note2button.listener);
+			note3button.button.addEventListener('click', note3button.listener);
+			note4button.button.addEventListener('click', note4button.listener);
+			note5button.button.addEventListener('click', note5button.listener);
+			note6button.button.addEventListener('click', note6button.listener);
+			note7button.button.addEventListener('click', note7button.listener);
+			note8button.button.addEventListener('click', note8button.listener);
+
+			answerButton1.button.addEventListener('click', answerButton1.listener);
+			answerButton2.button.addEventListener('click', answerButton2.listener);
+			answerButton3.button.addEventListener('click', answerButton3.listener);
+			answerButton4.button.addEventListener('click', answerButton4.listener);
+			answerButton5.button.addEventListener('click', answerButton5.listener);
+			answerButton6.button.addEventListener('click', answerButton6.listener);
+			answerButton7.button.addEventListener('click', answerButton7.listener);
+			answerButton8.button.addEventListener('click', answerButton8.listener);
+
+		} else {
+			
+			repeatbutton.removeEventListener('click', repeatListener);
+
+			note1button.button.removeEventListener('click', note1button.listener);
+			note2button.button.removeEventListener('click', note2button.listener);
+			note3button.button.removeEventListener('click', note3button.listener);
+			note4button.button.removeEventListener('click', note4button.listener);
+			note5button.button.removeEventListener('click', note5button.listener);
+			note6button.button.removeEventListener('click', note6button.listener);
+			note7button.button.removeEventListener('click', note7button.listener);
+			note8button.button.removeEventListener('click', note8button.listener);
+
+			answerButton1.button.removeEventListener('click', answerButton1.listener);
+			answerButton2.button.removeEventListener('click', answerButton2.listener);
+			answerButton3.button.removeEventListener('click', answerButton3.listener);
+			answerButton4.button.removeEventListener('click', answerButton4.listener);
+			answerButton5.button.removeEventListener('click', answerButton5.listener);
+			answerButton6.button.removeEventListener('click', answerButton6.listener);
+			answerButton7.button.removeEventListener('click', answerButton7.listener);
+			answerButton8.button.removeEventListener('click', answerButton8.listener);
+
+		};
 
 	}
 
