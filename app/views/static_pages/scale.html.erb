@@ -117,6 +117,18 @@
 	var note6button;
 	var note7button;
 	var note8button;
+
+
+	var interval;
+	var timer = function() {
+	    	document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    	if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+
+	};
+
 	
 
 
@@ -148,14 +160,7 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-		interval = setInterval(function() {
-	    	document.getElementById('timer_spot').innerHTML = --seconds;
-
-	    	if (seconds == 0) {
-	    		answer(current_question,thequiz,"TIMEOUT");
-	    	}
-
-		}, 1000);
+		
 
 		
 
@@ -208,7 +213,6 @@
 		answerButton6 = createAnswerButton("Minor", "answerSpot");
 		answerButton7 = createAnswerButton("Locrian", "answerSpot");
 		answerButton8 = createAnswerButton("Harmonic Minor", "answerSpot");
-
 
 		present_question(current_question,thequiz)
 
@@ -323,6 +327,7 @@
 	function end(quiz) {
 
 		clearInterval(interval);
+		console.log("interval---");
 
 		dataElement2.html(quiz.total_points + " points earned");
 		dataElement3.html("");
@@ -356,15 +361,6 @@
 
 				present_question(current_question,thequiz)
 
-				interval = setInterval(function() {
-	    			document.getElementById('timer_spot').innerHTML = --seconds;
-
-	    			if (seconds == 0) {
-	    				answer(current_question,thequiz,"TIMEOUT");
-	    			}
-
-				}, 1000);
-
 				RESTARTSPOT.hide();
 
 				first = false;
@@ -378,9 +374,13 @@
 
 
 	//toggles event button listeners. True for on, false for off
+	//also stops and starts timer
 	function toggleEventListeners(type) {
 
 		if (type) {
+
+			interval = setInterval(timer,1000);
+			console.log("interval+++");
 
 			repeatbutton.addEventListener('click', repeatListener);
 
@@ -404,6 +404,10 @@
 
 		} else {
 			
+			clearInterval(interval);
+			console.log("interval---");
+
+
 			repeatbutton.removeEventListener('click', repeatListener);
 
 			note1button.button.removeEventListener('click', note1button.listener);

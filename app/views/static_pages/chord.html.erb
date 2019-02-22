@@ -102,6 +102,15 @@
 	var note3button;
 	
 
+	var interval;
+	var timer = function() {
+	    	document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    	if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+
+	};
 
 
 
@@ -133,22 +142,10 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 
-		interval = setInterval(function() {
-	    	document.getElementById('timer_spot').innerHTML = --seconds;
-
-	    	if (seconds == 0) {
-	    		answer(current_question,thequiz,"TIMEOUT");
-	    	}
-
-		}, 1000);
-
-		
-
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
 		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
 		note3button = createNoteButton("Play Note 3", "3", "playbackSpot" );
-
 
 
 		//creates button + event listener to play chord
@@ -343,6 +340,8 @@
 
 		if (type) {
 
+			interval = setInterval(timer,1000);
+
 			repeatbutton.addEventListener('click', repeatListener);
 
 			note1button.button.addEventListener('click', note1button.listener);
@@ -357,7 +356,9 @@
 			
 
 		} else {
-			
+				
+			clearInterval(interval);
+
 			repeatbutton.removeEventListener('click', repeatListener);
 
 			note1button.button.removeEventListener('click', note1button.listener);

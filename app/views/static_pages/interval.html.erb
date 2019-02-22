@@ -105,6 +105,17 @@
 	var note1button;
 	var note2button;
 
+
+	var interval;
+	var timer = function() {
+	    	document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    	if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+
+	};
+
 	
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
@@ -137,16 +148,6 @@
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
-
-		interval = setInterval(function() {
-	   		document.getElementById('timer_spot').innerHTML = --seconds;
-		
-	   		if (seconds == 0) {
-	    		answer(current_question,thequiz,"TIMEOUT");
-	    	}
-
-
-		}, 1000);
 		
 
 
@@ -376,13 +377,7 @@
 				ANSWERSPOT.show();
 				timerSpot.show();
 
-				interval = setInterval(function() {
-	   				document.getElementById('timer_spot').innerHTML = --seconds;
-		
-		   			if (seconds == 0) {
-		    			answer(current_question,thequiz,"TIMEOUT");
-		    		}
-				}, 1000);
+			
 		
 
 
@@ -412,6 +407,8 @@
 
 		if (type) {
 
+			interval = setInterval(timer,1000);
+
 			repeatbutton.addEventListener('click', repeatListener);
 
 			note1button.button.addEventListener('click', note1button.listener);
@@ -429,6 +426,8 @@
 			answerButton10.button.addEventListener('click', answerButton10.listener);
 
 		} else {
+			
+			clearInterval(interval);
 			
 			repeatbutton.removeEventListener('click', repeatListener);
 
