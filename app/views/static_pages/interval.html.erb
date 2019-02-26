@@ -145,6 +145,11 @@
 
 	//let btn = document.getElementById('btn');	
 
+
+	$(".bulk").fadeIn("slow");
+
+
+
 	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
@@ -221,22 +226,6 @@
     				}
     			}
     		});
-
-    		$.ajax({
-    			type: "POST",
-    			url: "/quizzes/1/questions",
-    			data: {question: {
-    				question_text: "TEST QUESTION TEXT",
-    				result: false,
-    				score: 300
-    				}
-    			}
-    		});
-
-
-
-
-
 
 		});
 	});

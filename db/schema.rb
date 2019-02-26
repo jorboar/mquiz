@@ -15,16 +15,6 @@ ActiveRecord::Schema.define(version: 20190201012323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "questions", force: :cascade do |t|
-    t.integer  "quiz_id"
-    t.string   "question_text"
-    t.boolean  "result"
-    t.integer  "score"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["quiz_id"], name: "index_questions_on_quiz_id", using: :btree
-  end
-
   create_table "quizzes", force: :cascade do |t|
     t.string   "quiz_type"
     t.string   "quiz_taker"

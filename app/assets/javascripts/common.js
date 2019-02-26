@@ -147,6 +147,10 @@
 			buttonName.button.appendChild(t);
 			document.getElementById(element).appendChild(buttonName.button);
 
+			//$("<button></button").text(text);
+			//$(element).append()
+
+
 
 		buttonName.button.addEventListener('click', buttonName.listener);
 
@@ -155,9 +159,8 @@
 		}
 
 
-
-
 //generates a random number on or between minimum to maximum
 	function randNum(min, max) {
   		return Math.floor(Math.random() * (max - min + 1) ) + min;
 	}
+

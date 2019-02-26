@@ -1,17 +1,36 @@
 <br>
-<h1>QUIZZES</h1>
+<h1>QUIZZES NEW</h1>
 
 
 <div class = "bulk">
 	<a href="/interval"><button class="indexButton">INTERVAL</button></a>
 	<a href="/chord"><button class="indexButton">CHORD</button></a>
 	<a href="/scale"><button class="indexButton">SCALE</button></a>
+
+
+<br>
+<h2>High Scores</h2>
+
+<h3>Interval</h3>
+	<% @quizzes.each do |quiz| %>
+		<p>
+			<%= quiz.quiz_taker %>
+		</p>
+
+
+	<% end %>
+
+
+
 </div>
 
 
 
 
 <script>
+
+
+	$(".bulk").fadeIn("slow");
 
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {

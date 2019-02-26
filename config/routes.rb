@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'controller/questions'
 
-	root 'static_pages#index'
+	root 'quizzes#index'
 	get 'interval', to: 'static_pages#interval'
 	get 'chord', to: 'static_pages#chord'
 	get 'scale', to: 'static_pages#scale'
