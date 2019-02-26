@@ -229,7 +229,7 @@
     				}
     			}
     		});
-
+			document.location.href="/"
 		});
 	});
 
@@ -253,16 +253,12 @@
 
 		setTimeout(function(){toggleEventListeners(true);}, 3200);
 
-
-
 	}
 
 
 	function create_note(steps){
 		
-		
 		hertz = 440;
-		
 
 		const a = Math.pow(2, 1/12)
 			
@@ -300,7 +296,6 @@
 
 		number = randNum(0,9);
 		initialoffset = randNum(-12,12)
-
 
 		note1 = create_note(initialoffset);
 		note2 = create_note(initialoffset + intervals[number][0]);

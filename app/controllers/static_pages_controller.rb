@@ -2,10 +2,6 @@ class StaticPagesController < ApplicationController
 
 
 	def index
-		
-		#@question = Question.find(get_id) 
-		
-		#@quizzes = Quiz.all
 
 		@quiz = Quiz.find(get_id)
 

@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
 	
 	def index
 		@quizzes = Quiz.all
-		#render json: Quiz.all
+		
 
 	end
 
@@ -34,6 +34,8 @@ class QuizzesController < ApplicationController
 	def quiz_params
 		params.require(:quiz).permit(:quiz_taker,:quiz_type,:score)
 	end
+
+	
 
 
 
