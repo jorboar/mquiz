@@ -41,11 +41,7 @@
 	}
 
 
-
-
-
-
-
+var timeouts = [];
 
 
 //plays tone at given hertz

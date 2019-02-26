@@ -191,13 +191,13 @@
 		repeatListener = function(){
 
 			playTone(note1);
-			setTimeout(function(){playTone(note2);}, 500);
-			setTimeout(function(){playTone(note3);}, 1000);
-			setTimeout(function(){playTone(note4);}, 1500);
-			setTimeout(function(){playTone(note5);}, 2000);
-			setTimeout(function(){playTone(note6);}, 2500);
-			setTimeout(function(){playTone(note7);}, 3000);
-			setTimeout(function(){playTone(note8);}, 3500);
+			timeouts.push(setTimeout(function(){playTone(note2);}, 500));
+			timeouts.push(setTimeout(function(){playTone(note3);}, 1000));
+			timeouts.push(setTimeout(function(){playTone(note4);}, 1500));
+			timeouts.push(setTimeout(function(){playTone(note5);}, 2000));
+			timeouts.push(setTimeout(function(){playTone(note6);}, 2500));
+			timeouts.push(setTimeout(function(){playTone(note7);}, 3000));
+			timeouts.push(setTimeout(function(){playTone(note8);}, 3500));
 
 
 		}
@@ -262,15 +262,15 @@
 		quiz.set_question(index,question);
 
 		playTone(note1);
-		setTimeout(function(){playTone(note2);}, 500);
-		setTimeout(function(){playTone(note3);}, 1000);
-		setTimeout(function(){playTone(note4);}, 1500);
-		setTimeout(function(){playTone(note5);}, 2000);
-		setTimeout(function(){playTone(note6);}, 2500);
-		setTimeout(function(){playTone(note7);}, 3000);
-		setTimeout(function(){playTone(note8);}, 3500);
+		timeouts.push(setTimeout(function(){playTone(note2);}, 500));
+		timeouts.push(setTimeout(function(){playTone(note3);}, 1000));
+		timeouts.push(setTimeout(function(){playTone(note4);}, 1500));
+		timeouts.push(setTimeout(function(){playTone(note5);}, 2000));
+		timeouts.push(setTimeout(function(){playTone(note6);}, 2500));
+		timeouts.push(setTimeout(function(){playTone(note7);}, 3000));
+		timeouts.push(setTimeout(function(){playTone(note8);}, 3500));
 
-		setTimeout(function(){toggleEventListeners(true);}, 4100);
+		timeouts.push(setTimeout(function(){toggleEventListeners(true);}, 4100));
 
 	}
 

@@ -1,5 +1,5 @@
 <br>
-<h1>QUIZZES NEW</h1>
+<h1>QUIZZES</h1>
 
 
 <div class = "bulk">
@@ -8,7 +8,7 @@
 	<a href="/scale"><button class="indexButton">SCALE</button></a>
 
 	<h2>High Scores</h2>
-</div>
+
 
 <br>
 
@@ -65,11 +65,18 @@
 	</ul>
 
 </div>
-
+</div>
 
 
 
 <script>
+
+	//prevents notes from continuing onto page
+	for(var i=0; i<timeouts.length; i++)
+    {
+        clearTimeout(timeouts[i]);
+        //console.log("WHOA MAN" + i);
+    }
 
 
 	$(".bulk").fadeIn("slow");

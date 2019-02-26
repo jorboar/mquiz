@@ -248,10 +248,10 @@
 		playTone(thequiz.get_question(index).note1);
 		playTone(thequiz.get_question(index).note2);
 
-		setTimeout(function(){playTone(note1);}, 1500);
-		setTimeout(function(){playTone(note2);}, 2600);
+		timeouts.push(setTimeout(function(){playTone(note1);}, 1500));
+		timeouts.push(setTimeout(function(){playTone(note2);}, 2600));
 
-		setTimeout(function(){toggleEventListeners(true);}, 3200);
+		timeouts.push(setTimeout(function(){toggleEventListeners(true);}, 3200));
 
 	}
 

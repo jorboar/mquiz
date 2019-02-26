@@ -233,11 +233,11 @@
 		playTone(thequiz.get_question(index).note2);
 		playTone(thequiz.get_question(index).note3);
 
-		setTimeout(function(){playTone(note1);}, 1600);
-		setTimeout(function(){playTone(note2);}, 2600);
-		setTimeout(function(){playTone(note3);}, 3600);
+		timeouts.push(setTimeout(function(){playTone(note1);}, 1600));
+		timeouts.push(setTimeout(function(){playTone(note2);}, 2600));
+		timeouts.push(setTimeout(function(){playTone(note3);}, 3600));
 
-		setTimeout(function(){toggleEventListeners(true);}, 4100);
+		timeouts.push(setTimeout(function(){toggleEventListeners(true);}, 4100));
 
 	}
 	
