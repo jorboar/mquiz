@@ -14,13 +14,20 @@
 		<div id="playbackSpot"></div>
 
 		<div id="answerSpot"></div>
+	
+		<br>
+
+		<form id="myform">
+			Name: <input type="text" id="useranswer"/>
+			<input type="submit" value="Submit Score" />
+		</form> 
+
+
+
 	</div>
 
 	 
-	<form hidden id="myform">
-		Name:<input type="text" id="useranswer"/>
-		<input type="submit" />
-	</form> 
+	
 	
 <script>
 	
@@ -78,6 +85,7 @@
 
 	var gimme = ""
 	var first = true;
+	var points;
 
 	var response = $('.response');
 	var dataElement = $('.data');
@@ -210,11 +218,6 @@
 			e.preventDefault();
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
-			
-
-			//$(function() {
-			//	$.post("/users", { name: gimme})
-			//			});
 
 			$.ajax({
     			type: "POST",
@@ -222,7 +225,7 @@
     			data: {quiz: {
     				quiz_type: "Interval Quiz",
     				quiz_taker: gimme,
-    				score: 2300
+    				score: points
     				}
     			}
     		});
@@ -341,8 +344,12 @@
 		ANSWERSPOT.hide();
 		timerSpot.hide();
 		
-		document.getElementById("myform").hidden = false;
-		
+
+		$("#myform").fadeIn("slow");
+		//document.getElementById("myform").show();
+		points = quiz.total_points;
+
+
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
 
@@ -357,11 +364,11 @@
 			restartButton.addEventListener('click', function(){
 
 				current_question = 0;
-				thequiz = new Quiz(10);
+				thequiz = new Quiz(5);
 
 				response.html("");
 
-				document.getElementById("myform").hidden = true;
+				$("#myform").fadeOut("fast");
 
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();

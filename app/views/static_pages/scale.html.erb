@@ -14,6 +14,14 @@
 		<div id="playbackSpot"></div>
 
 		<div id="answerSpot"></div>
+
+		<br>
+
+		<form id="myform">
+			Name: <input type="text" id="useranswer"/>
+			<input type="submit" value="Submit Score" />
+		</form> 
+
 	</div>
 
 
@@ -86,6 +94,7 @@
 
 	var first = true;
 	var gimme = ""
+	var points;
 
 	var response = $('.response');
 	var dataElement = $('.data');
@@ -217,6 +226,29 @@
 	});
 
 
+	//action on form submit
+	//saves quiz to database
+	$(document).ready(function (){
+		$('#myform').on('submit', function(e){
+			e.preventDefault();
+			console.log("Grabbed form stuff");
+			gimme = document.getElementById("useranswer").value;
+
+			$.ajax({
+    			type: "POST",
+    			url: "/quizzes",
+    			data: {quiz: {
+    				quiz_type: "Scale Quiz",
+    				quiz_taker: gimme,
+    				score: points
+    				}
+    			}
+    		});
+
+		});
+	});
+
+
 
 	//generates two notes for question and assigns them to quiz on given index
 	//also plays the two notes
@@ -331,6 +363,9 @@
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
 		timerSpot.hide();
+
+		$("#myform").fadeIn("slow");
+		points = quiz.total_points;
 		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
@@ -346,9 +381,11 @@
 			restartButton.addEventListener('click', function(){
 
 				current_question = 0;
-				thequiz = new Quiz(10);
+				thequiz = new Quiz(5);
 
 				response.html("");
+
+				$("#myform").fadeOut("fast");
 
 				PLAYBACKSPOT.show();
 				ANSWERSPOT.show();

@@ -60,7 +60,7 @@
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 
-		oscillator.type = 'sawtooth';
+		oscillator.type = 'triangle';
 		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
 
 		//oscillator.connect(audioctx.destination);
