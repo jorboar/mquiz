@@ -32,7 +32,7 @@ class QuizzesController < ApplicationController
 	private
 
 	def quiz_params
-		params.require(:quiz).permit(:quiz_taker,:quiz_type,:score)
+		params.require(:quiz).permit(:quiz_taker,:quiz_type,:score,:rank)
 	end
 
 	

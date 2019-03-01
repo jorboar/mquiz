@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20190201012323) do
     t.string   "quiz_type"
     t.string   "quiz_taker"
     t.integer  "score"
+    t.integer  "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

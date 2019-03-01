@@ -21,7 +21,7 @@
 			<li>
 				
 			<% if quiz.quiz_type == "Interval Quiz"%>
-				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %>
+				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %> - rank: <%= quiz.rank %>
 			<% end %>
 			</li>
 
@@ -40,7 +40,7 @@
 			<li>
 				
 			<% if quiz.quiz_type == "Chord Quiz"%>
-				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %>
+				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %> - rank: <%= quiz.rank %>
 			<% end %>
 			</li>
 
@@ -57,7 +57,7 @@
 			<li>
 				
 			<% if quiz.quiz_type == "Scale Quiz"%>
-				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %>
+				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %> - rank: <%= quiz.rank %>
 			<% end %>
 			</li>
 

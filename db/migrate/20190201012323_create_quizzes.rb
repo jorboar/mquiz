@@ -4,6 +4,7 @@ class CreateQuizzes < ActiveRecord::Migration[5.0]
       t.string :quiz_type
       t.string :quiz_taker
       t.integer :score
+      t.integer :rank
       t.timestamps
     end
   end
