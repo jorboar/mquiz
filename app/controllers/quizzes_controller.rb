@@ -2,8 +2,7 @@ class QuizzesController < ApplicationController
 	
 	def index
 		@quizzes = Quiz.all
-		
-
+		@board_nodes = BoardNode.all
 	end
 
 	def show
@@ -11,11 +10,9 @@ class QuizzesController < ApplicationController
 
 	end
 
-
-
 	def new
 		@quiz = Quiz.new
-		render json: quiz
+		render json: @quiz
 	end
 
 	def create

@@ -1,0 +1,2 @@
+class BoardNode < ApplicationRecord
+end

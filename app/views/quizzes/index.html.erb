@@ -7,6 +7,15 @@
 	<a href="/chord"><button class="indexButton">CHORD</button></a>
 	<a href="/scale"><button class="indexButton">SCALE</button></a>
 
+	<p> <% @board_nodes.each do |node| %> 
+		<%= node.quiz_id %>
+
+		<% end %>
+
+		<%= @board_nodes.find(1).quiz_id %>
+
+	</p>
+
 	<h2>High Scores</h2>
 
 

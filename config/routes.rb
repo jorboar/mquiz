@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 	get 'about', to: 'static_pages#about'
 
 	
-	resources :quizzes do 
-		resources :questions	
-	end
+	resources :quizzes 
+	resources :board_nodes
 end

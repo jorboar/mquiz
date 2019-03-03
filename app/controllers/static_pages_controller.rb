@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
 	def index
 
 		@quiz = Quiz.find(get_id)
-
+		@board_node = BoardNode.find(get_id)
 	end
 
 	def game
