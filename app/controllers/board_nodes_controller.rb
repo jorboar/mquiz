@@ -16,6 +16,15 @@ class BoardNodesController < ApplicationController
 		render json: @board_node
 	end
 
+	def edit
+		@board_node = BoardNode.find(params[:id])
+
+	end
+
+	def update
+		@board_node = BoardNode.find(params[:id])
+		@board_node.update(board_node_params)
+	end
 
 
 	def create
@@ -32,7 +41,7 @@ class BoardNodesController < ApplicationController
 	private
 
 	def board_node_params
-		params.require(:quiz).permit(:quiz_taker,:quiz_type,:score,:rank)
+		params.require(:board_node).permit(:quiz_id,:score)
 	end
 
 	helper_method :specific_node

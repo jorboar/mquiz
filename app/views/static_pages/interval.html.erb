@@ -158,7 +158,7 @@
 
 
 
-	thequiz = new Quiz(5);
+	thequiz = new Quiz(3);
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -219,18 +219,160 @@
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
-			$.ajax({
-    			type: "POST",
-    			url: "/quizzes",
-    			data: {quiz: {
-    				quiz_type: "Interval Quiz",
-    				quiz_taker: gimme,
-    				score: points,
-    				rank: 0
-    				}
+			var lastID;
+			var lastScore;
+
+		function ajax1() {
+
+			return	$.ajax({
+	    			type: "POST",
+	    			url: "/quizzes",
+	    			data: {quiz: {
+	    				quiz_type: "Interval Quiz",
+	    				quiz_taker: gimme,
+	    				score: points,
+	    				rank: 0
+	    				}
+	    			},
+
+	    			success: function(data) {
+	        			console.log("hey success. on id: " + data.id);
+	        			lastID = data.id;
+	        			lastScore = data.score;
+	    			}
+	    		});
+		}
+
+   			// $.ajax({
+    		// 	type: "PATCH",
+    		// 	url: "/board_nodes/1",
+    		// 	data: {board_node: {
+    		// 		quiz_id:1,
+    		// 		score: 2234,
+    		// 		}
+    		// 	}
+    		// });
+
+
+
+
+
+		function ajax2(i) {
+
+						return $.get(["/board_nodes/" + i], function (data) {
+		    				
+
+		    				console.log("Lets go " + data.id);
+		    				console.log(data.quiz_id + " and " + data.score);
+		    				//tempscore = data.score;
+		    				
+		    				//top10[i] = data;
+
+		    				//console.log("quiz id: " + top10[i].quiz_id + " score: " + top10[i].score);
+
+
+		    			if  (lastScore > data.score)  {
+
+		    				$.ajax({
+				    			type: "PATCH",
+				    			url: ["/board_nodes/" + i],
+				    			data: {board_node: {
+					   				quiz_id: lastID,
+					   				score: lastScore,
+					   				}
+					    		}
+					    	});
+
+		    				console.log("FOUND ON " + data.id);
+		    				found = true;
+
+		    			}
+
+
+		    	})
+
+	    		
+	    		
+	    }
+
+
+
+
+
+
+
+
+
+
+    		var top10 = new Array(10);
+			
+    		var tempscore;
+
+    		var found = false;
+
+    		function boardcomparison(i) {
+
+    			if (found){
+    				i = 11;
     			}
-    		});
-			document.location.href="/"
+
+    			if (i != 11) {
+	    			$.when(ajax2(i)).done(function(){
+	    				
+	    				return boardcomparison(i + 1)
+		    		});
+	    		}
+
+    		}
+
+
+    	$.when(ajax1()).done(function(){
+
+	    		boardcomparison(1);
+				
+    	});
+
+
+
+
+	    		
+
+
+
+
+
+
+
+	    		
+
+
+	    			
+    	
+
+
+
+
+
+
+
+    		// for (var i = 1; i < 11; i++) {
+    		// 	console.log("quiz id: " + top10[i].quiz_id + " score: " + top10[i].score);
+    		// }
+
+    
+
+
+			//document.location.href="/"
+
+
+
+			
+
+
+
+
+
+
 		});
 	});
 
