@@ -43,9 +43,8 @@
 			<% if @board_nodes.find(i).quiz_id == 0 %>
 				--------
 			<% else %>
-				<%= @quizzes.find(@board_nodes.find(i).quiz_id).quiz_taker %> - <%= @quizzes.find(@board_nodes.find(i).quiz_id).score %> - <%= @quizzes.find(@board_nodes.find(i).quiz_id).quiz_type %> - boardnode score: <%=@board_nodes.find(i).score %>
+				 <%= @board_nodes.find(i).score %> - <%= @board_nodes.find(i).name %>
 			<% end %>
-				
 			</li>
 
 			<% i = i + 1 %>

@@ -221,6 +221,7 @@
 
 			var lastID;
 			var lastScore;
+			var lastName;
 
 		function ajax1() {
 
@@ -239,6 +240,7 @@
 	        			console.log("hey success. on id: " + data.id);
 	        			lastID = data.id;
 	        			lastScore = data.score;
+	        			lastName = data.quiz_taker;
 	    			}
 	    		});
 		}
@@ -279,6 +281,7 @@
 				    			data: {board_node: {
 					   				quiz_id: lastID,
 					   				score: lastScore,
+					   				name: lastName
 					   				}
 					    		}
 					    	});

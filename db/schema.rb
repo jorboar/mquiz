@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20190302220126) do
   create_table "board_nodes", force: :cascade do |t|
     t.integer  "quiz_id"
     t.integer  "score"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

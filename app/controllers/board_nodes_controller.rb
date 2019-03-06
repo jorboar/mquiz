@@ -41,7 +41,7 @@ class BoardNodesController < ApplicationController
 	private
 
 	def board_node_params
-		params.require(:board_node).permit(:quiz_id,:score)
+		params.require(:board_node).permit(:quiz_id,:score, :name)
 	end
 
 	helper_method :specific_node
