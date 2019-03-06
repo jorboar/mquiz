@@ -158,7 +158,7 @@
 
 
 
-	thequiz = new Quiz(3);
+	thequiz = new Quiz(2);
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -245,6 +245,36 @@
 	    		});
 		}
 
+		$.when(ajax1()).done(function(){
+
+	    		boardcomparison(1);
+				
+    	});
+
+
+		//recursively runs ajax2 and then runs moveNodes() if a score is needed to be put onto board
+    		function boardcomparison(i) {
+
+
+
+    			if (found){
+    				i = 11;
+    				moveNodes(nodeID,nodeScore,nodeName);
+
+    			}
+
+    			if (i < 10) {
+	    			$.when(ajax2(i)).done(function(){
+	    				console.log("running boardcomparison with " + (i+1));
+	    				return boardcomparison(i + 1)
+		    		});
+	    		}
+
+    		}
+
+
+
+
    			// $.ajax({
     		// 	type: "PATCH",
     		// 	url: "/board_nodes/1",
@@ -256,24 +286,36 @@
     		// });
 
 
+    		var nodeID;
+    		var nodeScore;
+    		var nodeName;
+
+    		var nextID;
+    		var nextScore;
+    		var nextName;
+
+    		var found = false;
 
 
-
+    	//reads through board nodes to find if the most recent submitted data beats any node's score
+    	//stores old node data under initial get request, then patches with new data from user submission
 		function ajax2(i) {
 
 						return $.get(["/board_nodes/" + i], function (data) {
-		    				
 
 		    				console.log("Lets go " + data.id);
-		    				console.log(data.quiz_id + " and " + data.score);
-		    				//tempscore = data.score;
+		    				console.log(data.id + " and " + data.score);
 		    				
-		    				//top10[i] = data;
-
-		    				//console.log("quiz id: " + top10[i].quiz_id + " score: " + top10[i].score);
+		    				nodeID = data.id;
+    						nodeScore = data.score;
+    						nodeName = data.name;
 
 
 		    			if  (lastScore > data.score)  {
+
+		    				found = true;
+
+		    				nextID = nodeID;
 
 		    				$.ajax({
 				    			type: "PATCH",
@@ -287,7 +329,9 @@
 					    	});
 
 		    				console.log("FOUND ON " + data.id);
-		    				found = true;
+		    				
+
+		    				
 
 		    			}
 
@@ -298,42 +342,67 @@
 	    		
 	    }
 
+	    //recursively runs ajax3
+	    function moveNodes(id, score, name) {
 
-
-
-
-
-
-
-
-
-    		var top10 = new Array(10);
-			
-    		var tempscore;
-
-    		var found = false;
-
-    		function boardcomparison(i) {
-
-    			if (found){
-    				i = 11;
-    			}
-
-    			if (i != 11) {
-	    			$.when(ajax2(i)).done(function(){
+	    	console.log("running moveNodes with " + id + ", " + score + ", " + name);
+	    	console.log("nextID - " + nextID);
+    			if (nextID < 11) {
+	    			$.when(ajax3(id,score,name)).done(function(){
+	    				console.log("moving to next moveNodes with " + nextID + ", " + nextScore + ", " + nextName);
 	    				
-	    				return boardcomparison(i + 1)
+	    				return moveNodes(nextID, nextScore, nextName)
 		    		});
 	    		}
+	    }
 
-    		}
 
 
-    	$.when(ajax1()).done(function(){
+	    function ajax3(id,score,name){
 
-	    		boardcomparison(1);
-				
-    	});
+	    	console.log("running ajax3 with " + (id + 1));
+
+	    	return $.get(["/board_nodes/" + (id+1)], function (data) {
+	    		
+	    		nextID = nextID + 1;
+    			nextScore = data.score;
+    			nextName = data.name;
+    			//console.log("writing nextID as " + nextID);
+
+	    	})
+
+	    	.done(function(){
+
+	    		$.ajax({
+					type: "PATCH",
+					url: ["/board_nodes/" + (id+1)],
+					data: {board_node: {
+					quiz_id: id,
+					score: score,
+					name: name
+					}
+	    		}		
+	    	});
+
+
+
+
+	    	});
+
+
+	    	
+
+
+
+	    	
+
+	    }
+
+    		
+	    	
+
+
+    	
 
 
 
@@ -462,7 +531,7 @@
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
-		seconds = 20;
+		seconds = 114;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 

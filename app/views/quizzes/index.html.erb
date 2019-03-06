@@ -40,7 +40,7 @@
 		<% while i < 11 %>
 			<li>
 			
-			<% if @board_nodes.find(i).quiz_id == 0 %>
+			<% if @board_nodes.find(i).name == "---" %>
 				--------
 			<% else %>
 				 <%= @board_nodes.find(i).score %> - <%= @board_nodes.find(i).name %>
