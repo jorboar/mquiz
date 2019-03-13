@@ -6,6 +6,9 @@
 		<div class = "data3"></div>
 		<div class = "data"></div>
 		<button id="start_quiz">Start Quiz</button>
+		<div class="slidecontainer">
+  			<input type="range" min="1" max="20" value="10" class="slider" id="myRange">
+		</div>
 		<div id="restart_spot"></div>
 		<div class = "response"><br></div>
 
@@ -76,6 +79,14 @@
 
 			return this.correct
 		}
+
+
+	slider = document.getElementById("myRange");
+
+	slider.oninput = function() {
+  		volume = this.value/100;
+	}
+
 
 	
 	var note1 = new Note("A", "root", 440, 0);
@@ -387,19 +398,12 @@
 
 
 
-	    	});
-
-
-	    	
-
-
-
-	    	
+	    	});	    	
 
 	    }
 
     		
-	    	
+	    //document.location.href="/"
 
 
     	
@@ -434,7 +438,7 @@
     
 
 
-			//document.location.href="/"
+			
 
 
 

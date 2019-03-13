@@ -42,6 +42,12 @@
 
 
 var timeouts = [];
+var volume = 0.10;
+var slider = 20;
+
+
+
+
 
 
 //plays tone at given hertz
@@ -52,6 +58,12 @@ var timeouts = [];
 		} else {
 			console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
 		}
+
+
+
+		console.log(volume);
+		
+
 
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
@@ -64,8 +76,12 @@ var timeouts = [];
 		oscillator.connect(gainNode);
 
 		oscillator.start(audioctx.currentTime);
-		gainNode.gain.setValueAtTime(0.01, audioctx.currentTime);
+		gainNode.gain.setValueAtTime(volume, audioctx.currentTime);
 		oscillator.stop(audioctx.currentTime + 0.6);
+
+	
+
+
 	}
 
 //checks answer ("input") of given question index per quiz object
