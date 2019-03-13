@@ -154,11 +154,11 @@
 	//let btn = document.getElementById('btn');	
 
 
-	$(".bulk").fadeIn("slow");
+	
 
 
 
-	thequiz = new Quiz(2);
+	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -531,7 +531,7 @@
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
-		seconds = 114;
+		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 
