@@ -322,7 +322,7 @@
     						nodeName = data.name;
 
 
-		    			if  (lastScore > data.score)  {
+		    			if (lastScore >= data.score)  {
 
 		    				found = true;
 
@@ -358,7 +358,7 @@
 
 	    	console.log("running moveNodes with " + id + ", " + score + ", " + name);
 	    	console.log("nextID - " + nextID);
-    			if (nextID < 11) {
+    			if (nextID < 10) {
 	    			$.when(ajax3(id,score,name)).done(function(){
 	    				console.log("moving to next moveNodes with " + nextID + ", " + nextScore + ", " + nextName);
 	    				
