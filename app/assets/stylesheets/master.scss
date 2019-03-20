@@ -164,6 +164,18 @@ button {
   text-align: center;
 }
 
+.guestbook {
+  border: solid;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  font-size: 35px;
+}
+
+.guestbook h3 {
+  text-align: center;
+}
+
 
 button:hover {
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);

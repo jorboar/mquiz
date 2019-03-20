@@ -5,6 +5,11 @@ class QuizzesController < ApplicationController
 		@board_nodes = BoardNode.all
 	end
 
+	def scores
+		@quizzes = Quiz.all
+		@board_nodes = BoardNode.all
+	end
+
 	def show
 		@quiz = Quiz.find(params[:id])
 
