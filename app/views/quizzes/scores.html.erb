@@ -9,8 +9,12 @@
 <div class = "guestbook">
 	<h3>Guestbook</h3>
 	
+
+	<% i = @quizzes.length %>
+
 	<ul>
-		<% @quizzes.each do |quiz| %>
+		<% while i > 0 %>
+			<% quiz = @quizzes.find(i) %>
 			<li>
 				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %>
 				<ul>
@@ -18,11 +22,20 @@
 				</ul>
 			</li>
 
+		<% i = i - 1 %>
 
 		<% end %>
 	</ul>
 
 </div>
+
+
+
+
+			
+
+
+
 
 
 
