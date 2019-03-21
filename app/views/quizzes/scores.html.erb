@@ -6,36 +6,35 @@
 
 <br>
 
+
+
+
+
+
+
+
+<%= will_paginate @quizzes %>
+
 <div class = "guestbook">
 	<h3>Guestbook</h3>
-	
 
-	<% i = @quizzes.length %>
 
 	<ul>
-		<% while i > 0 %>
-			<% quiz = @quizzes.find(i) %>
+		
+			<% @quizzes.each do |quiz| %>
 			<li>
-				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %>
+				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %> - <%= quiz.id %>
 				<ul>
 					<%= quiz.created_at.to_formatted_s(:long_ordinal) %>
 				</ul>
 			</li>
 
-		<% i = i - 1 %>
+		
 
 		<% end %>
 	</ul>
 
 </div>
-
-
-
-
-			
-
-
-
 
 
 

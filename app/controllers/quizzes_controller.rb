@@ -6,8 +6,11 @@ class QuizzesController < ApplicationController
 	end
 
 	def scores
-		@quizzes = Quiz.all
+		
 		@board_nodes = BoardNode.all
+		@quizzes = Quiz.paginate(page: params[:page], per_page: 10).order('id DESC')
+
+
 	end
 
 	def show
