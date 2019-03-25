@@ -13,6 +13,20 @@ body {
   background: image_url('tiledark.png');
   background-attachment: fixed;
   color: white;
+  margin:0;
+}
+
+p {
+  margin-right: 180px;
+  margin-left: 180px;
+}
+
+.aboutlist{
+  margin-left: 220px;
+}
+
+hr {
+  border-color: white;
 }
 
 .indexButton {
@@ -52,10 +66,12 @@ a .indexButton:hover{
 
 .navbar-dark .navbar-brand {
 	color: white;
+  text-decoration: none;
 }
 
 .nav-link {
 	color: white;
+  text-decoration: none;
 }
 
 li .nav-item .active{
@@ -170,10 +186,26 @@ button {
   vertical-align: top;
   text-align: left;
   font-size: 35px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .guestbook h3 {
   text-align: center;
+}
+
+.row {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+a {
+  color: #bf0000;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #ff2121;
 }
 
 

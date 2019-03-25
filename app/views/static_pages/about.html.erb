@@ -1,5 +1,52 @@
+<br>
 <h1>About</h1>
 
+<p>
+	MQuiz is a web application that provides several quizzes which generate and play musical intervals, chords, and scales using JavaScript's BaseAudioContext. The user is to accurately determine what is being presented using only their ears and earns a score based on speed and accuracy. All submitted scores are added to the guestbook, and those within the top 10 per quiz-type are logged onto the leaderboard.
+
+	<br></br>
+	When I was in highschool I took a jazz improvisation class that would regularly have us do similar tests to what can be found on this website. The instructor would sit behind a piano and play random intervals and chords in order to train our ears. It proved to be incredibly valuable for my understanding of music and my ability to identify particular musical elements only by ear.
+
+	<br></br>
+	Technologies used in this application:
+
+</p>
+	
+	<div class="aboutlist">
+		<ul>
+			<li>Ruby on Rails</li>
+			<li>Javascript</li>
+			<li>jQuery</li>
+			<li>AJAX</li>
+			<li>postgresSQL</li>
+			<li>Bootstrap</li>
+			<li>HTML/CSS</li>
+			<li><a href="https://github.com/jorboar/mquiz">Git</a></li>
+			<li>Heroku</li>
+
+		</ul>
+	</div>
+<hr>
+
+<div class="row">
+    <div class="col-12 col-sm-4">
+      <%= image_tag 'mikejor.jpg', class: 'img-fluid' %>
+    </div>
+
+<div class="col-12 col-sm-8 ">
+      <h2 class="text-center">Musical Experience</h2>
+      <br />
+      <p>
+        I've been playing in bands and recording music since I was 13. From the moment I picked up a guitar, music theory always heavily interested me. I would independently study different scales/methods of composition and eventually explored some formal training through independent lessons and classes.
+        <br></br>
+        Today music is very much something I'm passionate about. My <a href="https://www.youtube.com/user/JMAPMUSIC/">YouTube channel</a> provides a decent catalog of my past and most recent projects.
+        <br></br>
+        -Jordan Perkic-
+      </p>
+      <br />
+    </div>
+
+</div>
 
 
 <script>
@@ -29,6 +76,13 @@
 		console.log('cleared interval!');
 		clearInterval(interval);
 	}
+
+
+	for(var i=0; i<timeouts.length; i++)
+    {
+        clearTimeout(timeouts[i]);
+        //console.log("WHOA MAN" + i);
+    }
 
 
 </script>
