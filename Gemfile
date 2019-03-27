@@ -35,6 +35,8 @@ gem 'bootstrap', '~> 4.1.2'
 
 gem 'will_paginate', '>= 3.1'
 
+gem "actionview", ">= 5.0.7.2"
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

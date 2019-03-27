@@ -29,6 +29,55 @@ hr {
   border-color: white;
 }
 
+.waveName {
+  background-color: #700000; 
+  border-radius: 16px;
+}
+
+.waveMenu {
+  margin-left:auto; 
+}
+
+.slidecontainer {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dropdown {
+ margin-top: 10px;
+  
+  margin-left: 875px;
+  margin-right: 220px;
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+
+
+
 .indexButton {
   background-color: #700000; 
   margin: 25px;

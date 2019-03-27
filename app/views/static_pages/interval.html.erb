@@ -3,9 +3,21 @@
 
 	<div class = "bulk">
 		<div class = "data2"></div>
+		
+		<div class="dropdown">
+			<button class="waveName">wavetype placeholder</button>
+			<div class="dropdown-content">
+			    <button class="dropbtn1">square</button>
+			    <button class="dropbtn2">sine</button>
+			    <button class="dropbtn3">sawtooth</button>
+			    <button class="dropbtn4">triangle</button>
+			</div>
+		</div>
+
 		<div class = "data3"></div>
 		<div class = "data"></div>
 		<button id="start_quiz">Start Quiz</button>
+		
 		<div class="slidecontainer">
   			<%= image_tag ("speaker.png")%>  <input type="range" min="1" max="20" value="10" class="slider" id="myRange">
 		</div>
@@ -107,6 +119,31 @@
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
+	
+	var waveName = $(".waveName");
+	waveName.html("Playback wave type: " + waveType);
+
+	var drop1 = $(".dropbtn1");
+	var drop2 = $(".dropbtn2");
+	var drop3 = $(".dropbtn3");
+	var drop4 = $(".dropbtn4");
+
+	drop1.on('click', function(){
+		waveTypeChange("square");
+	});
+	
+	drop2.on('click',function(){
+		waveTypeChange("sine");
+	});
+
+	drop3.on('click',function(){
+		waveTypeChange("sawtooth");
+	});
+
+	drop4.on('click',function(){
+		waveTypeChange("triangle");
+	});
+
 
 	var repeatbutton;
 	var repeatListener;

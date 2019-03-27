@@ -45,8 +45,13 @@ var timeouts = [];
 var volume = 0.10;
 var slider = 20;
 
+var waveType = 'triangle';
 
-
+//changes waveType to given text
+waveTypeChange = function(type){
+	waveType = type;
+	waveName.html("Playback wave type: " + waveType);
+};
 
 
 
@@ -68,7 +73,7 @@ var slider = 20;
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 
-		oscillator.type = 'triangle';
+		oscillator.type = waveType;
 		oscillator.frequency.setValueAtTime(note.hertz, audioctx.currentTime);
 
 		//oscillator.connect(audioctx.destination);
