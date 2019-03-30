@@ -181,3 +181,190 @@ waveTypeChange = function(type){
   		return Math.floor(Math.random() * (max - min + 1) ) + min;
 	}
 
+
+
+
+
+
+
+function logtop10 (quiz_name) {
+
+				var lastID;
+				var lastScore;
+				var lastName;
+
+				var nodeID;
+	    		var nodeScore;
+	    		var nodeName;
+
+	    		var nextID;
+	    		var nextScore;
+	    		var nextName;
+
+	    		var found = false;
+
+	    		var mod = 0;
+
+	    		if (quiz_name == "Chord Quiz") {
+	    			mod = 10;
+	    		}
+
+	    		if (quiz_name == "Scale Quiz") {
+	    			mod = 20;
+	    		}
+
+
+			function ajax1() {
+
+				return	$.ajax({
+		    			type: "POST",
+		    			url: "/quizzes",
+		    			data: {quiz: {
+		    				quiz_type: quiz_name,
+		    				quiz_taker: gimme,
+		    				score: points,
+		    				rank: 0
+		    				}
+		    			},
+
+		    			success: function(data) {
+		        			console.log("hey success on id: " + data.id);
+		        			lastID = data.id;
+		        			lastScore = data.score;
+		        			lastName = data.quiz_taker;
+		    			}
+		    		});
+			}
+
+			$.when(ajax1()).done(function(){
+
+		    		boardcomparison((1+mod));
+					
+	    	});
+
+
+			//recursively runs ajax2 and then runs moveNodes() if a score is needed to be put onto board
+	    		function boardcomparison(i) {
+
+
+
+	    			if (found){
+	    				i = 11+mod;
+	    				moveNodes(nodeID,nodeScore,nodeName);
+
+	    			}
+
+	    			if (i < (11+mod) ) {
+		    			$.when(ajax2(i)).done(function(){
+		    				console.log("running boardcomparison with " + (i+1));
+		    				return boardcomparison(i + 1)
+			    		});
+		    		}
+
+	    		}
+
+
+	    		
+
+
+	    	//reads through board nodes to find if the most recent submitted data beats any node's score
+	    	//stores old node data under initial get request, then patches with new data from user submission
+			function ajax2(i) {
+
+							return $.get(["/board_nodes/" + i], function (data) {
+
+			    				console.log("Lets go " + data.id);
+			    				console.log(data.id + " and " + data.score);
+			    				
+			    				nodeID = data.id;
+	    						nodeScore = data.score;
+	    						nodeName = data.name;
+
+
+			    			if (lastScore >= data.score)  {
+
+			    				found = true;
+
+			    				nextID = nodeID;
+
+			    				$.ajax({
+					    			type: "PATCH",
+					    			url: ["/board_nodes/" + i],
+					    			data: {board_node: {
+						   				quiz_id: lastID,
+						   				score: lastScore,
+						   				name: lastName
+						   				}
+						    		}
+						    	});
+
+			    				console.log("FOUND ON " + data.id);
+			    				
+
+			    				
+
+			    			}
+
+
+			    	})
+
+		    		
+		    		
+		    }
+
+		    //recursively runs ajax3
+		    function moveNodes(id, score, name) {
+
+		    	console.log("running moveNodes with " + id + ", " + score + ", " + name);
+		    	console.log("nextID - " + nextID);
+	    			if (nextID < (10+mod) ) {
+		    			$.when(ajax3(id,score,name)).done(function(){
+		    				console.log("moving to next moveNodes with " + nextID + ", " + nextScore + ", " + nextName);
+		    				
+		    				return moveNodes(nextID, nextScore, nextName)
+			    		});
+		    		}
+		    }
+
+
+
+		    function ajax3(id,score,name){
+
+		    	console.log("running ajax3 with " + (id + 1));
+
+		    	return $.get(["/board_nodes/" + (id+1)], function (data) {
+		    		
+		    		nextID = nextID + 1;
+	    			nextScore = data.score;
+	    			nextName = data.name;
+	    			//console.log("writing nextID as " + nextID);
+
+		    	})
+
+		    	.done(function(){
+
+		    		$.ajax({
+						type: "PATCH",
+						url: ["/board_nodes/" + (id+1)],
+						data: {board_node: {
+						quiz_id: id,
+						score: score,
+						name: name
+						}
+		    		}		
+		    	});
+
+
+
+
+		    	});	    	
+
+		    }
+
+	    		
+		    //document.location.href="/"
+
+}
+
+
+

@@ -2,6 +2,7 @@
 <h1>QUIZZES</h1>
 
 
+
 <div class = "bulk">
 	<a href="/interval"><button class="indexButton">INTERVAL</button></a>
 	<a href="/chord"><button class="indexButton">CHORD</button></a>
@@ -34,10 +35,10 @@
 
 
 <div class = "scores">
-	<h3>Interval</h3>
+	<h3>Top 10 Interval Quiz Scores</h3>
 	
 	<ol type="1">
-		<% while i < 12 %>
+		<% while i < 11 %>
 			<li>
 			
 			<% if @board_nodes.find(i).name == "---" %>
@@ -54,6 +55,48 @@
 
 </div>
 
+<div class = "scores">
+	<h3>Top 10 Chord Quiz Scores</h3>
+	
+	<ol type="1">
+		<% while i < 21 %>
+			<li>
+			
+			<% if @board_nodes.find(i).name == "---" %>
+				--------
+			<% else %>
+				 <%= @board_nodes.find(i).score %> - <%= @board_nodes.find(i).name %>
+			<% end %>
+			</li>
+
+			<% i = i + 1 %>
+		<% end %>
+	</ol>
+
+
+</div>
+
+
+<div class = "scores">
+	<h3>Top 10 Scale Quiz Scores</h3>
+	
+	<ol type="1">
+		<% while i < 31 %>
+			<li>
+			
+			<% if @board_nodes.find(i).name == "---" %>
+				--------
+			<% else %>
+				 <%= @board_nodes.find(i).score %> - <%= @board_nodes.find(i).name %>
+			<% end %>
+			</li>
+
+			<% i = i + 1 %>
+		<% end %>
+	</ol>
+
+
+</div>
 
 
 

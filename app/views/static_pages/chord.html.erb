@@ -251,18 +251,9 @@
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
-			$.ajax({
-    			type: "POST",
-    			url: "/quizzes",
-    			data: {quiz: {
-    				quiz_type: "Chord Quiz",
-    				quiz_taker: gimme,
-    				score: points,
-    				rank: 0
-    				}
-    			}
-    		});
-			document.location.href="/"
+			logtop10("Chord Quiz");
+
+
 		});
 	});
 
