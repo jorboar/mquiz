@@ -186,7 +186,8 @@ waveTypeChange = function(type){
 
 
 
-
+//runs all logic for maintaining top 10 boards
+//quiz type is needed in constructor
 function logtop10 (quiz_name) {
 
 				var lastID;
