@@ -91,13 +91,12 @@
 			return this.correct
 		}
 
-
+	var volume = 0.10;
 	slider = document.getElementById("myRange");
 
 	slider.oninput = function() {
   		volume = this.value/100;
 	}
-
 
 	
 	var note1 = new Note("A", "root", 440, 0);

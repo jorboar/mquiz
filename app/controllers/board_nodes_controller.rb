@@ -1,9 +1,6 @@
 class BoardNodesController < ApplicationController
 
 
-
-
-
 	def show
 		@board_node = BoardNode.find(params[:id])
 		render json: @board_node
