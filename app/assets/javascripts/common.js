@@ -190,6 +190,10 @@ waveTypeChange = function(type){
 //quiz type is needed in constructor
 function logtop10 (quiz_name) {
 
+				if (gimme=="") {
+					gimme = "Anonymous";
+				}
+
 				var lastID;
 				var lastScore;
 				var lastName;
