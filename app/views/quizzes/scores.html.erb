@@ -24,9 +24,9 @@
 		
 			<% @quizzes.each do |quiz| %>
 			<li>
-				<%= quiz.quiz_taker %> - <%= quiz.score %> - <%= quiz.quiz_type %> - <%= quiz.id %>
+				<b><%= quiz.quiz_taker %></b> - <%= quiz.score %> - <%= quiz.quiz_type %> - <%= quiz.id %>
 				<ul>
-					<%= quiz.created_at.to_formatted_s(:long_ordinal) %>
+					<i><%= quiz.created_at.to_formatted_s(:long_ordinal) %></i>
 				</ul>
 			</li>
 
