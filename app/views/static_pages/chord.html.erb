@@ -71,7 +71,7 @@
 			if (this.answer === this.submittedanswer){
 				this.correct = true;
 				
-				this.points = seconds * 100;
+				this.points = (seconds * 100) + 500;
 
 				response.html("CORRECT");
 
