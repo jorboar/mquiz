@@ -41,7 +41,7 @@ hr {
 }
 
 .waveName {
-  background-color: #700000; 
+  background-color: #4c0000; 
   border-radius: 16px;
 }
 
@@ -77,9 +77,19 @@ hr {
   display: block;
 }
 
+.quizdes {
+  display: none;
+  padding-top: 15px;
+  margin: auto;
+  font-size: 18px;
+  width: 125px;
+  font-style: italic;
+  color: white;
+}
 
-
-
+a .indexButton:hover .quizdes{
+  display: block;
+}
 
 
 
@@ -88,6 +98,8 @@ hr {
   margin: 25px;
   text-align: center;
   padding: 180px 120px;
+  width: 385px;
+  height: 400px;
   
 
 }
@@ -95,15 +107,18 @@ hr {
 a .indexButton{
   font-family: 'Righteous', cursive;
   color: white;
-  font-size: 30px;
+  font-size: 32px;
   text-align: center;
+
 }
 
 
 a .indexButton:hover{
   color: #b7acac;
-  text-decoration:none;
-  border-color: rgba(255,255,255,1);
+}
+
+.indexButton:hover{
+  background-color: #510000;
 }
 
 
@@ -114,7 +129,7 @@ a .indexButton:hover{
 }
 
 .navbar-dark .navbar-text {
-	color: red;
+	color: #a30000;
 	
 }
 
