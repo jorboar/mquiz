@@ -24,20 +24,30 @@
   			<%= image_tag ("speaker.png")%>  <input type="range" min="1" max="20" value="10" class="slider" id="myRange">
 		</div>
 		<div id="restart_spot"></div>
-		<div class = "response"><br></div>
+		<div class = "response"><br>
+			This is some text explaining the quiz!
+		</div>
 
 		<div id="timer_spot"></div>
 
-		<div id="playbackSpot"></div>
-
+		<div id="playbackSpot">
+			<button class="examplebtn0">Root - A</button>
+			<button class="examplebtn1">Second - B</button>
+			<button class="examplebtn2">Minor Third - C</button>
+			<button class="examplebtn3">Major Third - C#</button>
+			<button class="examplebtn4">Fourth - D</button>
+			<button class="examplebtn5">Fifth - E</button>
+			<button class="examplebtn6">Minor Seventh - G</button>
+			<button class="examplebtn7">Major Seventh - G#</button>
+			<button class="examplebtn8">Octave - A</button>
+			<button class="examplebtn9">Ninth - B</button>
+		</div>
 		<div id="answerSpot"></div>
 	
-
-
 		<br>
 
 		<form id="myform">
-			Name: <input type="text" id="useranswer" maxlength="15" />
+			Name: <input type="text" id="useranswer" maxlength="13" />
 			<input type="submit" value="Submit Score" />
 		</form> 
 
@@ -125,6 +135,42 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
 	
+
+	//creates example buttons for before quiz is started----------------
+	var ExampleIntervals = [
+		440,
+		493.88,
+		523.25,
+		554.37,
+		587.33,
+		659.25,
+		783.99,
+		830.61,
+		880,
+		987.77
+	];
+
+	var example = [];
+
+	for (var z = 0; z < 10; z++) {
+		example[z] = $(".examplebtn" + z);
+		
+		let temp = ExampleIntervals[z];
+
+		example[z].on('click', function(){
+
+			playExampleTone(temp);
+			
+		}); 
+
+	}
+
+	
+
+	
+
+
+
 	var waveName = $(".waveName");
 	waveName.html("Playback wave type: " + waveType);
 
@@ -216,6 +262,8 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 		
+		PLAYBACKSPOT.html("");
+		response.html("");
 
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );

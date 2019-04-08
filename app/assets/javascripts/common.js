@@ -55,7 +55,8 @@ waveTypeChange = function(type){
 
 
 
-//plays tone at given hertz
+//plays tone for given note
+//accesses note general note data
 	function playTone(note){
 		
 		if (note.label == "root") {
@@ -88,6 +89,34 @@ waveTypeChange = function(type){
 
 
 	}
+
+//plays note at given hertz
+	function playExampleTone(hertz){
+		
+
+		console.log("-----playing " + hertz + " hertz");
+		
+		console.log(volume);
+		
+		var oscillator = audioctx.createOscillator();
+		var gainNode = audioctx.createGain();
+
+		oscillator.type = waveType;
+		oscillator.frequency.setValueAtTime(hertz, audioctx.currentTime);
+
+		//oscillator.connect(audioctx.destination);
+		gainNode.connect(audioctx.destination);
+		oscillator.connect(gainNode);
+
+		oscillator.start(audioctx.currentTime);
+		gainNode.gain.setValueAtTime(volume, audioctx.currentTime);
+		oscillator.stop(audioctx.currentTime + 0.6);
+
+	
+
+
+	}
+
 
 //checks answer ("input") of given question index per quiz object
 //increases current_question variable by 1
