@@ -23,11 +23,20 @@
 		</div>
 
 		<div id="restart_spot"></div>
-		<div class = "response"><br></div>
+		<div class = "response"><br>
+			This is some text explaining the quiz!
+		</div>
 
 		<div id="timer_spot"></div>
 
-		<div id="playbackSpot"></div>
+		<div id="playbackSpot">
+			<button class="examplebtn0">Minor Seventh - (A, C, G)</button>
+			<button class="examplebtn1">Major Seventh - (A, C#, G#)</button>
+			<button class="examplebtn2">Dominant Seventh - (A, C#, G)</button>
+			<button class="examplebtn3">Minor - (A, C, A)</button>
+			<button class="examplebtn4">Major - (A, C#, A)</button>
+
+		</div>
 
 		<div id="answerSpot"></div>
 
@@ -121,6 +130,36 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
 
+	//creates example buttons for before quiz is started----------------
+	var ExampleChords = [
+		[440,523.25,783.99],
+		[440,554.37,830.61],
+		[440,554.37,783.99],
+		[440,523.25,880],
+		[440,554.37,880]
+	];
+
+	var example = [];
+
+	for (var z = 0; z < 5; z++) {
+		example[z] = $(".examplebtn" + z);
+		
+		let temp = ExampleChords[z][0];
+		let temp2 = ExampleChords[z][1];
+		let temp3 = ExampleChords[z][2];
+
+		example[z].on('click', function(){
+
+			playExampleTone(temp);
+			playExampleTone(temp2);
+			playExampleTone(temp3);
+			
+		}); 
+
+	}
+
+
+
 	var waveName = $(".waveName");
 	waveName.html("Playback wave type: " + waveType);
 
@@ -201,6 +240,10 @@
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
+
+		PLAYBACKSPOT.html("");
+		response.html("");
+
 
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
