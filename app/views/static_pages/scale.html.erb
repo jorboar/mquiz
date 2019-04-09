@@ -23,11 +23,22 @@
 		</div>
 
 		<div id="restart_spot"></div>
-		<div class = "response"><br></div>
+		<div class = "response">
+			This is some text explaining the quiz!
+		</div>
 
 		<div id="timer_spot"></div>
 
-		<div id="playbackSpot"></div>
+		<div id="playbackSpot">
+			<button class="examplebtn0">Major</button>
+			<button class="examplebtn1">Dorian</button>
+			<button class="examplebtn2">Phrygian</button>
+			<button class="examplebtn3">Lydian</button>
+			<button class="examplebtn4">Mixolydian</button>
+			<button class="examplebtn5">Minor</button>
+			<button class="examplebtn6">Locrian</button>
+			<button class="examplebtn7">Harmonic Minor</button>
+		</div>
 
 		<div id="answerSpot"></div>
 
@@ -129,6 +140,49 @@
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot"); 
 
+	//creates example buttons for before quiz is started----------------
+	var ExampleScales = [
+		[440,493.88,554.37,587.33,659.25,739.99,830.61,880],
+		[440,493.88,523.25,587.33,659.25,739.99,783.99,880],
+		[440,466.16,523.25,587.33,659.25,698.46,783.99,880],
+		[440,493.88,554.37,622.25,659.25,739.99,830.61,880],
+		[440,493.88,554.37,587.33,659.25,739.99,783.99,880],
+		[440,493.88,523.25,587.33,659.25,698.46,783.99,880],
+		[440,466.16,523.25,587.33,622.25,698.46,783.99,880],
+		[440,493.88,523.25,587.33,659.25,698.46,830.61,880]
+	];
+
+	var example = [];
+
+	for (var z = 0; z < 8; z++) {
+		example[z] = $(".examplebtn" + z);
+		
+		let temp = ExampleScales[z][0];
+		let temp2 = ExampleScales[z][1];
+		let temp3 = ExampleScales[z][2];
+		let temp4 = ExampleScales[z][3];
+		let temp5 = ExampleScales[z][4];
+		let temp6 = ExampleScales[z][5];
+		let temp7 = ExampleScales[z][6];
+		let temp8 = ExampleScales[z][7];
+
+		example[z].on('click', function(){
+
+			playExampleTone(temp);
+			timeouts.push(setTimeout(function(){playExampleTone(temp2);}, 500));
+			timeouts.push(setTimeout(function(){playExampleTone(temp3);}, 1000));
+			timeouts.push(setTimeout(function(){playExampleTone(temp4);}, 1500));
+			timeouts.push(setTimeout(function(){playExampleTone(temp5);}, 2000));
+			timeouts.push(setTimeout(function(){playExampleTone(temp6);}, 2500));
+			timeouts.push(setTimeout(function(){playExampleTone(temp7);}, 3000));
+			timeouts.push(setTimeout(function(){playExampleTone(temp8);}, 3500));
+			
+		}); 
+
+	}
+
+
+
 	var waveName = $(".waveName");
 	waveName.html("Playback wave type: " + waveType);
 
@@ -219,6 +273,9 @@
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
 		
+		PLAYBACKSPOT.html("");
+		response.html("");
+
 		//creates buttons to playback current scale tones
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
 		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
