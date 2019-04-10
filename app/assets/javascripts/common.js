@@ -25,11 +25,9 @@
 			return this.strikes;
 		}
 
-
 	Quiz.prototype.get_total_points = function() {
 		return this.total_points;
 	}
-
 
 	Quiz.prototype.add_strike = function(){
 		this.strikes = this.strikes + 1;
@@ -47,13 +45,15 @@ var slider = 20;
 
 var waveType = 'triangle';
 
+
+
 //changes waveType to given text
 waveTypeChange = function(type){
 	waveType = type;
 	waveName.html("Playback wave type: " + waveType);
 };
 
-
+var audioctx = new AudioContext();
 
 //plays tone for given note
 //accesses note general note data
@@ -66,11 +66,9 @@ waveTypeChange = function(type){
 		}
 
 
-
 		console.log(volume);
 		
-
-
+		
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 
@@ -98,6 +96,8 @@ waveTypeChange = function(type){
 		
 		console.log(volume);
 		
+
+
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
 

@@ -25,7 +25,7 @@
 		</div>
 		<div id="restart_spot"></div>
 		<div class = "response"><br>
-			This quiz tests your ability to assess different musical intervals using only your ear. An interval is simply the distance between two pitches. Below provides examples of the types of intervals in this test using A as a root note.
+			This quiz tests your ability to assess different musical intervals using only your ear. An interval is simply the distance between two pitches. Below provides examples of the types of intervals in this test using A as the root note.
 		</div>
 
 		<div id="timer_spot"></div>
@@ -248,7 +248,7 @@
 		[14, "Ninth"]
 	];
 
-	var audioctx = new AudioContext();
+	
 
 	//let btn = document.getElementById('btn');	
 
@@ -256,7 +256,11 @@
 	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
-	startQuiz.on('click', function(){
+	startQuiz.on('click', startQuizStuff);
+	startQuiz.on('touchstart', startQuizStuff);
+
+
+	function startQuizStuff() {
 		
 		PLAYBACKSPOT.html("");
 		response.html("");
@@ -302,7 +306,7 @@
 		//hides start quiz button
 		startQuiz.hide();		
 
-	});
+	}
 
 
 	//action on form submit
