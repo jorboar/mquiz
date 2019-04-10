@@ -211,6 +211,16 @@ var audioctx = new AudioContext();
 	}
 
 
+//censors user submitted names with profanity which are stored under the "gimme" variable
+function nameCensor(){
+	return $.ajax({
+		    type: "GET",
+		   	url: ["https://www.purgomalum.com/service/json?text="+gimme],						
+		   	success: function(data) {
+			        gimme = data.result;
+			    }
+			});
+}
 
 
 

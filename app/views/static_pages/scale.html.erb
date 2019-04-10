@@ -343,8 +343,11 @@
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
-			
-			logtop10("Scale Quiz");
+			$.when(nameCensor()).done(function(){
+
+		    	logtop10("Interval Quiz");
+					
+	    	});
 
 			$("#myform").fadeOut("fast");
 			response.html("Thank you for your submission! You can see your score in the <a href=\"/scores\">Guestbook</a>");
