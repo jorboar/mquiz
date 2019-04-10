@@ -12,7 +12,10 @@
 			    <button class="dropbtn3">sawtooth</button>
 			    <button class="dropbtn4">triangle</button>
 			</div>
+			
 		</div>
+
+		
 
 		<div class = "data3"></div>
 		<div class = "data"></div>
@@ -24,7 +27,7 @@
 
 		<div id="restart_spot"></div>
 		<div class = "response">
-			This is some text explaining the quiz!
+			This quiz tests your ability to identify scales/modes. Below provides examples rooted in A.
 		</div>
 
 		<div id="timer_spot"></div>
@@ -138,7 +141,8 @@
 	var PLAYBACKSPOT = $("#playbackSpot");
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
-	var timerSpot = $("#timer_spot"); 
+	var timerSpot = $("#timer_spot");
+	var synthExp = $(".synthExp");
 
 	//creates example buttons for before quiz is started----------------
 	var ExampleScales = [
@@ -275,6 +279,7 @@
 		
 		PLAYBACKSPOT.html("");
 		response.html("");
+		synthExp.html("");
 
 		//creates buttons to playback current scale tones
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
