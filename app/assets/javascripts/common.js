@@ -65,9 +65,7 @@ var audioctx = new AudioContext();
 			console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
 		}
 
-
-		console.log(volume);
-		
+		console.log(volume);		
 		
 		var oscillator = audioctx.createOscillator();
 		var gainNode = audioctx.createGain();
@@ -221,8 +219,6 @@ function nameCensor(){
 			    }
 			});
 }
-
-
 
 
 //runs all logic for maintaining top 10 boards
@@ -397,8 +393,6 @@ function logtop10 (quiz_name) {
 						}
 		    		}		
 		    	});
-
-
 
 
 		    	});	    	
