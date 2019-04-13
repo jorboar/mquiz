@@ -4,7 +4,7 @@
 
 
 h1 {
-	text-align: center;
+  text-align: center;
   
 }
 
@@ -95,7 +95,7 @@ a .indexButton:hover .quizdes{
 
 .indexButton {
   background-color: #700000; 
-  margin: 25px;
+  margin: 20px;
   text-align: center;
   padding: 180px 120px;
   width: 385px;
@@ -129,29 +129,29 @@ a .indexButton:hover{
 }
 
 .navbar-dark .navbar-text {
-	color: #a30000;
-	
+  color: #a30000;
+  
 }
 
 .navbar-dark .navbar-brand {
-	color: white;
+  color: white;
   text-decoration: none;
 }
 
 .nav-link {
-	color: white;
+  color: white;
   text-decoration: none;
 }
 
 li .nav-item .active{
-	color: white;
+  color: white;
 }
 
 
 
 .data3 {
-  text-align: left;
-  margin-left: 200px;
+  text-align: right;
+  margin-right: 190px;
 }
 
 #timer_spot {
@@ -217,12 +217,12 @@ button {
 
 
 #start_quiz {
-	margin: auto;
- 	width: 30%;
+  margin: auto;
+  width: 30%;
 }
 
 .bulk {
-	text-align: center;
+  text-align: center;
   min-width: 800px;
   
 
@@ -277,7 +277,7 @@ a:hover {
 
 
 button:hover {
-	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .dropdown-backdrop {
@@ -295,7 +295,7 @@ button:hover {
 
 .dropdown {
   margin-top: 10px;
-  margin-left: 475px;
+  margin-right: 475px;
   
   
   display: inline-block;

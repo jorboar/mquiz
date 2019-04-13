@@ -50,7 +50,7 @@ var waveType = 'triangle';
 //changes waveType to given text
 waveTypeChange = function(type){
 	waveType = type;
-	waveName.html("Playback wave type: " + waveType);
+	waveName.html("▾ Playback wave type: " + waveType);
 };
 
 var audioctx = new AudioContext();
