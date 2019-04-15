@@ -2,8 +2,6 @@
 <h2>SCALE QUIZ</h2>
 
 	<div class = "bulk">
-		
-		
 		<div class="dropdown">
 			<button class="waveName">wavetype placeholder</button>
 			<div class="dropdown-content">
@@ -12,10 +10,8 @@
 			    <button class="dropbtn3">sawtooth</button>
 			    <button class="dropbtn4">triangle</button>
 			</div>
-			
 		</div>
 
-		
 		<div class = "data2"></div>
 		<div class = "data3"></div>
 		<div class = "data"></div>
@@ -55,7 +51,6 @@
 	</div>
 
 
-
 <script>
 
 	var Question = function(note1, note2, note3, note4, note5, note6, note7, note8){
@@ -72,7 +67,6 @@
 			this.submittedanswer = "";
 			this.time = 0;
 			this.points = 0;
-
 		}
 
 	Question.prototype.get_answer = function(){
@@ -268,10 +262,6 @@
 		["Harmonic Minor", 2, 3, 5, 7, 8, 11, 12],
 	];
 
-	
-
-	
-
 	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
@@ -290,7 +280,6 @@
 		note6button = createNoteButton("Play Note 6", "6", "playbackSpot" );
 		note7button = createNoteButton("Play Note 7", "7", "playbackSpot" );
 		note8button = createNoteButton("Play Note 8", "8", "playbackSpot" );
-
 
 		repeatbutton = document.createElement("BUTTON");
 		var t = document.createTextNode("Repeat Scale");
@@ -311,11 +300,7 @@
 
 		}
 
-
 		repeatbutton.addEventListener('click', repeatListener);
-		
-
-
 
 		//----ANSWER BUTTONS-----------------------------------------------
 		answerButton1 = createAnswerButton("Major", "answerSpot");
@@ -355,8 +340,6 @@
 		});
 	});
 
-
-
 	//generates two notes for question and assigns them to quiz on given index
 	//also plays the two notes
 	function genQuestion(index,quiz){
@@ -381,17 +364,12 @@
 
 	}
 
-
-
 	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
 		
 		hertz = 440;
-
 		const a = Math.pow(2, 1/12)
-			
 		label = scales[scaletype][0];
-	
 
 		mod = steps;
 
@@ -404,10 +382,7 @@
 		}
 
 		name = notenames[mod];
-	
-
 		hertz = hertz * Math.pow(a, steps);
-		
 		
 		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
 		
@@ -422,7 +397,6 @@
 		scaletype = randNum(0,7);
 		initialoffset = randNum(-12,12)
 
-
 		note1 = create_note(initialoffset);
 		note2 = create_note(initialoffset + scales[scaletype][1]);
 		note3 = create_note(initialoffset + scales[scaletype][2]);
@@ -434,8 +408,6 @@
 
 	}
 
-
-
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
 		
@@ -446,16 +418,12 @@
 		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
 
 		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
-		
 
 		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 
 	}
-
-
-
 
 	//runs on quiz completion
 	function end(quiz) {
@@ -476,8 +444,6 @@
 		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
-
-
 
 		if (first) {
 			var restartButton = document.createElement("BUTTON");

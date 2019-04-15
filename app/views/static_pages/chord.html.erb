@@ -3,7 +3,6 @@
 
 	<div class = "bulk">
 		
-		
 		<div class="dropdown">
 			<button class="waveName">wavetype placeholder</button>
 			<div class="dropdown-content">
@@ -13,7 +12,6 @@
 			    <button class="dropbtn4">triangle</button>
 			</div>
 		</div>
-
 
 		<div class = "data2"></div>
 		<div class = "data3"></div>
@@ -51,8 +49,6 @@
 
 	</div>
 
-
-
 <script>
 
 	var Question = function(note1, note2, note3){
@@ -64,7 +60,6 @@
 			this.time = 0;
 			this.points = 0;
 		}
-
 
 	Question.prototype.get_answer = function(){
 			return this.answer
@@ -109,7 +104,6 @@
   		volume = this.value/100;
 	}
 
-	
 	var note1 = new Note("A", "root", 440, 0);
 	var note2 = new Note("", "Third", 440, 0);
 	var note3 = new Note("", "Seventh", 440, 0);
@@ -121,7 +115,6 @@
 	var seconds = 0;
 	var points;
 	
-
 	var response = $('.response');
 	var dataElement = $('.data');
 	var dataElement2 = $('.data2');
@@ -159,8 +152,6 @@
 		}); 
 
 	}
-
-
 
 	var waveName = $(".waveName");
 	waveName.html("▾ Playback wave type: " + waveType);
@@ -200,7 +191,6 @@
 	var note2button;
 	var note3button;
 	
-
 	var interval;
 	var timer = function() {
 	    	document.getElementById('timer_spot').innerHTML = --seconds;
@@ -211,17 +201,11 @@
 
 	};
 
-
-
-
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
 		console.log('cleared interval!');
 		clearInterval(interval);
 	}
-
-
-
 
 	//used to communicate question index number to various functions
 	var current_question = 0; 
@@ -234,10 +218,6 @@
 		[4, 12, "Major"],
 	];
 
-	
-
-	
-
 	thequiz = new Quiz(5);
 	
 	//presents question and increases current_question
@@ -246,12 +226,10 @@
 		PLAYBACKSPOT.html("");
 		response.html("");
 
-
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
 		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
 		note3button = createNoteButton("Play Note 3", "3", "playbackSpot" );
-
 
 		//creates button + event listener to play chord
 		repeatbutton = document.createElement("BUTTON");
@@ -269,8 +247,6 @@
 
 		repeatbutton.addEventListener('click', repeatListener);
 
-
-
 		//----------ANSWER BUTTONS-----------------------------------------------
 		//-----------------------------------------------------------------------
 		answerButton1 = createAnswerButton("Minor Seventh", "answerSpot");
@@ -278,7 +254,6 @@
 		answerButton3 = createAnswerButton("Dominant Seventh", "answerSpot");
 		answerButton4 = createAnswerButton("Minor", "answerSpot");
 		answerButton5 = createAnswerButton("Major", "answerSpot");
-
 
 		present_question(current_question,thequiz)
 
@@ -303,8 +278,6 @@
 
 			$("#myform").fadeOut("fast");
 			response.html("Thank you for your submission! You can see your score in the <a href=\"/scores\">Guestbook</a>");
-
-
 		});
 	});
 
@@ -337,13 +310,9 @@
 
 	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
-		
 		hertz = 440;
-
 		const a = Math.pow(2, 1/12)
-			
 		label = chords[chordtype][2];
-	
 		mod = steps;
 
 		while (11 < mod) {
@@ -361,20 +330,16 @@
 		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
 		
 		return new Note(name, label, hertz, steps);
-
 	}
 
 	//generates a noteset for chord with all 3 chord tones
 	function genNoteSet(){
-
 		chordtype = randNum(0,4);
 		initialoffset = randNum(-12,12)
-
 
 		note1 = create_note(initialoffset);
 		note2 = create_note(initialoffset + chords[chordtype][0]);
 		note3 = create_note(initialoffset + chords[chordtype][1]);
-
 	}
 
 
@@ -385,19 +350,12 @@
 		genQuestion(index,quiz);
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
-
 		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
-
 		dataElement.html(" Got " + note1.name + ", " + note2.name + ", " + note3.name + ". " + note2.label + "" );
-
-
 
 		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
-
-
-		
 	}
 
 
@@ -421,8 +379,6 @@
 		
 		dataElement.html("QUIZ COMPLETE");
 		response.html((quiz.question_total - quiz.strikes) + " out of " + quiz.question_total + " correct");
-
-
 
 		if (first) {
 			var restartButton = document.createElement("BUTTON");
@@ -456,16 +412,13 @@
 
 				}, 1000);
 
-
 				first = false;
 
 			}) } else {
 		RESTARTSPOT.show();
 	};
 
-
 	}
-
 
 	//toggles event button listeners. True for on, false for off
 	//also stops and starts timer
@@ -489,7 +442,6 @@
 			answerButton4.button.addEventListener('click', answerButton4.listener);
 			answerButton5.button.addEventListener('click', answerButton5.listener);
 			
-
 		} else {
 				
 			clearInterval(interval);
@@ -507,12 +459,7 @@
 			answerButton3.button.removeEventListener('click', answerButton3.listener);
 			answerButton4.button.removeEventListener('click', answerButton4.listener);
 			answerButton5.button.removeEventListener('click', answerButton5.listener);
-			
-
 		};
-
 	}
-
 	
-
 </script>
