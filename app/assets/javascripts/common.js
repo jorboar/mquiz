@@ -53,6 +53,7 @@ waveTypeChange = function(type){
 	waveName.html("▾ Playback wave type: " + waveType);
 };
 
+var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioctx = new AudioContext();
 
 //plays tone for given note

@@ -281,8 +281,6 @@
 		});
 	});
 
-
-
 	//generates two notes for question and assigns them to quiz on given index
 	//also plays notes
 	function genQuestion(index,quiz){
@@ -305,8 +303,6 @@
 		timeouts.push(setTimeout(function(){toggleEventListeners(true);}, 4100));
 
 	}
-	
-
 
 	//creates note with given steps offset from A4 (440 hertz)
 	function create_note(steps){
@@ -461,5 +457,5 @@
 			answerButton5.button.removeEventListener('click', answerButton5.listener);
 		};
 	}
-	
+
 </script>
