@@ -277,7 +277,7 @@
 	    	});
 
 			$("#myform").fadeOut("fast");
-			response.html("Thank you for your submission! You can see your score in the <a href=\"/scores\">Guestbook</a>");
+			response.html("Thank you for your submission! You can see your score on the <a href=\"/scores\">Scores</a> page.");
 		});
 	});
 
@@ -399,14 +399,7 @@
 				RESTARTSPOT.hide();
 				timerSpot.show();
 
-				interval = setInterval(function() {
-	    			document.getElementById('timer_spot').innerHTML = --seconds;
-
-			    	if (seconds == 0) {
-			    		answer(current_question,thequiz,"TIMEOUT");
-			    	}
-
-				}, 1000);
+				
 
 				first = false;
 
