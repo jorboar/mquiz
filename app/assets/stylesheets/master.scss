@@ -82,7 +82,7 @@ hr {
   display: none;
   padding-top: 15px;
   margin: auto;
-  font-size: 18px;
+  font-size: 16px;
   width: 125px;
   font-style: italic;
   color: white;
@@ -96,21 +96,20 @@ a .indexButton:hover .quizdes{
 
 .indexButton {
   background-color: #700000; 
-  margin: 20px;
+  margin: 12px;
   text-align: center;
-  padding: 180px 120px;
-  width: 385px;
-  height: 400px;
-  
+  padding: 170px 110px;
+  width: 375px;
+  height: 390px;
 
 }
 
 a .indexButton{
   font-family: 'Righteous', cursive;
   color: white;
-  font-size: 32px;
+  font-size: 30px;
   text-align: center;
-
+  padding-bottom: 195px;
 }
 
 
@@ -254,8 +253,7 @@ button {
   vertical-align: top;
   text-align: left;
   font-size: 35px;
-  padding-left: 50px;
-  padding-right: 50px;
+  width:1000px;
 }
 
 .guestbook h3 {
@@ -268,7 +266,7 @@ button {
 }
 
 a {
-  color: #bf0000;
+  color: #dd0000;
   text-decoration: underline;
 }
 
@@ -306,5 +304,30 @@ button:hover {
   margin-left: 200px;
   margin-right: 200px;
 
+}
+
+.pagination {
+  margin-left: 100px;
+  padding-bottom: 5px;
+  a, span, em {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: block;
+    float: left;
+    margin-right: 1px;
+    text-decoration: none;
+    border: solid;
+    border-width: 1px;
+    color: #dd2400;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+
+  }
 
 }
+
+.pagination span, em.current {
+  color: white;
+}
+
+

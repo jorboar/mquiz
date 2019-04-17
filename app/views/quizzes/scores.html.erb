@@ -6,35 +6,25 @@
 
 <br>
 
-
-
-
-
-
-
-
 <%= will_paginate @quizzes %>
 
 <div class = "guestbook">
 	<h3>Guestbook</h3>
-	<h4><%=@quizzes.length%> scores total</h4>
 
-
-	<ul>
+<nav aria-label="Page navigation example">
+	<ul style="list-style: none;">
 		
 			<% @quizzes.each do |quiz| %>
 			<li>
-				<b><%= quiz.quiz_taker %></b> - <%= quiz.score %> - <%= quiz.quiz_type %> - <%= quiz.id %>
+				<b><%= quiz.id %>. <%= quiz.quiz_taker %></b> - <%= quiz.score %> - <%= quiz.quiz_type %> 
 				<ul>
 					<i><%= quiz.created_at.to_formatted_s(:long_ordinal) %></i>
 				</ul>
 			</li>
 
-		
-
 		<% end %>
 	</ul>
-
+</nav>
 </div>
 
 
@@ -50,9 +40,6 @@
         clearTimeout(timeouts[i]);
         //console.log("WHOA MAN" + i);
     }
-
-
-	
 
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
