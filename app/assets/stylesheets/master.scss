@@ -317,10 +317,12 @@ button:hover {
     margin-right: 1px;
     text-decoration: none;
     border: solid;
-    border-width: 1px;
-    color: #dd2400;
+    border-width: 2px;
+    border-color: #681c1c;
+    color: #c40000;
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
+    background-color:#210000;
 
   }
 
@@ -330,4 +332,9 @@ button:hover {
   color: white;
 }
 
+.toggledescription {
+  font-size: 14px;
+  
+  font-style: italic;
+}
 

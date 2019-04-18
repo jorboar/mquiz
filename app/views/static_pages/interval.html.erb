@@ -4,6 +4,7 @@
 	<div class = "bulk">
 		
 		<div class="dropdown">
+			<div class="toggledescription">This application uses synthesis to generate tones. You can toggle the type of waveform used here.</div>
 			<button class="waveName">wavetype placeholder</button>
 			<div class="dropdown-content">
 			    <button class="dropbtn1">square</button>
@@ -11,12 +12,12 @@
 			    <button class="dropbtn3">sawtooth</button>
 			    <button class="dropbtn4">triangle</button>
 			</div>
+			
 		</div>
 		
 		<div class = "data2"></div>
 		<div class = "data3"></div>
 		<div class = "data"></div>
-		<button id="start_quiz">Start Quiz</button>
 		
 		<div class="slidecontainer">
   			<%= image_tag ("speaker.png")%>  <input type="range" min="1" max="20" value="10" class="slider" id="myRange">
@@ -40,6 +41,10 @@
 			<button class="examplebtn8">Octave - A</button>
 			<button class="examplebtn9">Ninth - B</button>
 		</div>
+
+		<br>
+		<button id="start_quiz">Start Quiz</button>
+
 		<div id="answerSpot"></div>
 	
 		<br>
@@ -124,6 +129,8 @@
 	var ANSWERSPOT = $("#answerSpot");
 	var RESTARTSPOT = $("#restart_spot");
 	var timerSpot = $("#timer_spot");
+	var toggleDes = $(".toggledescription");
+	var dropSpot = $(".dropdown");
 	
 	//creates example buttons for before quiz is started----------------
 	var ExampleIntervals = [
@@ -236,6 +243,9 @@
 
 	function startQuizStuff() {
 		
+		toggleDes.html("");
+		dropSpot.css('margin-right', 390 +"px");
+
 		PLAYBACKSPOT.html("");
 		response.html("");
 
