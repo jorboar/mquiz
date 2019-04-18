@@ -233,6 +233,8 @@
 	var note8button;
 
 
+	var guard = 21;
+	var seconds = 20;
 	var interval;
 	var timer = function() {
 	    	document.getElementById('timer_spot').innerHTML = --seconds;
@@ -241,6 +243,14 @@
 	    		answer(current_question,thequiz,"TIMEOUT");
 	    	}
 
+	    	//prevents user from altering seconds in console for additional points
+			if (seconds > guard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+			}
+
+			guard = seconds + 1;
+			
 	};
 
 	
@@ -427,6 +437,7 @@
 
 		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
 
+		guard = 21;
 		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;

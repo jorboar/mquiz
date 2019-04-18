@@ -109,12 +109,6 @@ function playExampleTone(hertz){
 //checks answer ("input") of given question index per quiz object
 //increases current_question variable by 1
 function answer(index, quiz, input) {
-	
-	//prevents user from altering seconds in console for additional points
-	if (seconds > 20) {
-		window.alert("Cheater!");
-		window.location.href = "/";
-	}
 
 	quiz.get_question(index).set_submittedanswer(input);
 	
@@ -204,7 +198,6 @@ function nameCensor(){
 			    }
 			});
 }
-
 
 //runs all logic for maintaining top 10 boards
 //quiz type is needed in constructor

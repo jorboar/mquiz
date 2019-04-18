@@ -203,6 +203,8 @@
 	var note1button;
 	var note2button;
 
+	var guard = 21;
+	var seconds = 20;
 	var interval;
 	var timer = function() {
 	    	document.getElementById('timer_spot').innerHTML = --seconds;
@@ -211,7 +213,18 @@
 	    		answer(current_question,thequiz,"TIMEOUT");
 	    	}
 
+	    	//prevents user from altering seconds in console for additional points
+			if (seconds > guard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+			}
+
+			guard = seconds + 1;
+			
 	};
+
+
+
 
 
 	//prevents timer from stacking intervals
@@ -378,6 +391,7 @@
 
 		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
+		guard = 21;
 		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;

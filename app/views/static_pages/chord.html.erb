@@ -197,6 +197,8 @@
 	var note2button;
 	var note3button;
 	
+	var guard = 21;
+	var seconds = 20;
 	var interval;
 	var timer = function() {
 	    	document.getElementById('timer_spot').innerHTML = --seconds;
@@ -205,6 +207,14 @@
 	    		answer(current_question,thequiz,"TIMEOUT");
 	    	}
 
+	    	//prevents user from altering seconds in console for additional points
+			if (seconds > guard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+			}
+
+			guard = seconds + 1;
+			
 	};
 
 	//prevents timer from stacking intervals
@@ -358,6 +368,7 @@
 		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
 		dataElement.html(" Got " + note1.name + ", " + note2.name + ", " + note3.name + ". " + note2.label + "" );
 
+		guard = 21;
 		seconds = 20;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
