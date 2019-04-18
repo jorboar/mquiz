@@ -110,6 +110,12 @@ function playExampleTone(hertz){
 //increases current_question variable by 1
 function answer(index, quiz, input) {
 	
+	//prevents user from altering seconds in console for additional points
+	if (seconds > 20) {
+		window.alert("Cheater!");
+		window.location.href = "/";
+	}
+
 	quiz.get_question(index).set_submittedanswer(input);
 	
 	//adds strike to quiz if answer is incorrect

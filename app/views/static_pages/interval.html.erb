@@ -4,7 +4,7 @@
 	<div class = "bulk">
 		
 		<div class="dropdown">
-			<div class="toggledescription">This application uses synthesis to generate tones. You can toggle the type of waveform used here.</div>
+			<div class="toggledescription">Synthesis is used to generate tones. You can toggle the type of waveform used here.</div>
 			<button class="waveName">wavetype placeholder</button>
 			<div class="dropdown-content">
 			    <button class="dropbtn1">square</button>
@@ -59,7 +59,7 @@
 	</div>
 
 <script>
-	
+
 	var Question = function(note1, note2){
 			this.note1 = note1;
 			this.note2 = note2;
@@ -131,7 +131,7 @@
 	var timerSpot = $("#timer_spot");
 	var toggleDes = $(".toggledescription");
 	var dropSpot = $(".dropdown");
-	
+
 	//creates example buttons for before quiz is started----------------
 	var ExampleIntervals = [
 		440,
@@ -212,6 +212,7 @@
 	    	}
 
 	};
+
 
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
