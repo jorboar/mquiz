@@ -253,10 +253,13 @@
 	
 	//presents question and increases current_question
 	startQuiz.on('click', startQuizStuff);
-	startQuiz.on('touchstart', startQuizStuff);
 
 	function startQuizStuff() {
 		
+		for(var i=0; i<timeouts.length; i++) {
+        	clearTimeout(timeouts[i]);
+    	}
+
 		toggleDes.html("");
 		dropSpot.css('margin-right', 390 +"px");
 
@@ -310,19 +313,14 @@
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
-
 			$.when(nameCensor()).done(function(){
 
 		    	logtop10("Interval Quiz");
 					
 	    	});
 
-
-			
-
 			$("#myform").fadeOut("fast");
 			response.html("Thank you for your submission! You can see your score on the <a href=\"/scores\">Scores</a> page.");
-
 		});
 	});
 
