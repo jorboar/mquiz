@@ -316,7 +316,7 @@
 
 			let cheatSwitch = true;
 
-			if (points > pointGuard) {
+			if (points > pointGuard || points > 12500) {
 				cheatSwitch = false;
 				window.location.href = "/";
 				window.alert("Cheater!");
