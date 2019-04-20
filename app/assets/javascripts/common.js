@@ -3,7 +3,6 @@ var Note = function(name, label, hertz, steps){
 	this.label = label;
 	this.hertz = hertz;
 	this.steps = steps;
-
 }
 
 var Quiz = function(question_total){

@@ -368,11 +368,11 @@
 		return new Note(name, label, hertz, steps);
 	}
 
-	//generates a noteset for chord with all 3 chord tones
+	//generates a noteset 
 	function genNoteSet(){
 
 		number = randNum(0,9);
-		initialoffset = randNum(-12,12)
+		initialoffset = randNum(-12,8)
 
 		note1 = create_note(initialoffset);
 		note2 = create_note(initialoffset + intervals[number][0]);
