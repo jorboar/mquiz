@@ -203,6 +203,7 @@
 	var note1button;
 	var note2button;
 
+	var pointGuard = 2501;
 	var guard = 21;
 	var seconds = 20;
 	var interval;
@@ -313,11 +314,22 @@
 			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
-			$.when(nameCensor()).done(function(){
+			let cheatSwitch = true;
 
-		    	logtop10("Interval Quiz");
-					
-	    	});
+			if (points > pointGuard) {
+				cheatSwitch = false;
+				window.location.href = "/";
+				window.alert("Cheater!");
+			}
+
+			if (cheatSwitch){
+
+				$.when(nameCensor()).done(function(){
+
+			    	logtop10("Interval Quiz");
+						
+		    	});
+		    }
 
 			$("#myform").fadeOut("fast");
 			response.html("Thank you for your submission! You can see your score on the <a href=\"/scores\">Scores</a> page.");
@@ -381,6 +393,11 @@
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
 
+		if (quiz.total_points > pointGuard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+		}
+
 		genQuestion(index,quiz);
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
@@ -391,6 +408,7 @@
 		
 		guard = 21;
 		seconds = 20;
+		pointGuard = quiz.total_points + 2501;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 	}
@@ -400,6 +418,11 @@
 
 	//runs on quiz completion
 	function end(quiz) {
+
+		if (quiz.total_points > pointGuard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+		}
 
 		clearInterval(interval);
 
@@ -426,6 +449,7 @@
 
 			restartButton.addEventListener('click', function(){
 
+				pointGuard = 2501;
 				current_question = 0;
 				thequiz = new Quiz(5);
 
