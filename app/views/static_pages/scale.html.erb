@@ -291,14 +291,14 @@
 		response.html("");
 
 		//creates buttons to playback current scale tones
-		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
-		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
-		note3button = createNoteButton("Play Note 3", "3", "playbackSpot" );
-		note4button = createNoteButton("Play Note 4", "4", "playbackSpot" );
-		note5button = createNoteButton("Play Note 5", "5", "playbackSpot" );
-		note6button = createNoteButton("Play Note 6", "6", "playbackSpot" );
-		note7button = createNoteButton("Play Note 7", "7", "playbackSpot" );
-		note8button = createNoteButton("Play Note 8", "8", "playbackSpot" );
+		note1button = createNoteButton("Play Root", "1", "playbackSpot" );
+		note2button = createNoteButton("Play Second", "2", "playbackSpot" );
+		note3button = createNoteButton("Play Third", "3", "playbackSpot" );
+		note4button = createNoteButton("Play Fourth", "4", "playbackSpot" );
+		note5button = createNoteButton("Play Fifth", "5", "playbackSpot" );
+		note6button = createNoteButton("Play Sixth", "6", "playbackSpot" );
+		note7button = createNoteButton("Play Seventh", "7", "playbackSpot" );
+		note8button = createNoteButton("Play Octave", "8", "playbackSpot" );
 
 		repeatbutton = document.createElement("BUTTON");
 		var t = document.createTextNode("Repeat Scale");
@@ -424,7 +424,7 @@
 	function genNoteSet(){
 
 		scaletype = randNum(0,7);
-		initialoffset = randNum(-12,8)
+		initialoffset = randNum(-12,6)
 
 		note1 = create_note(initialoffset);
 		note2 = create_note(initialoffset + scales[scaletype][1]);

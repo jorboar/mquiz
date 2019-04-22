@@ -44,8 +44,6 @@ var slider = 20;
 
 var waveType = 'triangle';
 
-
-
 //changes waveType to given text
 waveTypeChange = function(type){
 	waveType = type;
