@@ -54,8 +54,6 @@
 			<input type="submit" value="Submit Score" />
 		</form> 
 
-
-
 	</div>
 
 <script>
@@ -87,17 +85,9 @@
 				this.correct = true;
 				
 				this.points = (seconds * 100) + 500;
-
-				response.html("CORRECT");
-
-				console.log("CORRECT");
 			} else {
 				this.correct = false;
 				this.points = 0;
-
-				response.html("INCORRECT");
-
-				console.log("INCORRECT")
 			}
 			
 			this.time = seconds;
@@ -224,10 +214,6 @@
 			
 	};
 
-
-
-
-
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
 		console.log('cleared interval!');
@@ -250,7 +236,7 @@
 		[14, "Ninth"]
 	];
 
-	thequiz = new Quiz(5);
+	thequiz = new Quiz(5,"interval");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', startQuizStuff);
@@ -264,8 +250,8 @@
 		toggleDes.html("");
 		dropSpot.css('margin-right', 390 +"px");
 
-		PLAYBACKSPOT.html("");
 		response.html("");
+		PLAYBACKSPOT.html("");
 
 		//creates playback buttons
 		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
@@ -388,8 +374,6 @@
 		note2 = create_note(initialoffset + intervals[number][0]);
 	}
 
-
-
 	//generates question using genQuestion function and presents it to page
 	function present_question(index,quiz){
 
@@ -404,17 +388,16 @@
 
 		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
 
-		dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
+		//dataElement.html(" Got a(n) " + note1.name + " as the  " + note1.label + ". The second note is a(n) " + note2.label + " (" + note2.name + "), which is " + (note2.steps - note1.steps) + " halfsteps from the root" );
 		
+		dataElement.html(note1.name + " + ? is a ________?");
+
 		guard = 21;
 		seconds = 20;
 		pointGuard = quiz.total_points + 2501;
 
 		document.getElementById('timer_spot').innerHTML = seconds;
 	}
-
-
-
 
 	//runs on quiz completion
 	function end(quiz) {
@@ -451,7 +434,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(5);
+				thequiz = new Quiz(5,"interval");
 
 				response.html("");
 

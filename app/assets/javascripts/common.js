@@ -5,11 +5,12 @@ var Note = function(name, label, hertz, steps){
 	this.steps = steps;
 }
 
-var Quiz = function(question_total){
+var Quiz = function(question_total,type){
 		this.question_total = question_total;
 		this.strikes = 0;
 		this.array = new Array(question_total);
 		this.total_points = 0;
+		this.type = type;
 }
 
 Quiz.prototype.get_question = function(id){
@@ -107,12 +108,17 @@ function playExampleTone(hertz){
 //increases current_question variable by 1
 function answer(index, quiz, input) {
 
+	toggleEventListeners(false);
+
 	quiz.get_question(index).set_submittedanswer(input);
 	
+	let result = "CORRECT";
+
 	//adds strike to quiz if answer is incorrect
 	//also runs check_answer in this line which provides important data for question
 	if(!quiz.get_question(index).check_answer()){
 		quiz.add_strike();
+		result = "INCORRECT";
 	}
 	
 	//adds question points to total points
@@ -120,14 +126,40 @@ function answer(index, quiz, input) {
 
 	current_question = current_question + 1;
 
-	if(quiz.question_total===current_question) {
-		
-		end(quiz);
-		
-	} else {
-		present_question(current_question,quiz)
+	//displays unique response for quiz type after question is answered
+	if (quiz.type == "interval") {
+
+		let grammar = "a";
+
+		if (quiz.get_question(index).note1.label == "Octave") {
+			grammar = "an";
+		}
+		dataElement.html("<b>" + result + "</b>! " + quiz.get_question(index).note1.name + " + " + quiz.get_question(index).note2.name + " is " + grammar + " " + quiz.get_question(index).note1.label);
+
+	} else if (quiz.type == "chord") {
+
+		dataElement.html("<b>" + result + "</b>! " + note1.name + ", " + note2.name + ", and " + note3.name + " create a " + note2.label + " chord." );
+
+	} else if (quiz.type == "scale") {
+
+		dataElement.html("<b>" + result + "</b>! This scale is " + note1.name + " " + note1.label + ".");
 	}
+
+	timeouts.push(setTimeout(function(){
+
+		if (quiz.question_total===current_question) {
+		
+			end(quiz);
+		
+		} else {
+			present_question(current_question,quiz)
+		}
+
+
+	}, 3200));
+
 }
+
 
 
 //creates answer button with given text and element to append to

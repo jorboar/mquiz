@@ -91,16 +91,10 @@
 				
 				this.points = (seconds * 100) + 500;
 
-				response.html("CORRECT");
-
-				console.log("CORRECT");
 			} else {
 				this.correct = false;
 				this.points = 0;
 
-				response.html("INCORRECT");
-
-				console.log("INCORRECT")
 			}
 			
 			this.time = seconds;
@@ -275,7 +269,7 @@
 		["Harmonic Minor", 2, 3, 5, 7, 8, 11, 12],
 	];
 
-	thequiz = new Quiz(5);
+	thequiz = new Quiz(5, "scale");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -451,7 +445,7 @@
 
 		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
 
-		dataElement.html(" Got " + note1.label + ", " + note1.name + ", " + note2.name + ", " + note3.name + ". " );
+		dataElement.html("This scale is " + note1.name + " ________.");
 
 		seconds = 20;
 		guard = 21;
@@ -498,7 +492,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(5);
+				thequiz = new Quiz(5, "scale");
 
 				response.html("");
 
