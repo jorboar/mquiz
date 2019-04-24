@@ -33,8 +33,26 @@ p {
   margin-left: 180px;
 }
 
+@media (max-width: 1000px) {
+
+      p {
+          margin: auto;
+          margin-left: 10px;
+          margin-right: 10px;
+       }
+
+       ul {
+          margin: auto;
+      }
+
+      .aboutlist {
+        margin-left: 20px !important;
+      }
+}
+
 .aboutlist{
   margin-left: 220px;
+  
 }
 
 hr {
