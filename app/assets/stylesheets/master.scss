@@ -3,11 +3,6 @@
 @import url('https://fonts.googleapis.com/css?family=Istok+Web');
 
 
-h1 {
-  text-align: center;
-  
-}
-
 body {
   font-family: 'Istok Web', sans-serif;
   background: image_url('tile5.png');
@@ -21,6 +16,7 @@ body {
 h1 {
   font-size: 66px;
   font-size: bold;
+  text-align: center;
 }
 
 h2 {
@@ -48,6 +44,46 @@ p {
       .aboutlist {
         margin-left: 20px !important;
       }
+
+      .scores {
+        display: block !important;
+        width: 100% !important;
+
+      }
+
+      .guestbook {
+        width: 100% !important;
+      }
+
+      .pagination {
+        margin-left: 0px !important;
+      }
+
+      .response {
+        margin: auto !important;
+      }
+
+      .dropdown {
+        margin: auto !important;
+      }
+
+      #playbackSpot {
+        margin: auto !important;
+      }
+
+      #answerSpot {
+        margin: auto !important;
+      }
+
+      .data2 {
+        margin: auto !important;
+      }
+
+      .data3 {
+        margin: auto !important;
+        text-align: left !important;
+      }
+
 }
 
 .aboutlist{
@@ -242,7 +278,6 @@ button {
 
 .bulk {
   text-align: center;
-  min-width: 800px;
   
 
 }
