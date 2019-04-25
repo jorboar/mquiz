@@ -24,7 +24,7 @@
 
 		<div id="restart_spot"></div>
 		<div class = "response">
-			This quiz tests your ability to identify scales/modes. Below provides examples rooted in A.
+			This quiz tests your ability to identify scales/modes. Below provides examples rooted in A. <br><small>(Points earned for a correct answer are the timer multiplied by 100 plus 500)</small>
 		</div>
 
 		<div id="timer_spot"></div>
@@ -40,7 +40,6 @@
 			<button class="examplebtn7">Harmonic Minor</button>
 		</div>
 
-
 		<br>
 		<button id="start_quiz">Start Quiz</button>
 		<div id="answerSpot"></div>
@@ -53,7 +52,6 @@
 		</form> 
 
 	</div>
-
 
 <script>
 
@@ -269,7 +267,7 @@
 		["Harmonic Minor", 2, 3, 5, 7, 8, 11, 12],
 	];
 
-	thequiz = new Quiz(5, "scale");
+	thequiz = new Quiz(8, "scale");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -343,7 +341,7 @@
 
 			let cheatSwitch = true;
 
-			if (points > pointGuard || points > 12500) {
+			if (points > pointGuard || points > 20000) {
 				cheatSwitch = false;
 				window.location.href = "/";
 				window.alert("Cheater!");
@@ -443,7 +441,7 @@
 
 		dataElement2.html("Question #" + (index + 1) + " of " + quiz.question_total);
 
-		dataElement3.html("Total points: " + quiz.total_points + " ------- Strikes: " + quiz.strikes);
+		dataElement3.html("Total points: " + quiz.total_points);
 
 		dataElement.html("This scale is " + note1.name + " ________.");
 
@@ -492,7 +490,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(5, "scale");
+				thequiz = new Quiz(8, "scale");
 
 				response.html("");
 

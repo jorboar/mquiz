@@ -47,7 +47,7 @@ p {
 
       .scores {
         display: block !important;
-        width: 100% !important;
+        width: 95% !important;
 
       }
 
@@ -84,7 +84,28 @@ p {
         text-align: left !important;
       }
 
-}
+      .indexButton {
+        width: 300px !important;
+        height: 200px !important;
+        margin: 5px !important;
+        padding: 170px 90px !important;
+        padding-bottom: 195px !important;
+      }
+
+      button {
+        padding: 10px 16px !important;
+        margin: 5px !important;
+      }
+
+      #start_quiz {
+        width: 50% !important;
+      }
+
+      .response {
+        font-size: 20px !important;
+      }
+
+} 
 
 .aboutlist{
   margin-left: 220px;
@@ -150,18 +171,16 @@ a .indexButton:hover .quizdes{
 .indexButton {
   background-color: #700000; 
   margin: 12px;
-  text-align: center;
   padding: 170px 110px;
   width: 375px;
   height: 390px;
-
 }
 
 a .indexButton{
   font-family: 'Righteous', cursive;
   color: white;
   font-size: 30px;
-  text-align: center;
+  
   padding-bottom: 195px;
 }
 
