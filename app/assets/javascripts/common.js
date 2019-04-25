@@ -38,7 +38,6 @@ Quiz.prototype.add_points = function(number) {
 
 }
 
-
 var timeouts = [];
 var volume = 0.10;
 var slider = 20;
@@ -56,15 +55,7 @@ var audioctx = new AudioContext();
 
 //plays tone for given note
 //accesses note general note data
-function playTone(note){
-		
-	if (note.label == "root") {
-		console.log("-----playing the " + note.label + ", " + note.name + ", " + "at " + note.hertz + " hertz");
-	} else {
-		console.log("-----playing " + note.name + " at " + note.hertz + " hertz");
-	}
-
-	console.log(volume);		
+function playTone(note){	
 	
 	var oscillator = audioctx.createOscillator();
 	var gainNode = audioctx.createGain();
@@ -84,9 +75,7 @@ function playTone(note){
 //plays note at given hertz
 function playExampleTone(hertz){
 	
-	console.log("-----playing " + hertz + " hertz");
-	
-	console.log(volume);
+	//console.log("-----playing " + hertz + " hertz");
 	
 	var oscillator = audioctx.createOscillator();
 	var gainNode = audioctx.createGain();
@@ -154,8 +143,6 @@ function answer(index, quiz, input) {
 		} else {
 			present_question(current_question,quiz)
 		}
-
-
 	}, 3200));
 
 }
@@ -275,7 +262,6 @@ function logtop10 (quiz_name) {
 				},
 
 				success: function(data) {
-	    			console.log("hey success on id: " + data.id);
 	    			lastID = data.id;
 	    			lastScore = data.score;
 	    			lastName = data.quiz_taker;
@@ -289,36 +275,27 @@ function logtop10 (quiz_name) {
 			
 	});
 
-
 	//recursively runs ajax2 and then runs moveNodes() if a score is needed to be put onto board
 	function boardcomparison(i) {
 
 		if (found){
 			i = 11+mod;
 			moveNodes(nodeID,nodeScore,nodeName);
-
 		}
 
 		if (i < (11+mod) ) {
 			$.when(ajax2(i)).done(function(){
-				console.log("running boardcomparison with " + (i+1));
+				//console.log("running boardcomparison with " + (i+1));
 				return boardcomparison(i + 1)
     		});
 		}
 	}
-
-
-	
-
 
 	//reads through board nodes to find if the most recent submitted data beats any node's score
 	//stores old node data under initial get request, then patches with new data from user submission
 	function ajax2(i) {
 
 		return $.get(["/board_nodes/" + i], function (data) {
-
-			console.log("Lets go " + data.id);
-			console.log(data.id + " and " + data.score);
 			
 			nodeID = data.id;
 			nodeScore = data.score;
@@ -342,7 +319,6 @@ function logtop10 (quiz_name) {
 		    		}
 		    	});
 
-				console.log("FOUND ON " + data.id);
 			}
 		})
 
@@ -351,11 +327,8 @@ function logtop10 (quiz_name) {
 	//recursively runs ajax3
 	function moveNodes(id, score, name) {
 
-		console.log("running moveNodes with " + id + ", " + score + ", " + name);
-		console.log("nextID - " + nextID);
 		if (nextID < (10+mod) ) {
 			$.when(ajax3(id,score,name)).done(function(){
-				console.log("moving to next moveNodes with " + nextID + ", " + nextScore + ", " + nextName);
 				return moveNodes(nextID, nextScore, nextName)
     		});
 		}
@@ -363,8 +336,6 @@ function logtop10 (quiz_name) {
 
 	//moves old top 10 scores down
 	function ajax3(id,score,name){
-
-		console.log("running ajax3 with " + (id + 1));
 
 		return $.get(["/board_nodes/" + (id+1)], function (data) {
 			

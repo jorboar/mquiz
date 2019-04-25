@@ -213,7 +213,6 @@
 
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
-		console.log('cleared interval!');
 		clearInterval(interval);
 	}
 
@@ -228,7 +227,7 @@
 		[4, 12, "Major"],
 	];
 
-	thequiz = new Quiz(8, "chord");
+	thequiz = new Quiz(10, "chord");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -284,12 +283,11 @@
 	$(document).ready(function (){
 		$('#myform').on('submit', function(e){
 			e.preventDefault();
-			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
 			let cheatSwitch = true;
 
-			if (points > pointGuard || points > 20000) {
+			if (points > pointGuard || points > 25000) {
 				cheatSwitch = false;
 				window.location.href = "/";
 				window.alert("Cheater!");
@@ -351,8 +349,6 @@
 	
 		hertz = hertz * Math.pow(a, steps);
 		
-		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
-		
 		return new Note(name, label, hertz, steps);
 	}
 
@@ -400,7 +396,6 @@
 		dataElement2.html(quiz.total_points + " points earned");
 		dataElement3.html("");
 
-		console.log("all done");
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
 		timerSpot.hide();
@@ -421,7 +416,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(8, "chord");
+				thequiz = new Quiz(10, "chord");
 
 				response.html("");
 

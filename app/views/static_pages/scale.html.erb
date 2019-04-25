@@ -248,7 +248,6 @@
 	
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
-		console.log('cleared interval!');
 		clearInterval(interval);
 	}
 
@@ -336,7 +335,6 @@
 	$(document).ready(function (){
 		$('#myform').on('submit', function(e){
 			e.preventDefault();
-			console.log("Grabbed form stuff");
 			gimme = document.getElementById("useranswer").value;
 
 			let cheatSwitch = true;
@@ -406,8 +404,6 @@
 		name = notenames[mod];
 		hertz = hertz * Math.pow(a, steps);
 		
-		console.log("Creating " + name + ", " + label + ", " + hertz + ", " + steps + ", ");
-		
 		return new Note(name, label, hertz, steps);
 		
 	}
@@ -464,12 +460,10 @@
 		pointGuard = quiz.total_points;
 
 		clearInterval(interval);
-		console.log("interval---");
 
 		dataElement2.html(quiz.total_points + " points earned");
 		dataElement3.html("");
 
-		console.log("all done");
 		PLAYBACKSPOT.hide();
 		ANSWERSPOT.hide();
 		timerSpot.hide();

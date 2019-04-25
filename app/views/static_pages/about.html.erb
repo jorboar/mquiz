@@ -49,20 +49,16 @@
 
 </div>
 
-
 <script>
 	
 	//prevents timer from stacking intervals
 	if (typeof interval !=='undefined') {
-		console.log('cleared interval!');
 		clearInterval(interval);
 	}
 
 
-	for(var i=0; i<timeouts.length; i++)
-    {
+	for(var i=0; i<timeouts.length; i++) {
         clearTimeout(timeouts[i]);
-        //console.log("WHOA MAN" + i);
     }
 
 
