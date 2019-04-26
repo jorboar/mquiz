@@ -266,7 +266,7 @@
 		["Harmonic Minor", 2, 3, 5, 7, 8, 11, 12],
 	];
 
-	thequiz = new Quiz(15, "scale");
+	thequiz = new Quiz(20, "scale");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -339,7 +339,7 @@
 
 			let cheatSwitch = true;
 
-			if (points > pointGuard || points > 37500) {
+			if (points > pointGuard || points > 50000) {
 				cheatSwitch = false;
 				window.location.href = "/";
 				window.alert("Cheater!");
@@ -484,7 +484,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(15, "scale");
+				thequiz = new Quiz(20, "scale");
 
 				response.html("");
 
