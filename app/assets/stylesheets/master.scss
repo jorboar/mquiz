@@ -93,6 +93,14 @@ p {
         padding-bottom: 195px !important;
       }
 
+      .indexButton2 {
+        width: 300px !important;
+        height: 200px !important;
+        margin: 5px !important;
+        padding: 170px 90px !important;
+        padding-bottom: 195px !important;
+      }
+
       button {
         padding: 10px 16px !important;
         margin: 5px !important;
@@ -191,6 +199,31 @@ a .indexButton:hover{
 }
 
 .indexButton:hover{
+  background-color: #510000;
+}
+
+.indexButton2 {
+  background-color: #a30000; 
+  margin: 12px;
+  padding: 170px 110px;
+  width: 375px;
+  height: 390px;
+}
+
+a .indexButton2{
+  font-family: 'Righteous', cursive;
+  color: white;
+  font-size: 30px;
+  
+  padding-bottom: 195px;
+}
+
+
+a .indexButton2:hover{
+  color: #b7acac;
+}
+
+.indexButton2:hover{
   background-color: #510000;
 }
 

@@ -1,0 +1,503 @@
+<br>
+<h2>INTERVAL ENDLESS</h2>
+
+	<div class = "bulk">
+		
+		<div class="dropdown">
+			<div class="toggledescription">Synthesis is used to generate tones. You can toggle the type of waveform used here.</div>
+			<button class="waveName">wavetype placeholder</button>
+			<div class="dropdown-content">
+			    <button class="dropbtn1">square</button>
+			    <button class="dropbtn2">sine</button>
+			    <button class="dropbtn3">sawtooth</button>
+			    <button class="dropbtn4">triangle</button>
+			</div>
+			
+		</div>
+		
+		<div class = "data2"></div>
+		<div class = "data3"></div>
+		<div class = "data"></div>
+		
+		<div class="slidecontainer">
+  			<%= image_tag ("speaker.png")%>  <input type="range" min="1" max="20" value="10" class="slider" id="myRange">
+		</div>
+		<div id="restart_spot"></div>
+		<div class = "response"><br>
+			This quiz tests your ability to assess different musical intervals using only your ear. An interval is simply the distance between two pitches. Below provides examples of the types of intervals in this test using A as the root note. <br><small>(Points earned for a correct answer are the timer multiplied by 100 plus 500. In this mode you play until you get an answer incorrect.)</small>
+		</div>
+
+		<div id="timer_spot"></div>
+
+		<div id="playbackSpot">
+			<button class="examplebtn0">Root - A</button>
+			<button class="examplebtn1">Second - B</button>
+			<button class="examplebtn2">Minor Third - C</button>
+			<button class="examplebtn3">Major Third - C#</button>
+			<button class="examplebtn4">Fourth - D</button>
+			<button class="examplebtn5">Fifth - E</button>
+			<button class="examplebtn6">Minor Seventh - G</button>
+			<button class="examplebtn7">Major Seventh - G#</button>
+			<button class="examplebtn8">Octave - A</button>
+			<button class="examplebtn9">Ninth - B</button>
+		</div>
+
+		<br>
+		<button id="start_quiz">Start Quiz</button>
+
+		<div id="answerSpot"></div>
+	
+		<br>
+
+		<form id="myform">
+			Name: <input type="text" id="useranswer" maxlength="13" />
+			<input type="submit" value="Submit Score" />
+		</form> 
+
+	</div>
+
+<script>
+
+	var Question = function(note1, note2){
+			this.note1 = note1;
+			this.note2 = note2;
+			this.answer = note2.label;
+			this.submittedanswer = "";
+			this.time = 0;
+			this.points = 0;
+		}
+
+
+	Question.prototype.get_answer = function(){
+			return this.answer
+		}
+
+	Question.prototype.get_submittedanswer = function(){
+			return this.submittedanswer
+		}
+
+	Question.prototype.set_submittedanswer = function(x){
+			this.submittedanswer = x;
+		}
+
+	Question.prototype.check_answer = function(){
+			if (this.answer === this.submittedanswer){
+				this.correct = true;
+				
+				this.points = (seconds * 100) + 500;
+			} else {
+				this.correct = false;
+				this.points = 0;
+			}
+			
+			this.time = seconds;
+			return this.correct
+		}
+
+	var volume = 0.10;
+	slider = document.getElementById("myRange");
+
+	slider.oninput = function() {
+  		volume = this.value/100;
+	}
+
+	var note1 = new Note("A", "root", 440, 0);
+	var note2 = new Note("", "", 440, 0);
+
+	var notenames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+
+	var gimme = ""
+	var first = true;
+	var points;
+
+	var response = $('.response');
+	var dataElement = $('.data');
+	var dataElement2 = $('.data2');
+	var dataElement3 = $('.data3');
+	var startQuiz = $("#start_quiz");
+	var PLAYBACKSPOT = $("#playbackSpot");
+	var ANSWERSPOT = $("#answerSpot");
+	var RESTARTSPOT = $("#restart_spot");
+	var timerSpot = $("#timer_spot");
+	var toggleDes = $(".toggledescription");
+	var dropSpot = $(".dropdown");
+
+	//creates example buttons for before quiz is started----------------
+	var ExampleIntervals = [
+		440,
+		493.88,
+		523.25,
+		554.37,
+		587.33,
+		659.25,
+		783.99,
+		830.61,
+		880,
+		987.77
+	];
+
+	var example = [];
+
+	for (var z = 0; z < 10; z++) {
+		example[z] = $(".examplebtn" + z);
+		
+		let temp = ExampleIntervals[z];
+
+		example[z].on('click', function(){
+
+			playExampleTone(temp);
+			
+		}); 
+
+	}
+
+	var waveName = $(".waveName");
+	waveName.html("▾ Playback wave type: " + waveType );
+
+	var drop1 = $(".dropbtn1");
+	var drop2 = $(".dropbtn2");
+	var drop3 = $(".dropbtn3");
+	var drop4 = $(".dropbtn4");
+
+	drop1.on('click', function(){
+		waveTypeChange("square");
+	});
+	
+	drop2.on('click',function(){
+		waveTypeChange("sine");
+	});
+
+	drop3.on('click',function(){
+		waveTypeChange("sawtooth");
+	});
+
+	drop4.on('click',function(){
+		waveTypeChange("triangle");
+	});
+
+
+	var repeatbutton;
+	var repeatListener;
+
+	var answerButton1;
+	var answerButton2;
+	var answerButton3;
+	var answerButton4;
+	var answerButton5;
+	var answerButton6;
+	var answerButton7;
+	var answerButton8;
+	var answerButton9;
+	var answerButton10;
+
+	var note1button;
+	var note2button;
+
+	var pointGuard = 2501;
+	var guard = 21;
+	var seconds = 20;
+	var interval;
+	var timer = function() {
+	    	document.getElementById('timer_spot').innerHTML = --seconds;
+
+	    	if (seconds == 0) {
+	    		answer(current_question,thequiz,"TIMEOUT");
+	    	}
+
+	    	//prevents user from altering seconds in console for additional points
+			if (seconds > guard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+			}
+
+			guard = seconds + 1;
+			
+	};
+
+	//prevents timer from stacking intervals
+	if (typeof interval !=='undefined') {
+		clearInterval(interval);
+	}
+
+	//used to communicate question index number to various functions
+	var current_question = 0; 
+
+	var intervals = [
+		[2, "Second"],
+		[3, "Minor Third"],
+		[4, "Major Third"],
+		[5, "Fourth"],
+		[6, "Flatted Fifth"],
+		[7, "Fifth"],
+		[10, "Minor Seventh"],
+		[11, "Major Seventh"],
+		[12, "Octave"],
+		[14, "Ninth"]
+	];
+
+	thequiz = new Quiz(0,"interval");
+	
+	//presents question and increases current_question
+	startQuiz.on('click', startQuizStuff);
+
+	function startQuizStuff() {
+		
+		for(var i=0; i<timeouts.length; i++) {
+        	clearTimeout(timeouts[i]);
+    	}
+
+		toggleDes.html("");
+		dropSpot.css('margin-right', 390 +"px");
+
+		response.html("");
+		PLAYBACKSPOT.html("");
+
+		//creates playback buttons
+		note1button = createNoteButton("Play Note 1", "1", "playbackSpot" );
+		note2button = createNoteButton("Play Note 2", "2", "playbackSpot" );
+
+		//creates button + event listener to play both notes
+		repeatbutton = document.createElement("BUTTON");
+		var t = document.createTextNode("Play Both Notes");
+		repeatbutton.appendChild(t);
+		document.getElementById("playbackSpot").appendChild(repeatbutton);
+
+		repeatListener = function(){
+
+			playTone(thequiz.get_question(current_question).note1);
+			playTone(thequiz.get_question(current_question).note2);
+
+		}
+
+		repeatbutton.addEventListener('click', repeatListener);
+
+		//----------ANSWER BUTTONS-----------------------------------------------
+		//-----------------------------------------------------------------------
+		answerButton1 = createAnswerButton("Second", "answerSpot");
+		answerButton2 = createAnswerButton("Minor Third", "answerSpot");
+		answerButton3 = createAnswerButton("Major Third", "answerSpot");
+		answerButton4 = createAnswerButton("Fourth", "answerSpot");
+		answerButton5 = createAnswerButton("Flatted Fifth", "answerSpot");
+		answerButton6 = createAnswerButton("Fifth", "answerSpot");
+		answerButton7 = createAnswerButton("Minor Seventh", "answerSpot");
+		answerButton8 = createAnswerButton("Major Seventh", "answerSpot");
+		answerButton9 = createAnswerButton("Octave", "answerSpot");
+		answerButton10 = createAnswerButton("Ninth", "answerSpot");
+
+		present_question(current_question,thequiz)
+
+		//hides start quiz button
+		startQuiz.hide();
+	}
+
+
+	//action on form submit
+	//saves quiz to database
+	$(document).ready(function (){
+		$('#myform').on('submit', function(e){
+			e.preventDefault();
+			gimme = document.getElementById("useranswer").value;
+
+			let cheatSwitch = true;
+
+			if (points > pointGuard || points > ((current_question - 1) * 2500) ) {
+				cheatSwitch = false;
+				window.location.href = "/";
+				window.alert("Cheater!");
+			}
+
+			if (cheatSwitch){
+
+				$.when(nameCensor()).done(function(){
+
+			    	logtop10("Interval Endless");
+						
+		    	});
+		    }
+
+			$("#myform").fadeOut("fast");
+			response.html("Thank you for your submission! You can see your score on the <a href=\"/scores\">Scores</a> page.");
+		});
+	});
+
+	//generates two notes for question and assigns them to quiz on given index
+	//also plays the two notes
+	function genQuestion(index,quiz){
+
+		genNoteSet();
+
+		toggleEventListeners(false);
+
+		let question = new Question(note1,note2);
+		quiz.set_question(index,question);
+		
+		playTone(thequiz.get_question(index).note1);
+		playTone(thequiz.get_question(index).note2);
+
+		timeouts.push(setTimeout(function(){playTone(note1);}, 1500));
+		timeouts.push(setTimeout(function(){playTone(note2);}, 2600));
+
+		timeouts.push(setTimeout(function(){toggleEventListeners(true);}, 3200));
+	}
+
+	function create_note(steps){
+		
+		hertz = 440;
+		const a = Math.pow(2, 1/12)
+		label = intervals[number][1];
+		mod = steps;
+
+		while (11 < mod) {
+			mod = mod - 12;
+		}
+
+		while (0 > mod) {
+			mod = mod + 12;
+		}
+
+		name = notenames[mod];
+		hertz = hertz * Math.pow(a, steps);
+		
+		return new Note(name, label, hertz, steps);
+	}
+
+	//generates a noteset 
+	function genNoteSet(){
+
+		number = randNum(0,9);
+		initialoffset = randNum(-12,6)
+
+		note1 = create_note(initialoffset);
+		note2 = create_note(initialoffset + intervals[number][0]);
+	}
+
+	//generates question using genQuestion function and presents it to page
+	function present_question(index,quiz){
+
+		if (quiz.total_points > pointGuard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+		}
+
+		genQuestion(index,quiz);
+
+		dataElement2.html("Question #" + (index + 1));
+
+		dataElement3.html("Total points: " + quiz.total_points);
+		
+		dataElement.html(note1.name + " + ? is a ________?");
+
+		guard = 21;
+		seconds = 20;
+		pointGuard = quiz.total_points + 2501;
+
+		document.getElementById('timer_spot').innerHTML = seconds;
+	}
+
+	//runs on quiz completion
+	function end(quiz) {
+
+		if (quiz.total_points > pointGuard) {
+				window.alert("Cheater!");
+				window.location.href = "/";
+		}
+
+		clearInterval(interval);
+
+		dataElement2.html(quiz.total_points + " points earned");
+		dataElement3.html("");
+
+		PLAYBACKSPOT.hide();
+		ANSWERSPOT.hide();
+		timerSpot.hide();
+		
+		$("#myform").fadeIn("slow");
+		//document.getElementById("myform").show();
+		points = quiz.total_points;
+
+		dataElement.html("QUIZ COMPLETE");
+		response.html((current_question - 1) + " correct");
+
+		if (first) {
+			var restartButton = document.createElement("BUTTON");
+			var t = document.createTextNode("Restart Quiz");
+			restartButton.appendChild(t);
+			document.getElementById("restart_spot").appendChild(restartButton);
+
+			restartButton.addEventListener('click', function(){
+
+				pointGuard = 2501;
+				current_question = 0;
+				thequiz = new Quiz(0,"interval");
+
+				response.html("");
+
+				$("#myform").fadeOut("fast");
+
+				PLAYBACKSPOT.show();
+				ANSWERSPOT.show();
+				timerSpot.show();
+
+				present_question(current_question,thequiz)
+
+				RESTARTSPOT.hide();
+
+				first = false;
+			})
+
+		} else {
+		RESTARTSPOT.show();
+		};
+	}
+
+	//toggles event button listeners. True for on, false for off
+	//also stops and starts timer
+	function toggleEventListeners(type) {
+
+		if (type) {
+
+			interval = setInterval(timer,1000);
+
+			document.getElementById('timer_spot').style.color="white";
+
+			repeatbutton.addEventListener('click', repeatListener);
+
+			note1button.button.addEventListener('click', note1button.listener);
+			note2button.button.addEventListener('click', note2button.listener);
+
+			answerButton1.button.addEventListener('click', answerButton1.listener);
+			answerButton2.button.addEventListener('click', answerButton2.listener);
+			answerButton3.button.addEventListener('click', answerButton3.listener);
+			answerButton4.button.addEventListener('click', answerButton4.listener);
+			answerButton5.button.addEventListener('click', answerButton5.listener);
+			answerButton6.button.addEventListener('click', answerButton6.listener);
+			answerButton7.button.addEventListener('click', answerButton7.listener);
+			answerButton8.button.addEventListener('click', answerButton8.listener);
+			answerButton9.button.addEventListener('click', answerButton9.listener);
+			answerButton10.button.addEventListener('click', answerButton10.listener);
+
+		} else {
+			
+			clearInterval(interval);
+
+			document.getElementById('timer_spot').style.color="grey";
+
+			repeatbutton.removeEventListener('click', repeatListener);
+
+			note1button.button.removeEventListener('click', note1button.listener);
+			note2button.button.removeEventListener('click', note2button.listener);
+
+			answerButton1.button.removeEventListener('click', answerButton1.listener);
+			answerButton2.button.removeEventListener('click', answerButton2.listener);
+			answerButton3.button.removeEventListener('click', answerButton3.listener);
+			answerButton4.button.removeEventListener('click', answerButton4.listener);
+			answerButton5.button.removeEventListener('click', answerButton5.listener);
+			answerButton6.button.removeEventListener('click', answerButton6.listener);
+			answerButton7.button.removeEventListener('click', answerButton7.listener);
+			answerButton8.button.removeEventListener('click', answerButton8.listener);
+			answerButton9.button.removeEventListener('click', answerButton9.listener);
+			answerButton10.button.removeEventListener('click', answerButton10.listener);
+		};
+	}
+
+</script>

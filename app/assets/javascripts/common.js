@@ -136,12 +136,25 @@ function answer(index, quiz, input) {
 
 	timeouts.push(setTimeout(function(){
 
+		let endless = false;
+		if (quiz.question_total===0) {
+
+			if (quiz.strikes > 0) {
+				endless = true;
+				end(quiz);
+			}
+
+		}
+
 		if (quiz.question_total===current_question) {
 		
 			end(quiz);
 		
 		} else {
-			present_question(current_question,quiz)
+			if (!endless) {
+				present_question(current_question,quiz)
+			}
+
 		}
 	}, 3200));
 
@@ -245,6 +258,18 @@ function logtop10 (quiz_name) {
 
 	if (quiz_name == "Scale Quiz") {
 		mod = 20;
+	}
+
+	if (quiz_name == "Interval Endless") {
+		mod = 30;
+	}
+
+	if (quiz_name == "Chord Endless") {
+		mod = 40;
+	}
+
+	if (quiz_name == "Scale Endless") {
+		mod = 50;
 	}
 
 	//submits score to general quiz database and grabs data to be used for top 10 comparison
