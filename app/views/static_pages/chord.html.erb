@@ -227,7 +227,7 @@
 		[4, 12, "Major"],
 	];
 
-	thequiz = new Quiz(10, "chord");
+	thequiz = new Quiz(15, "chord");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', function(){
@@ -287,7 +287,7 @@
 
 			let cheatSwitch = true;
 
-			if (points > pointGuard || points > 25000) {
+			if (points > pointGuard || points > 37500) {
 				cheatSwitch = false;
 				window.location.href = "/";
 				window.alert("Cheater!");
@@ -416,7 +416,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(10, "chord");
+				thequiz = new Quiz(15, "chord");
 
 				response.html("");
 

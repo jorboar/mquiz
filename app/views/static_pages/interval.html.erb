@@ -235,7 +235,7 @@
 		[14, "Ninth"]
 	];
 
-	thequiz = new Quiz(8,"interval");
+	thequiz = new Quiz(15,"interval");
 	
 	//presents question and increases current_question
 	startQuiz.on('click', startQuizStuff);
@@ -300,7 +300,7 @@
 
 			let cheatSwitch = true;
 
-			if (points > pointGuard || points > 20000) {
+			if (points > pointGuard || points > 37500) {
 				cheatSwitch = false;
 				window.location.href = "/";
 				window.alert("Cheater!");
@@ -430,7 +430,7 @@
 
 				pointGuard = 2501;
 				current_question = 0;
-				thequiz = new Quiz(8,"interval");
+				thequiz = new Quiz(15,"interval");
 
 				response.html("");
 
